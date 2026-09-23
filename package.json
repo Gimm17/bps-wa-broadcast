@@ -17,7 +17,11 @@
     "test:all": "npm run test --workspaces --if-present && vitest run tests/",
     "test:coverage": "npm run test:coverage --workspaces --if-present",
     "migrate": "node scripts/migrate.js",
-    "worker:once": "npm run worker:once --workspace @bps/worker"
+    "deploy": "node scripts/deploy-build.js",
+    "worker:cron": "node scripts/cron-worker.js",
+    "worker:once": "npm run worker:once --workspace @bps/worker",
+    "health:check": "node scripts/health-check.js",
+    "backup": "node scripts/backup-postgres.js"
   },
   "devDependencies": {
     "@eslint/js": "^9.20.0",
