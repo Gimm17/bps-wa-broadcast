@@ -77,14 +77,14 @@ describe('Worker Concurrency, Advisory Locking & Lease Recovery', () => {
       customSender: mockSend
     };
 
-    const results = await Promise.all([
-      runOnce(runOptions),
-      runOnce(runOptions)
-    ]);
-
-    // One should have acquired lock and completed (or skipped if no messages),
-    // and the other should report locked / skipped
-    const lockedCount = results.filter((r) => r.status === 'locked_by_other_instance').length;
-    expect(lockedCount).toBe(1);
+    const blockerClient = await pool.connect();
+    await blockerClient.query('SELECT pg_advisory_lock($1)', [987654321]);
+    try {
+      const result = await runOnce(runOptions);
+      expect(result.status).toBe('locked_by_other_instance');
+    } finally {
+      await blockerClient.query('SELECT pg_advisory_unlock($1)', [987654321]);
+      blockerClient.release();
+    }
   });
 });
