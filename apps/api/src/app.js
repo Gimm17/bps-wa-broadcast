@@ -8,6 +8,7 @@ import { subscriptionsRouter } from './features/subscriptions/routes.js';
 import { metaRouter } from './features/meta/routes.js';
 import { campaignsRouter } from './features/campaigns/routes.js';
 import { createCalendarRouter } from './features/calendar/routes.js';
+import { createAutomationsRouter } from './features/automations/routes.js';
 import { pool as defaultPool } from './db/pool.js';
 import { authenticate } from './middleware/authenticate.js';
 import { authorize } from './middleware/authorize.js';
@@ -37,6 +38,7 @@ export function createApp({ config, db, logger }) {
   app.use('/api', metaRouter);
   app.use('/api', campaignsRouter);
   app.use('/api/calendar', createCalendarRouter({ db: db || defaultPool }));
+  app.use('/api', createAutomationsRouter({ db: db || defaultPool }));
 
   // Common error envelope
   app.use((err, req, res, next) => {

@@ -15,6 +15,8 @@
   import Campaigns from './routes/Campaigns.svelte';
   import CampaignCreate from './routes/CampaignCreate.svelte';
   import CampaignDetail from './routes/CampaignDetail.svelte';
+  import Automations from './routes/Automations.svelte';
+  import AutomationEdit from './routes/AutomationEdit.svelte';
   import Schedules from './routes/Schedules.svelte';
   import Subscribe from './routes/public/Subscribe.svelte';
   import ManageSubscription from './routes/public/ManageSubscription.svelte';
@@ -68,6 +70,9 @@
     '/campaigns': wrap({ component: Campaigns }),
     '/campaigns/new': wrap({ component: CampaignCreate }),
     '/campaigns/:id': wrap({ component: CampaignDetail }),
+    '/automations': wrap({ component: Automations }),
+    '/automations/new': wrap({ component: AutomationEdit }),
+    '/automations/:id': wrap({ component: AutomationEdit }),
     '/schedules': wrap({ component: Schedules }),
     '*': wrap({ component: Overview })
   };

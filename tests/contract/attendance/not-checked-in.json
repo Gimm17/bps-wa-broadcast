@@ -1,0 +1,19 @@
+{
+  "source": "simpeg_presensi_bps_sulteng",
+  "observedAt": "2026-09-23T07:15:00+08:00",
+  "rosterCount": 84,
+  "records": [
+    {
+      "nip": "198501012010011001",
+      "name": "Ahmad Fauzi",
+      "status": "NOT_CHECKED_IN",
+      "checkInTime": null
+    },
+    {
+      "nip": "199002022014022002",
+      "name": "Siti Rahma",
+      "status": "PRESENT",
+      "checkInTime": "07:05:22"
+    }
+  ]
+}
