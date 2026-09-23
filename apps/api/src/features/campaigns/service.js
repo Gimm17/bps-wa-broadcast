@@ -196,75 +196,109 @@ export async function queueCampaignMessages(campaignId) {
     let queuedCount = 0;
     let suppressedCount = 0;
 
+    // Fast batch pre-fetch of suppression and subscription state
+    const suppRes = await client.query('SELECT phone_e164 FROM suppression_entries');
+    const suppressedSet = new Set(suppRes.rows.map(r => r.phone_e164));
+
+    let activeSubSet = null;
+    if (topicId) {
+      const subRes = await client.query(
+        "SELECT contact_id FROM subscriptions WHERE topic_id = $1 AND status = 'active'",
+        [topicId]
+      );
+      activeSubSet = new Set(subRes.rows.map(r => r.contact_id));
+    }
+
+    const queuedItems = [];
+    const suppressedItems = [];
+
     for (const r of recipientsRes.rows) {
-      // 1. Suppression checks
       let isSuppressed = false;
       let suppressionReason = null;
 
-      // Check global suppression entries
-      const inSuppression = await subscriptionRepository.isPhoneSuppressed(client, r.phone_e164);
-      if (inSuppression) {
+      if (suppressedSet.has(r.phone_e164)) {
         isSuppressed = true;
         suppressionReason = 'Nomor terdaftar dalam daftar supresi opt-out';
-      }
-
-      // Check contact status
-      if (!isSuppressed && r.contact_status === 'unsubscribed') {
+      } else if (r.contact_status === 'unsubscribed') {
         isSuppressed = true;
         suppressionReason = 'Kontak telah membatalkan langganan';
-      }
-
-      // Check topic subscription if linked to a topic
-      if (!isSuppressed && topicId) {
-        const subRes = await client.query(`
-          SELECT status FROM subscriptions
-          WHERE contact_id = $1 AND topic_id = $2
-        `, [r.contact_id, topicId]);
-
-        const sub = subRes.rows[0];
-        if (!sub || sub.status !== 'active') {
-          isSuppressed = true;
-          suppressionReason = 'Kontak tidak aktif berlangganan topik ini';
-        }
+      } else if (activeSubSet && !activeSubSet.has(r.contact_id)) {
+        isSuppressed = true;
+        suppressionReason = 'Kontak tidak aktif berlangganan topik ini';
       }
 
       const idempotencyKey = `camp:${campaignId}:${r.contact_id}`;
 
       if (isSuppressed) {
-        suppressedCount++;
-        // Update recipient record
+        suppressedItems.push({
+          recipientId: r.recipient_id,
+          contactId: r.contact_id,
+          idempotencyKey,
+          reason: suppressionReason
+        });
+      } else {
+        queuedItems.push({
+          recipientId: r.recipient_id,
+          contactId: r.contact_id,
+          idempotencyKey
+        });
+      }
+    }
+
+    const CHUNK_SIZE = 500;
+
+    // 1. Batch insert queued messages
+    for (let i = 0; i < queuedItems.length; i += CHUNK_SIZE) {
+      const chunk = queuedItems.slice(i, i + CHUNK_SIZE);
+      const values = [];
+      const placeholders = [];
+      for (let j = 0; j < chunk.length; j++) {
+        const item = chunk[j];
+        const base = j * 6;
+        placeholders.push(`($${base + 1}, $${base + 2}, $${base + 3}, $${base + 4}, $${base + 5}, $${base + 6})`);
+        values.push(campaignId, item.contactId, campaign.template_id, item.idempotencyKey, JSON.stringify({ topicId }), 'queued');
+      }
+      await client.query(`
+        INSERT INTO messages (campaign_id, contact_id, template_id, idempotency_key, payload, status)
+        VALUES ${placeholders.join(', ')}
+        ON CONFLICT (idempotency_key) DO NOTHING
+      `, values);
+    }
+
+    // 2. Batch insert suppressed messages
+    for (let i = 0; i < suppressedItems.length; i += CHUNK_SIZE) {
+      const chunk = suppressedItems.slice(i, i + CHUNK_SIZE);
+      const values = [];
+      const placeholders = [];
+      for (let j = 0; j < chunk.length; j++) {
+        const item = chunk[j];
+        const base = j * 7;
+        placeholders.push(`($${base + 1}, $${base + 2}, $${base + 3}, $${base + 4}, $${base + 5}, 'suppressed', 'OPTED_OUT', $${base + 6})`);
+        values.push(campaignId, item.contactId, campaign.template_id, item.idempotencyKey, JSON.stringify({ topicId }), item.reason);
+      }
+      await client.query(`
+        INSERT INTO messages (
+          campaign_id, contact_id, template_id, idempotency_key, payload, status,
+          last_error_code, last_error_message
+        )
+        VALUES ${placeholders.join(', ')}
+        ON CONFLICT (idempotency_key) DO UPDATE SET status = 'suppressed'
+      `, values);
+
+      // Update recipient exclusion reasons
+      for (const item of chunk) {
         await client.query(`
           UPDATE campaign_recipients
           SET status = 'suppressed', exclusion_reason = $1
           WHERE id = $2
-        `, [suppressionReason, r.recipient_id]);
-
-        // Insert suppressed message record for auditability
-        await client.query(`
-          INSERT INTO messages (
-            campaign_id, contact_id, template_id, idempotency_key, payload, status,
-            last_error_code, last_error_message
-          )
-          VALUES ($1, $2, $3, $4, $5, 'suppressed', 'OPTED_OUT', $6)
-          ON CONFLICT (idempotency_key) DO UPDATE SET status = 'suppressed'
-        `, [campaignId, r.contact_id, campaign.template_id, idempotencyKey, JSON.stringify({ topicId }), suppressionReason]);
-      } else {
-        queuedCount++;
-        // Insert queued message
-        await client.query(`
-          INSERT INTO messages (
-            campaign_id, contact_id, template_id, idempotency_key, payload, status
-          )
-          VALUES ($1, $2, $3, $4, $5, 'queued')
-          ON CONFLICT (idempotency_key) DO NOTHING
-        `, [campaignId, r.contact_id, campaign.template_id, idempotencyKey, JSON.stringify({ topicId })]);
+        `, [item.reason, item.recipientId]);
       }
     }
 
     return {
-      queuedCount,
-      suppressedCount,
-      total: queuedCount + suppressedCount
+      queuedCount: queuedItems.length,
+      suppressedCount: suppressedItems.length,
+      total: queuedItems.length + suppressedItems.length
     };
   });
 }

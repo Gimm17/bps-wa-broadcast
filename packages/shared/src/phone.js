@@ -54,7 +54,7 @@ export function maskPhoneNumber(phone, canViewSensitive = false) {
 export function safeSpreadsheetCell(value) {
   if (value === null || value === undefined) return '';
   const str = String(value);
-  if (/^[=+\-@]/.test(str)) {
+  if (/^[=+\-@\t\r]/.test(str)) {
     return `'${str}`;
   }
   return str;

@@ -26,7 +26,7 @@ export async function runAttendanceRule({ db, rule, now = new Date(), adapter })
   const currentTime = new Date(now).getTime();
   const ageMinutes = (currentTime - observedTime) / (60 * 1000);
 
-  if (isNaN(ageMinutes) || ageMinutes > maxAgeMinutes) {
+  if (isNaN(ageMinutes) || ageMinutes > maxAgeMinutes || ageMinutes < -5) {
     await _recordAlert(
       db,
       'ATTENDANCE_DATA_STALE',

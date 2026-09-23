@@ -129,12 +129,24 @@ export class CampaignRepository {
   async insertRecipientsBatch(client = this.pool, campaignId, recipientRows = []) {
     if (recipientRows.length === 0) return 0;
 
-    for (const r of recipientRows) {
+    const CHUNK_SIZE = 500;
+    for (let i = 0; i < recipientRows.length; i += CHUNK_SIZE) {
+      const chunk = recipientRows.slice(i, i + CHUNK_SIZE);
+      const values = [];
+      const placeholders = [];
+
+      for (let j = 0; j < chunk.length; j++) {
+        const r = chunk[j];
+        const base = j * 4;
+        placeholders.push(`($${base + 1}, $${base + 2}, $${base + 3}, $${base + 4})`);
+        values.push(campaignId, r.contactId, r.status || 'eligible', r.exclusionReason || null);
+      }
+
       await client.query(`
         INSERT INTO campaign_recipients (campaign_id, contact_id, status, exclusion_reason)
-        VALUES ($1, $2, $3, $4)
+        VALUES ${placeholders.join(', ')}
         ON CONFLICT (campaign_id, contact_id) DO NOTHING
-      `, [campaignId, r.contactId, r.status || 'eligible', r.exclusionReason || null]);
+      `, values);
     }
 
     return recipientRows.length;

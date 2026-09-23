@@ -51,7 +51,10 @@ metaRouter.post('/meta/webhook', async (req, res, next) => {
     const appSecret = creds?.appSecret || process.env.META_APP_SECRET;
 
     // Verify signature if appSecret is configured
-    if (signature && appSecret) {
+    if (appSecret) {
+      if (!signature) {
+        return res.status(401).json({ error: 'Signature webhook Meta diperlukan' });
+      }
       const rawBody = JSON.stringify(req.body);
       const isValid = verifyMetaSignature(rawBody, signature, appSecret);
       if (!isValid) {

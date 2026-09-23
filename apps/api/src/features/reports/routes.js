@@ -8,7 +8,7 @@ export function createReportsRouter({ db }) {
   const router = express.Router();
   router.use(authenticate);
 
-  router.get('/reports/messages/csv', authorize(PERMISSIONS.REPORT_EXPORT), async (req, res, next) => {
+  router.get(['/reports/messages/csv', '/reports/messages.csv'], authorize(PERMISSIONS.REPORT_EXPORT), async (req, res, next) => {
     try {
       const userRole = req.user?.role || 'viewer';
       const result = await listMessageLogs(db, {

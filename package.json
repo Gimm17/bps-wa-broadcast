@@ -13,6 +13,8 @@
     "dev": "concurrently -n api,web \"npm run dev --workspace @bps/api\" \"npm run dev --workspace @bps/web\"",
     "build": "npm run build --workspace @bps/web",
     "test": "npm run test --workspaces --if-present",
+    "test:acceptance": "vitest run tests/",
+    "test:all": "npm run test --workspaces --if-present && vitest run tests/",
     "test:coverage": "npm run test:coverage --workspaces --if-present",
     "migrate": "node scripts/migrate.js",
     "worker:once": "npm run worker:once --workspace @bps/worker"
