@@ -9,16 +9,28 @@
   import Contacts from './routes/Contacts.svelte';
   import ContactDetail from './routes/ContactDetail.svelte';
   import ImportReview from './routes/ImportReview.svelte';
+  import Subscriptions from './routes/Subscriptions.svelte';
+  import Subscribe from './routes/public/Subscribe.svelte';
+  import ManageSubscription from './routes/public/ManageSubscription.svelte';
+  import UnsubscribeResult from './routes/public/UnsubscribeResult.svelte';
   import './styles/global.css';
 
   let initialized = $state(false);
+
+  function isPublicPath(path) {
+    if (!path) return false;
+    return path === '/login' ||
+      path.startsWith('/subscribe') ||
+      path.startsWith('/manage-subscription') ||
+      path.startsWith('/unsubscribe');
+  }
 
   onMount(async () => {
     await initSession();
     initialized = true;
 
     // Route guard on initial load
-    if (!$session.isAuthenticated && $location !== '/login') {
+    if (!$session.isAuthenticated && !isPublicPath($location)) {
       push('/login');
     }
   });
@@ -26,7 +38,7 @@
   // Reactive route guard when location changes
   $effect(() => {
     if (initialized) {
-      if (!$session.isAuthenticated && $location !== '/login') {
+      if (!$session.isAuthenticated && !isPublicPath($location)) {
         push('/login');
       } else if ($session.isAuthenticated && $location === '/login') {
         push('/');
@@ -36,11 +48,15 @@
 
   const routes = {
     '/login': Login,
+    '/subscribe': Subscribe,
+    '/manage-subscription': ManageSubscription,
+    '/unsubscribe': UnsubscribeResult,
     '/': wrap({ component: Overview }),
     '/overview': wrap({ component: Overview }),
     '/contacts': wrap({ component: Contacts }),
     '/contacts/:id': wrap({ component: ContactDetail }),
     '/imports/contacts/:id': wrap({ component: ImportReview }),
+    '/subscriptions': wrap({ component: Subscriptions }),
     '*': wrap({ component: Overview })
   };
 </script>
@@ -52,7 +68,7 @@
       <span class="text-[14px] font-mono">Memuat BPS WhatsApp Operations...</span>
     </div>
   </div>
-{:else if $location === '/login'}
+{:else if isPublicPath($location)}
   <Router {routes} />
 {:else}
   <AppShell>
