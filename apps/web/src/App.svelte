@@ -6,6 +6,9 @@
   import AppShell from './lib/components/AppShell.svelte';
   import Login from './routes/Login.svelte';
   import Overview from './routes/Overview.svelte';
+  import Contacts from './routes/Contacts.svelte';
+  import ContactDetail from './routes/ContactDetail.svelte';
+  import ImportReview from './routes/ImportReview.svelte';
   import './styles/global.css';
 
   let initialized = $state(false);
@@ -33,12 +36,12 @@
 
   const routes = {
     '/login': Login,
-    '/': wrap({
-      component: Overview
-    }),
-    '*': wrap({
-      component: Overview
-    })
+    '/': wrap({ component: Overview }),
+    '/overview': wrap({ component: Overview }),
+    '/contacts': wrap({ component: Contacts }),
+    '/contacts/:id': wrap({ component: ContactDetail }),
+    '/imports/contacts/:id': wrap({ component: ImportReview }),
+    '*': wrap({ component: Overview })
   };
 </script>
 

@@ -15,7 +15,11 @@ export async function apiFetch(path, options = {}) {
     ...options.headers
   };
 
-  const response = await fetch(`/api${path}`, {
+  const isBrowser = typeof window !== 'undefined' && window.location && window.location.protocol.startsWith('http');
+  const origin = isBrowser ? window.location.origin : 'http://localhost:3000';
+  const url = path.startsWith('http') ? path : `${origin}/api${path.startsWith('/') ? path : '/' + path}`;
+
+  const response = await fetch(url, {
     credentials: 'same-origin',
     ...options,
     headers

@@ -106,3 +106,7 @@ export const ROLE_PERMISSIONS_MAP = {
     PERMISSIONS.REPORT_READ
   ]
 };
+
+export * from './phone.js';
+export * from './schemas/contact.js';
+

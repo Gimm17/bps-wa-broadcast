@@ -3,6 +3,7 @@ import express from 'express';
 import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
 import { authRouter } from './features/auth/routes.js';
+import { contactsRouter } from './features/contacts/routes.js';
 import { authenticate } from './middleware/authenticate.js';
 import { authorize } from './middleware/authorize.js';
 import { validateCsrf } from './middleware/csrf.js';
@@ -26,6 +27,7 @@ export function createApp({ config, db, logger }) {
 
   // Feature routes
   app.use('/api/auth', authRouter);
+  app.use('/api', contactsRouter);
 
   // Integration route (RBAC and CSRF protected)
   app.patch(
