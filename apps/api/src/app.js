@@ -7,6 +7,8 @@ import { contactsRouter } from './features/contacts/routes.js';
 import { subscriptionsRouter } from './features/subscriptions/routes.js';
 import { metaRouter } from './features/meta/routes.js';
 import { campaignsRouter } from './features/campaigns/routes.js';
+import { createCalendarRouter } from './features/calendar/routes.js';
+import { pool as defaultPool } from './db/pool.js';
 import { authenticate } from './middleware/authenticate.js';
 import { authorize } from './middleware/authorize.js';
 import { validateCsrf } from './middleware/csrf.js';
@@ -34,6 +36,7 @@ export function createApp({ config, db, logger }) {
   app.use('/api', subscriptionsRouter);
   app.use('/api', metaRouter);
   app.use('/api', campaignsRouter);
+  app.use('/api/calendar', createCalendarRouter({ db: db || defaultPool }));
 
   // Common error envelope
   app.use((err, req, res, next) => {
