@@ -8,9 +8,10 @@ import {
 } from './repository.js';
 import { runAttendanceRule, processTriggerEvent } from './service.js';
 import { createAttendanceAdapter } from '../../adapters/attendance.js';
-import { requireAuth } from '../../middleware/auth.js';
-import { requirePermission } from '../../middleware/rbac.js';
-import { auditLog } from '../../middleware/audit.js';
+import { authenticate } from '../../middleware/authenticate.js';
+import { authorize } from '../../middleware/authorize.js';
+import { recordAudit } from '../audit/service.js';
+import { PERMISSIONS } from '@bps/shared';
 
 const ruleSchema = z.object({
   code: z.string().min(3).regex(/^[a-z0-9_]+$/, 'Kode harus huruf kecil, angka, atau underscore'),
@@ -23,7 +24,7 @@ const ruleSchema = z.object({
 
 export function createAutomationsRouter({ db }) {
   const router = express.Router();
-  router.use(requireAuth);
+  router.use(authenticate);
 
   // List all rules
   router.get('/automations', async (req, res, next) => {
@@ -49,12 +50,13 @@ export function createAutomationsRouter({ db }) {
   });
 
   // Create rule
-  router.post('/automations', requirePermission('campaigns:create'), async (req, res, next) => {
+  router.post('/automations', authorize(PERMISSIONS.AUTOMATION_WRITE), async (req, res, next) => {
     try {
       const parsed = ruleSchema.parse(req.body);
       const rule = await createAutomationRule(db, parsed);
 
-      await auditLog(db, {
+      await recordAudit({
+        client: db,
         userId: req.user.id,
         action: 'automation:create',
         resourceType: 'automation_rules',
@@ -71,7 +73,7 @@ export function createAutomationsRouter({ db }) {
   });
 
   // Update rule
-  router.put('/automations/:id', requirePermission('campaigns:create'), async (req, res, next) => {
+  router.put('/automations/:id', authorize(PERMISSIONS.AUTOMATION_WRITE), async (req, res, next) => {
     try {
       const parsed = ruleSchema.partial().parse(req.body);
       const updated = await updateAutomationRule(db, req.params.id, parsed);
@@ -80,7 +82,8 @@ export function createAutomationsRouter({ db }) {
         return res.status(404).json({ error: { message: 'Rule otomasi tidak ditemukan' } });
       }
 
-      await auditLog(db, {
+      await recordAudit({
+        client: db,
         userId: req.user.id,
         action: 'automation:update',
         resourceType: 'automation_rules',
@@ -97,7 +100,7 @@ export function createAutomationsRouter({ db }) {
   });
 
   // Manual test trigger of a rule
-  router.post('/automations/:id/trigger', requirePermission('campaigns:create'), async (req, res, next) => {
+  router.post('/automations/:id/trigger', authorize(PERMISSIONS.AUTOMATION_WRITE), async (req, res, next) => {
     try {
       const rule = await getAutomationRuleById(db, req.params.id);
       if (!rule) {
@@ -128,7 +131,8 @@ export function createAutomationsRouter({ db }) {
         result = { status: 'triggered_mock', ruleType: rule.type };
       }
 
-      await auditLog(db, {
+      await recordAudit({
+        client: db,
         userId: req.user.id,
         action: 'automation:trigger_test',
         resourceType: 'automation_rules',

@@ -65,8 +65,8 @@ describe('Message Queue Primitives', () => {
     await enqueueMessage(input);
 
     const [a, b] = await Promise.all([
-      claimMessageBatch({ workerId: 'worker-a', limit: 1, leaseSeconds: 60 }),
-      claimMessageBatch({ workerId: 'worker-b', limit: 1, leaseSeconds: 60 })
+      claimMessageBatch({ workerId: 'worker-a', limit: 20, leaseSeconds: 60 }),
+      claimMessageBatch({ workerId: 'worker-b', limit: 20, leaseSeconds: 60 })
     ]);
 
     // Only one worker should have claimed this specific message

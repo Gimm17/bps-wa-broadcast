@@ -8,9 +8,10 @@ import {
   toWitaDate,
   getWitaNow
 } from './service.js';
-import { requireAuth } from '../../middleware/auth.js';
-import { requirePermission } from '../../middleware/rbac.js';
-import { auditLog } from '../../middleware/audit.js';
+import { authenticate } from '../../middleware/authenticate.js';
+import { authorize } from '../../middleware/authorize.js';
+import { recordAudit } from '../audit/service.js';
+import { PERMISSIONS } from '@bps/shared';
 
 const holidaySchema = z.object({
   date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Format tanggal harus YYYY-MM-DD'),
@@ -47,7 +48,7 @@ export function createCalendarRouter({ db }) {
   const router = express.Router();
 
   // All calendar management requires login
-  router.use(requireAuth);
+  router.use(authenticate);
 
   // List holidays and exceptions
   router.get('/holidays', async (req, res, next) => {
@@ -91,12 +92,13 @@ export function createCalendarRouter({ db }) {
   });
 
   // Add holiday / exception
-  router.post('/holidays', requirePermission('campaigns:create'), async (req, res, next) => {
+  router.post('/holidays', authorize(PERMISSIONS.CAMPAIGN_WRITE), async (req, res, next) => {
     try {
       const parsed = holidaySchema.parse(req.body);
       const created = await addHolidayException(db, parsed);
 
-      await auditLog(db, {
+      await recordAudit({
+        client: db,
         userId: req.user.id,
         action: 'calendar:exception_create',
         resourceType: 'holiday_dates',
@@ -116,12 +118,13 @@ export function createCalendarRouter({ db }) {
   });
 
   // Delete holiday / exception
-  router.delete('/holidays/:date', requirePermission('campaigns:create'), async (req, res, next) => {
+  router.delete('/holidays/:date', authorize(PERMISSIONS.CAMPAIGN_WRITE), async (req, res, next) => {
     try {
       const { date } = req.params;
       const removed = await removeHolidayException(db, date);
 
-      await auditLog(db, {
+      await recordAudit({
+        client: db,
         userId: req.user.id,
         action: 'calendar:exception_delete',
         resourceType: 'holiday_dates',
@@ -141,13 +144,14 @@ export function createCalendarRouter({ db }) {
   });
 
   // Sync SKB holidays
-  router.post('/sync-skb', requirePermission('campaigns:create'), async (req, res, next) => {
+  router.post('/sync-skb', authorize(PERMISSIONS.CAMPAIGN_WRITE), async (req, res, next) => {
     try {
       for (const h of SKB_2026_HOLIDAYS) {
         await addHolidayException(db, h);
       }
 
-      await auditLog(db, {
+      await recordAudit({
+        client: db,
         userId: req.user.id,
         action: 'calendar:sync_skb',
         resourceType: 'holiday_dates',

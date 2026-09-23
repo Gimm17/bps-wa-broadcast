@@ -9,6 +9,11 @@ import { metaRouter } from './features/meta/routes.js';
 import { campaignsRouter } from './features/campaigns/routes.js';
 import { createCalendarRouter } from './features/calendar/routes.js';
 import { createAutomationsRouter } from './features/automations/routes.js';
+import { createDashboardRouter } from './features/dashboard/routes.js';
+import { createMessagesRouter } from './features/messages/routes.js';
+import { createHealthRouter } from './features/health/routes.js';
+import { createReportsRouter } from './features/reports/routes.js';
+import { createAuditRouter } from './features/audit/routes.js';
 import { pool as defaultPool } from './db/pool.js';
 import { authenticate } from './middleware/authenticate.js';
 import { authorize } from './middleware/authorize.js';
@@ -31,14 +36,21 @@ export function createApp({ config, db, logger }) {
 
   app.get('/api/health/live', (req, res) => res.json({ status: 'ok' }));
 
+  const activeDb = db || defaultPool;
+
   // Feature routes
   app.use('/api/auth', authRouter);
   app.use('/api', contactsRouter);
   app.use('/api', subscriptionsRouter);
   app.use('/api', metaRouter);
   app.use('/api', campaignsRouter);
-  app.use('/api/calendar', createCalendarRouter({ db: db || defaultPool }));
-  app.use('/api', createAutomationsRouter({ db: db || defaultPool }));
+  app.use('/api/calendar', createCalendarRouter({ db: activeDb }));
+  app.use('/api', createAutomationsRouter({ db: activeDb }));
+  app.use('/api', createDashboardRouter({ db: activeDb }));
+  app.use('/api', createMessagesRouter({ db: activeDb }));
+  app.use('/api', createHealthRouter({ db: activeDb }));
+  app.use('/api', createReportsRouter({ db: activeDb }));
+  app.use('/api', createAuditRouter({ db: activeDb }));
 
   // Common error envelope
   app.use((err, req, res, next) => {
