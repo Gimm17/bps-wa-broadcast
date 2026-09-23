@@ -1,0 +1,54 @@
+{
+  "data": [
+    {
+      "name": "brs_rilis_bulanan",
+      "status": "APPROVED",
+      "category": "UTILITY",
+      "id": "100293810293",
+      "language": "id",
+      "components": [
+        {
+          "type": "HEADER",
+          "format": "TEXT",
+          "text": "Berita Resmi Statistik BPS Sulteng"
+        },
+        {
+          "type": "BODY",
+          "text": "Halo {{1}}, rilis data {{2}} telah terbit. Indikator utama mencatat {{3}}. Kunjungi {{4}} untuk informasi selengkapnya.",
+          "example": {
+            "body_text": [
+              ["Sahabat Data", "Inflasi September 2026", "2,14 persen", "https://sulteng.bps.go.id"]
+            ]
+          }
+        },
+        {
+          "type": "FOOTER",
+          "text": "BPS Provinsi Sulawesi Tengah • Ketik BERHENTI untuk berhenti berlangganan"
+        }
+      ]
+    },
+    {
+      "name": "pengingat_presensi_pegawai",
+      "status": "APPROVED",
+      "category": "UTILITY",
+      "id": "100293810294",
+      "language": "id",
+      "components": [
+        {
+          "type": "BODY",
+          "text": "Yth. {{1}}, Anda tercatat belum melakukan presensi masuk hari ini {{2}} WITA. Segera lakukan presensi pada portal internal."
+        },
+        {
+          "type": "FOOTER",
+          "text": "Bagian Umum BPS Provinsi Sulawesi Tengah"
+        }
+      ]
+    }
+  ],
+  "paging": {
+    "cursors": {
+      "before": "QVFIU1...",
+      "after": "QVFIU1..."
+    }
+  }
+}

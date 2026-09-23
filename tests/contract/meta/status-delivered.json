@@ -1,0 +1,40 @@
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "WABA_ID_SULTENG_2026",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "628114500000",
+              "phone_number_id": "PNID_SULTENG_001"
+            },
+            "statuses": [
+              {
+                "id": "wamid.HBgNNjI4MTI0MjA0MjgxMhUCABEYEjA4RUQ0MzlGQzJBM0I1NzE1QQA=",
+                "status": "delivered",
+                "timestamp": "1759287600",
+                "recipient_id": "6281242042812",
+                "conversation": {
+                  "id": "c76d054d5c9535091e01869e5f58c704",
+                  "expiration_timestamp": "1759374000",
+                  "origin": {
+                    "type": "utility"
+                  }
+                },
+                "pricing": {
+                  "billable": true,
+                  "pricing_model": "CBP",
+                  "category": "utility"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}

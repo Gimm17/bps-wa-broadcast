@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import { authRouter } from './features/auth/routes.js';
 import { contactsRouter } from './features/contacts/routes.js';
 import { subscriptionsRouter } from './features/subscriptions/routes.js';
+import { metaRouter } from './features/meta/routes.js';
 import { authenticate } from './middleware/authenticate.js';
 import { authorize } from './middleware/authorize.js';
 import { validateCsrf } from './middleware/csrf.js';
@@ -30,17 +31,7 @@ export function createApp({ config, db, logger }) {
   app.use('/api/auth', authRouter);
   app.use('/api', contactsRouter);
   app.use('/api', subscriptionsRouter);
-
-  // Integration route (RBAC and CSRF protected)
-  app.patch(
-    '/api/integrations/meta',
-    authenticate,
-    validateCsrf,
-    authorize(PERMISSIONS.INTEGRATION_MANAGE),
-    (req, res) => {
-      res.json({ status: 'ok', message: 'Kredensial Meta berhasil diperbarui' });
-    }
-  );
+  app.use('/api', metaRouter);
 
   // Common error envelope
   app.use((err, req, res, next) => {

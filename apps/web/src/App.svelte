@@ -10,6 +10,8 @@
   import ContactDetail from './routes/ContactDetail.svelte';
   import ImportReview from './routes/ImportReview.svelte';
   import Subscriptions from './routes/Subscriptions.svelte';
+  import Templates from './routes/Templates.svelte';
+  import Integrations from './routes/Integrations.svelte';
   import Subscribe from './routes/public/Subscribe.svelte';
   import ManageSubscription from './routes/public/ManageSubscription.svelte';
   import UnsubscribeResult from './routes/public/UnsubscribeResult.svelte';
@@ -57,6 +59,8 @@
     '/contacts/:id': wrap({ component: ContactDetail }),
     '/imports/contacts/:id': wrap({ component: ImportReview }),
     '/subscriptions': wrap({ component: Subscriptions }),
+    '/templates': wrap({ component: Templates }),
+    '/integrations': wrap({ component: Integrations }),
     '*': wrap({ component: Overview })
   };
 </script>
