@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+
+<html lang="id"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_stack" name="shell-type"/><title>Verifikasi Otp - BPS Sulawesi Tengah</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&amp;family=Geist:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100%;margin:0;padding:0;min-height:100%;background-color:#FFFFFF;}body{overscroll-behavior-y:none;-webkit-tap-highlight-color:transparent;font-family:'Geist',sans-serif;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "on-error": "#ffffff", "warm-sand": "#FFE2AF", "on-tertiary-fixed": "#002020", "structural-border": "#DCE2DF", "background": "#f2fbfb", "surface-container": "#e6f0ef", "primary": "#9e4200", "on-secondary-fixed-variant": "#004f4f", "operational-teal": "#24B1B1", "tertiary-fixed": "#7bf5f5", "outline": "#8a7267", "warm-sand-subtle": "#FFF8EC", "on-tertiary": "#ffffff", "charcoal-ink": "#172020", "authority-teal": "#007979", "error": "#ba1a1a", "on-surface": "#141d1d", "on-error-container": "#93000a", "secondary-container": "#97f2f1", "on-secondary-fixed": "#002020", "primary-fixed": "#ffdbcb", "inverse-on-surface": "#e9f3f2", "surface-dim": "#d2dcdb", "secondary-fixed-dim": "#7bd5d5", "surface-container-high": "#e0eae9", "error-container": "#ffdad6", "error-red": "#B42318", "tertiary-fixed-dim": "#5bd9d8", "surface-container-lowest": "#ffffff", "on-primary": "#ffffff", "primary-fixed-dim": "#ffb691", "on-primary-container": "#4e1d00", "on-primary-fixed": "#341100", "inverse-surface": "#293232", "inverse-primary": "#ffb691", "surface-bright": "#f2fbfb", "action-orange": "#E37434", "on-secondary": "#ffffff", "surface-variant": "#dbe4e4", "tertiary-container": "#00a4a4", "on-primary-fixed-variant": "#793100", "outline-variant": "#ddc1b4", "secondary-fixed": "#97f2f1", "surface-container-highest": "#dbe4e4", "surface": "#FFFFFF", "error-red-subtle": "#FEF3F2", "primary-container": "#e37434", "on-background": "#141d1d", "secondary": "#006a6a", "tertiary": "#006a6a", "surface-tint": "#9e4200", "muted-slate": "#66706F", "surface-container-low": "#ecf6f5", "on-secondary-container": "#007070", "on-surface-variant": "#564239", "on-tertiary-container": "#003232", "on-tertiary-fixed-variant": "#004f50", "canvas": "#F7F7F3" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "gutter-desktop": "1.5rem", "margin": "1rem", "margin-desktop": "2rem", "gutter": "1rem", "space-md": "1rem", "space-lg": "1.5rem", "space-xs": "0.25rem", "space-sm": "0.5rem", "space-xl": "2rem" }, fontFamily: { "headline-lg-mobile": ["Geist"], "headline-sm": ["Geist"], "body-lg": ["Geist"], "label-md": ["Geist"], "label-sm": ["Geist"], "headline-md": ["Geist"], "code-sm": ["Geist Mono"], "code-lg": ["Geist Mono"], "caption": ["Geist"], "headline-xl": ["Geist"], "body-sm": ["Geist"], "headline-lg": ["Geist"], "headline-xl-mobile": ["Geist"], "body-md": ["Geist"], "code-md": ["Geist Mono"] }, fontSize: { "headline-lg-mobile": ["22px", { lineHeight: "28px", letterSpacing: "-0.01em", fontWeight: "600" }], "headline-sm": ["16px", { lineHeight: "24px", fontWeight: "600" }], "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }], "label-md": ["14px", { lineHeight: "20px", fontWeight: "500" }], "label-sm": ["12px", { lineHeight: "16px", letterSpacing: "0.01em", fontWeight: "500" }], "headline-md": ["20px", { lineHeight: "28px", letterSpacing: "-0.01em", fontWeight: "600" }], "code-sm": ["12px", { lineHeight: "16px", fontWeight: "500" }], "code-lg": ["24px", { lineHeight: "32px", letterSpacing: "-0.01em", fontWeight: "600" }], "caption": ["12px", { lineHeight: "16px", fontWeight: "400" }], "headline-xl": ["32px", { lineHeight: "40px", letterSpacing: "-0.02em", fontWeight: "600" }], "body-sm": ["13px", { lineHeight: "18px", fontWeight: "400" }], "headline-lg": ["28px", { lineHeight: "36px", letterSpacing: "-0.02em", fontWeight: "600" }], "headline-xl-mobile": ["26px", { lineHeight: "32px", letterSpacing: "-0.01em", fontWeight: "600" }], "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }], "code-md": ["14px", { lineHeight: "20px", fontWeight: "500" }] } } } };</script></head><body class="bg-surface text-charcoal-ink flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-gutter flex items-center justify-between"><div class="flex items-center gap-space-sm"><button class="w-11 h-11 -ml-2 flex items-center justify-center text-charcoal-ink rounded-lg" onclick="history.back()"><span class="material-symbols-outlined text-[24px]">arrow_back</span></button><img alt="Brand logo. - Primary color: #e37434
+- Font: geist
+- Mode: light
+- Roundness: rounded-md
+" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UH5MpLrhbhuehZ-dnQCWS0NVx7DC5Nb6esC2poNV4h7CHrqxB8IZO-aRjQz1rqpTqOwGgn6UOJhq_UhMzm5f4uuhxmBUo3U7s37s8nvM-LycHq4wDMkzZGfNMf_97M-N9wQyVLQls-xOunkquv66hEg_LBy-DMWGt6gdUOLDoHCAnqYscFdox5pinwbcvavFqxbgUBy8blEX7MUpOCgQbSlF1bNLZ_23cwMByVprNjoH1yePx8iSHbv2Y"/><h1 class="font-headline-sm text-headline-sm text-charcoal-ink truncate max-w-[140px]">Verifikasi Otp</h1></div><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex-1 w-full bg-surface pt-16 pb-safe flex flex-col"><div class="flex flex-col w-full px-margin pb-space-xl">
+<!-- Security Authority Header -->
+<div class="mt-space-sm mb-space-md flex items-center justify-between bg-surface-container-low px-space-md py-space-sm rounded-xl">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-authority-teal" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="font-label-sm text-label-sm text-authority-teal font-semibold">Saluran Meta WABA Terenkripsi</span>
+</div>
+<div class="flex items-center gap-1 bg-surface px-2 py-0.5 rounded-full shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-operational-teal animate-pulse"></span>
+<span class="font-code-sm text-code-sm text-charcoal-ink font-medium">TLS 1.3</span>
+</div>
+</div>
+<!-- Verified WABA Badge & Institution Iconography -->
+<div class="flex flex-col items-center text-center my-space-sm">
+<div class="relative mb-space-md">
+<div class="w-16 h-16 rounded-2xl bg-surface-container flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[34px] text-authority-teal">mark_chat_read</span>
+</div>
+<div class="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-operational-teal text-surface flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-white" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+</div>
+<!-- Official sender badge -->
+<div class="inline-flex items-center gap-1.5 bg-surface-container-high px-space-sm py-1 rounded-full mb-space-xs">
+<span class="material-symbols-outlined text-[15px] text-authority-teal" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-label-sm text-label-sm text-charcoal-ink font-semibold">BPS Provinsi Sulawesi Tengah</span>
+</div>
+<!-- Title & Subtitle -->
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-charcoal-ink mt-space-xs mb-space-xs">Verifikasi Nomor WhatsApp</h2>
+<p class="font-body-sm text-body-sm text-muted-slate max-w-xs leading-relaxed">
+      Kode verifikasi 6-digit telah dikirim melalui pesan resmi WhatsApp Meta WABA BPS Provinsi Sulawesi Tengah ke nomor:
+    </p>
+<!-- Highlighted recipient badge -->
+<div class="w-full mt-space-sm bg-warm-sand-subtle px-space-md py-space-sm rounded-xl flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-2 min-w-0">
+<div class="w-8 h-8 rounded-lg bg-warm-sand flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px] text-primary">phone_iphone</span>
+</div>
+<div class="text-left min-w-0">
+<p class="font-code-md text-code-md text-charcoal-ink font-semibold truncate">+62 811-450-8921</p>
+<p class="font-caption text-caption text-on-surface-variant truncate">Anwar Hafid • Agen Statistik</p>
+</div>
+</div>
+<button class="shrink-0 ml-2 px-space-xs py-1 rounded-lg text-action-orange hover:bg-warm-sand/40 transition-colors flex items-center gap-0.5" type="button">
+<span class="font-label-sm text-label-sm font-semibold">Ubah</span>
+<span class="material-symbols-outlined text-[14px]">edit</span>
+</button>
+</div>
+</div>
+<!-- OTP Input Grid -->
+<div class="mt-space-md mb-space-lg flex flex-col items-center">
+<div class="w-full flex justify-between gap-2 max-w-[340px]" id="otpContainer">
+<input autofocus="" class="otp-box w-12 h-14 text-center font-code-lg text-code-lg bg-surface-container-low text-charcoal-ink rounded-xl shadow-sm focus:outline-none focus:bg-surface focus:shadow-md transition-all duration-150" inputmode="numeric" maxlength="1" pattern="[0-9]*" type="text" value="8"/>
+<input class="otp-box w-12 h-14 text-center font-code-lg text-code-lg bg-surface-container-low text-charcoal-ink rounded-xl shadow-sm focus:outline-none focus:bg-surface focus:shadow-md transition-all duration-150" inputmode="numeric" maxlength="1" pattern="[0-9]*" type="text" value="3"/>
+<input class="otp-box w-12 h-14 text-center font-code-lg text-code-lg bg-surface-container-low text-charcoal-ink rounded-xl shadow-sm focus:outline-none focus:bg-surface focus:shadow-md transition-all duration-150" inputmode="numeric" maxlength="1" pattern="[0-9]*" type="text" value="1"/>
+<input class="otp-box w-12 h-14 text-center font-code-lg text-code-lg bg-surface-container-lowest text-charcoal-ink rounded-xl shadow-sm focus:outline-none focus:bg-surface focus:shadow-md transition-all duration-150" inputmode="numeric" maxlength="1" pattern="[0-9]*" placeholder="•" type="text"/>
+<input class="otp-box w-12 h-14 text-center font-code-lg text-code-lg bg-surface-container-lowest text-charcoal-ink rounded-xl shadow-sm focus:outline-none focus:bg-surface focus:shadow-md transition-all duration-150" inputmode="numeric" maxlength="1" pattern="[0-9]*" placeholder="•" type="text"/>
+<input class="otp-box w-12 h-14 text-center font-code-lg text-code-lg bg-surface-container-lowest text-charcoal-ink rounded-xl shadow-sm focus:outline-none focus:bg-surface focus:shadow-md transition-all duration-150" inputmode="numeric" maxlength="1" pattern="[0-9]*" placeholder="•" type="text"/>
+</div>
+<!-- Timer & Verification telemetry bar -->
+<div class="w-full flex items-center justify-between max-w-[340px] mt-space-md pt-space-xs">
+<div class="flex items-center gap-1.5 text-muted-slate">
+<span class="material-symbols-outlined text-[16px] text-action-orange">timer</span>
+<span class="font-body-sm text-body-sm">Berlaku:</span>
+<span class="font-code-sm text-code-sm text-charcoal-ink font-semibold" id="countdownTimer">04:58</span>
+</div>
+<div class="flex items-center gap-1 text-authority-teal">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">lock</span>
+<span class="font-label-sm text-label-sm font-medium">End-to-End</span>
+</div>
+</div>
+</div>
+<!-- Primary Action -->
+<button class="w-full h-12 bg-action-orange text-white rounded-xl shadow-md font-label-md text-label-md font-semibold flex items-center justify-center gap-space-xs active:translate-y-[1px] transition-transform duration-100" id="verifyBtn">
+<span>Verifikasi &amp; Konfirmasi Langganan</span>
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+<!-- Secondary Actions -->
+<div class="mt-space-md flex flex-col gap-space-sm items-center">
+<button class="w-full py-2.5 bg-surface-container-low text-charcoal-ink rounded-xl font-label-sm text-label-sm font-semibold flex items-center justify-center gap-1.5 hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px] text-muted-slate">replay</span>
+<span>Kirim ulang kode via WhatsApp <span class="font-code-sm text-code-sm text-primary font-bold">(45d)</span></span>
+</button>
+<button class="w-full py-2 bg-transparent text-authority-teal rounded-lg font-label-sm text-label-sm font-semibold flex items-center justify-center gap-1.5 hover:bg-surface-container-low transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">sms</span>
+<span>Kirim via SMS Cadangan</span>
+</button>
+</div>
+<!-- Security Advisory Notice (UU PDP Compliant) -->
+<div class="mt-space-lg bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex items-start gap-space-sm">
+<div class="w-7 h-7 rounded-lg bg-warm-sand flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px] text-action-orange" style="font-variation-settings: 'FILL' 1;">shield</span>
+</div>
+<div class="flex flex-col gap-1 min-w-0">
+<p class="font-label-sm text-label-sm text-charcoal-ink font-semibold">Pemberitahuan Keamanan Resmi BPS Sulteng</p>
+<p class="font-caption text-caption text-muted-slate leading-relaxed">
+        Petugas BPS tidak pernah meminta kode OTP kepada siapapun. Pastikan akun pengirim memiliki centang hijau Meta Terverifikasi untuk perlindungan data sesuai amanat UU PDP No. 27/2022.
+      </p>
+</div>
+</div>
+<!-- Micro Help Footer -->
+<div class="mt-space-md text-center px-space-xs">
+<p class="font-body-sm text-body-sm text-muted-slate">
+      Mengalami kendala? Hubungi
+      <a class="text-authority-teal font-medium inline-flex items-center gap-0.5 ml-1" href="https://wa.me/628114507200">
+        PST BPS Sulteng
+        <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+</a>
+</p>
+<span class="font-code-sm text-code-sm text-muted-slate/80 mt-1 block">Ref ID: WABA-STG-9942A</span>
+</div>
+</div>
+<script>
+  (function() {
+    const inputs = document.querySelectorAll('.otp-box');
+    inputs.forEach((input, index) => {
+      input.addEventListener('input', (e) => {
+        if (e.target.value.length === 1 && index < inputs.length - 1) {
+          inputs[index + 1].focus();
+        }
+      });
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Backspace' && !e.target.value && index > 0) {
+          inputs[index - 1].focus();
+        }
+      });
+    });
+
+    let totalSeconds = 298;
+    const timerElem = document.getElementById('countdownTimer');
+    const interval = setInterval(() => {
+      if (totalSeconds <= 0) {
+        clearInterval(interval);
+        if (timerElem) timerElem.textContent = '00:00';
+        return;
+      }
+      totalSeconds--;
+      const mins = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
+      const secs = String(totalSeconds % 60).padStart(2, '0');
+      if (timerElem) timerElem.textContent = `${mins}:${secs}`;
+    }, 1000);
+  })();
+</script><footer class="w-full bg-canvas px-gutter py-space-lg mt-auto"><div class="flex flex-col gap-space-md"><div class="flex items-center justify-between"><div class="flex items-center gap-1.5 text-authority-teal"><span class="material-symbols-outlined text-[18px]">shield</span><span class="font-label-sm text-label-sm">Kepatuhan UU PDP No. 27/2022</span></div><span class="font-code-sm text-code-sm text-muted-slate">Zona WITA</span></div><div class="flex flex-col gap-1"><span class="font-label-sm text-label-sm text-charcoal-ink">Pelayanan Statistik Terpadu (PST) BPS Sulteng</span><p class="font-caption text-caption text-muted-slate leading-relaxed">Jl. Prof. Moh. Yamin No. 51, Palu, Sulawesi Tengah 94111</p><div class="flex items-center gap-space-sm pt-1"><span class="material-symbols-outlined text-[15px] text-operational-teal">call</span><a class="font-code-sm text-code-sm text-authority-teal font-medium" href="tel:+628114507200">+62 811-450-7200</a></div></div><div class="flex items-center justify-between pt-space-xs"><p class="font-caption text-caption text-muted-slate">© 2025 BPS Provinsi Sulawesi Tengah</p><span class="font-caption text-caption text-authority-teal">Meta WABA Certified</span></div></div></footer></main></body></html>

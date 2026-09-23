@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+
+<html lang="id"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={"darkMode":"class","theme":{"extend":{"colors":{"inverse-primary":"#ffb691","on-primary-fixed":"#341100","authority-teal":"#007979","surface-container-high":"#e0eae9","tertiary-fixed":"#7bf5f5","on-primary-fixed-variant":"#793100","inverse-on-surface":"#e9f3f2","on-background":"#141d1d","on-tertiary-container":"#003232","on-tertiary-fixed-variant":"#004f50","on-primary":"#ffffff","secondary-fixed":"#97f2f1","operational-teal":"#24B1B1","primary-container":"#e37434","secondary":"#006a6a","on-error-container":"#93000a","on-surface-variant":"#564239","surface":"#FFFFFF","surface-dim":"#d2dcdb","tertiary-container":"#00a4a4","background":"#f2fbfb","on-secondary":"#ffffff","primary-fixed-dim":"#ffb691","tertiary":"#006a6a","surface-tint":"#9e4200","on-secondary-container":"#007070","primary-fixed":"#ffdbcb","on-tertiary":"#ffffff","on-surface":"#141d1d","surface-container-highest":"#dbe4e4","surface-bright":"#f2fbfb","secondary-fixed-dim":"#7bd5d5","on-secondary-fixed-variant":"#004f4f","error-red-subtle":"#FEF3F2","outline":"#8a7267","inverse-surface":"#293232","secondary-container":"#97f2f1","outline-variant":"#ddc1b4","surface-container-low":"#ecf6f5","surface-container":"#e6f0ef","action-orange":"#E37434","surface-container-lowest":"#ffffff","primary":"#9e4200","structural-border":"#DCE2DF","error":"#ba1a1a","tertiary-fixed-dim":"#5bd9d8","warm-sand-subtle":"#FFF8EC","warm-sand":"#FFE2AF","charcoal-ink":"#172020","on-tertiary-fixed":"#002020","on-primary-container":"#4e1d00","canvas":"#F7F7F3","error-container":"#ffdad6","muted-slate":"#66706F","on-secondary-fixed":"#002020","error-red":"#B42318","on-error":"#ffffff","surface-variant":"#dbe4e4"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"gutter-desktop":"1.5rem","margin":"1rem","space-lg":"1.5rem","space-xl":"2rem","space-md":"1rem","space-xs":"0.25rem","margin-desktop":"2rem","space-sm":"0.5rem","gutter":"1rem"},"fontFamily":{"headline-xl-mobile":["Geist"],"headline-sm":["Geist"],"body-md":["Geist"],"caption":["Geist"],"label-md":["Geist"],"label-sm":["Geist"],"headline-lg-mobile":["Geist"],"headline-lg":["Geist"],"body-sm":["Geist"],"body-lg":["Geist"],"code-md":["Geist Mono"],"headline-md":["Geist"],"code-lg":["Geist Mono"],"code-sm":["Geist Mono"],"headline-xl":["Geist"]},"fontSize":{"headline-xl-mobile":["26px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-sm":["16px",{"lineHeight":"24px","fontWeight":"600"}],"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}],"caption":["12px",{"lineHeight":"16px","fontWeight":"400"}],"label-md":["14px",{"lineHeight":"20px","fontWeight":"500"}],"label-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.01em","fontWeight":"500"}],"headline-lg-mobile":["22px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-lg":["28px",{"lineHeight":"36px","letterSpacing":"-0.02em","fontWeight":"600"}],"body-sm":["13px",{"lineHeight":"18px","fontWeight":"400"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}],"code-md":["14px",{"lineHeight":"20px","fontWeight":"500"}],"headline-md":["20px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"600"}],"code-lg":["24px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"600"}],"code-sm":["12px",{"lineHeight":"16px","fontWeight":"500"}],"headline-xl":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"600"}]}}}};</script></head><body class="bg-canvas font-body-md text-on-surface antialiased selection:bg-action-orange selection:text-on-primary"><aside class="fixed left-0 top-0 h-screen w-64 bg-authority-teal text-on-primary z-50 flex flex-col justify-between overflow-y-auto border-r border-structural-border/20 shadow-[0_1px_8px_rgba(0,0,0,0.06)]"><div class="flex flex-col"><div class="h-14 px-4 flex items-center gap-3 border-b border-white/10 bg-secondary/20"><img alt="Logo BPS Provinsi Sulawesi Tengah" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UH5MpLrhbhuehZ-dnQCWS0NVx7DC5Nb6esC2poNV4h7CHrqxB8IZO-aRjQz1rqpTqOwGgn6UOJhq_UhMzm5f4uuhxmBUo3U7s37s8nvM-LycHq4wDMkzZGfNMf_97M-N9wQyVLQls-xOunkquv66hEg_LBy-DMWGt6gdUOLDoHCAnqYscFdox5pinwbcvavFqxbgUBy8blEX7MUpOCgQbSlF1bNLZ_23cwMByVprNjoH1yePx8iSHbv2Y"/><div class="flex flex-col min-w-0"><span class="font-label-md text-label-md text-on-primary truncate tracking-tight">BPS Sulteng</span><span class="font-caption text-caption text-secondary-fixed opacity-90 truncate leading-none">WhatsApp Operations</span></div></div><div class="px-3 py-3"><div class="text-[10px] uppercase tracking-wider font-semibold text-secondary-fixed/70 px-3 mb-1.5 font-label-sm">Diseminasi &amp; Komunikasi</div><nav class="flex flex-col gap-0.5" data-active-classes="bg-action-orange text-on-primary font-label-md rounded-lg shadow-sm"><a class="flex items-center px-3 py-2 rounded-lg text-secondary-fixed hover:bg-white/10 hover:text-on-primary transition-colors text-body-sm font-body-sm" data-path="overview" href="#">Overview</a><a class="flex items-center px-3 py-2 rounded-lg text-secondary-fixed hover:bg-white/10 hover:text-on-primary transition-colors text-body-sm font-body-sm" data-path="campaigns" href="#">Campaigns</a><a class="flex items-center px-3 py-2 rounded-lg text-secondary-fixed hover:bg-white/10 hover:text-on-primary transition-colors text-body-sm font-body-sm" data-path="automations" href="#">Automations</a><a class="flex items-center px-3 py-2 rounded-lg text-secondary-fixed hover:bg-white/10 hover:text-on-primary transition-colors text-body-sm font-body-sm" data-path="templates" href="#">Templates</a></nav></div><div class="px-3 py-2"><div class="text-[10px] uppercase tracking-wider font-semibold text-secondary-fixed/70 px-3 mb-1.5 font-label-sm">Direktori &amp; Distribusi</div><nav class="flex flex-col gap-0.5" data-active-classes="bg-action-orange text-on-primary font-label-md rounded-lg shadow-sm"><a class="flex items-center px-3 py-2 rounded-lg text-secondary-fixed hover:bg-white/10 hover:text-on-primary transition-colors text-body-sm font-body-sm" data-path="contacts" href="#">Contacts</a><a class="flex items-center px-3 py-2 rounded-lg text-secondary-fixed hover:bg-white/10 hover:text-on-primary transition-colors text-body-sm font-body-sm" data-path="subscriptions" href="#">Subscriptions</a><a aria-current="page" class="flex items-center px-3 py-2 transition-colors bg-action-orange text-on-primary font-label-md rounded-lg shadow-sm" data-path="schedules-and-calendar" href="#">Schedules &amp; Calendar</a><a class="flex items-center px-3 py-2 rounded-lg text-secondary-fixed hover:bg-white/10 hover:text-on-primary transition-colors text-body-sm font-body-sm" data-path="message-logs" href="#">Message Logs</a></nav></div><div class="px-3 py-2"><div class="text-[10px] uppercase tracking-wider font-semibold text-secondary-fixed/70 px-3 mb-1.5 font-label-sm">Infrastruktur &amp; Sistem</div><nav class="flex flex-col gap-0.5" data-active-classes="bg-action-orange text-on-primary font-label-md rounded-lg shadow-sm"><a class="flex items-center px-3 py-2 rounded-lg text-secondary-fixed hover:bg-white/10 hover:text-on-primary transition-colors text-body-sm font-body-sm" data-path="integrations" href="#">Integrations</a><a class="flex items-center px-3 py-2 rounded-lg text-secondary-fixed hover:bg-white/10 hover:text-on-primary transition-colors text-body-sm font-body-sm" data-path="users-and-roles" href="#">Users &amp; Roles</a><a class="flex items-center px-3 py-2 rounded-lg text-secondary-fixed hover:bg-white/10 hover:text-on-primary transition-colors text-body-sm font-body-sm" data-path="audit-and-settings" href="#">Audit &amp; Settings</a></nav></div></div><div class="p-3 border-t border-white/10 bg-secondary/30"><div class="flex items-center justify-between text-[11px] text-secondary-fixed/80"><span class="font-code-sm text-code-sm">BPS WABA v2.4</span><span class="px-1.5 py-0.5 rounded bg-authority-teal border border-secondary-fixed/30 text-[10px] text-on-primary font-code-sm">PROD</span></div></div></aside><div class="pl-64 flex flex-col min-h-screen"><header class="fixed top-0 left-64 right-0 h-14 bg-surface/95 backdrop-blur-md border-b border-structural-border z-40 px-6 flex items-center justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center gap-3"><div class="flex items-center gap-2"><span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-authority-teal/10 text-authority-teal border border-authority-teal/20 tracking-wide font-label-sm">PROD - Palu Cluster</span></div><div class="h-4 w-px bg-structural-border"></div><div class="flex items-center gap-1.5 text-caption font-caption text-muted-slate"><a class="hover:text-charcoal-ink transition-colors font-body-sm" href="#">Direktori &amp; Distribusi</a><span class="material-symbols-outlined text-[14px] text-muted-slate">chevron_right</span><span class="font-label-sm text-charcoal-ink">Schedules &amp; Calendar</span></div><div class="h-4 w-px bg-structural-border hidden sm:block"></div><div class="hidden md:flex items-center gap-2 text-caption font-caption text-muted-slate"><div class="flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container-low border border-structural-border"><span class="w-1.5 h-1.5 rounded-full bg-operational-teal"></span><span class="text-[11px] font-label-sm text-charcoal-ink">Meta WABA: Terhubung</span></div><div class="flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container-low border border-structural-border"><span class="w-1.5 h-1.5 rounded-full bg-operational-teal"></span><span class="text-[11px] font-label-sm text-charcoal-ink">Cron: Aktif</span></div><div class="flex items-center gap-1 px-1.5 text-muted-slate"><span class="material-symbols-outlined text-[14px]">schedule</span><span class="text-[11px] font-code-sm">WITA / Asia/Makassar</span></div></div></div><div class="flex items-center gap-3"><button aria-label="Notifikasi" class="relative p-1.5 text-muted-slate hover:text-charcoal-ink hover:bg-surface-container rounded-lg transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-action-orange ring-2 ring-surface"></span></button><div class="h-5 w-px bg-structural-border"></div><div class="flex items-center gap-2.5 pl-1"><div class="flex flex-col text-right"><span class="font-label-md text-label-md text-charcoal-ink leading-tight">Ainun</span><span class="text-[11px] font-caption text-muted-slate leading-none">Admin Diseminasi - BPS Sulteng</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-14 flex-1"><div class="flex flex-col w-full">
+<div class="max-w-[1440px] w-full mx-auto p-4 md:p-6 lg:p-8 space-y-6">
+<!-- Top Action & Overview Area -->
+<div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 bg-surface rounded-xl p-5 shadow-sm">
+<div class="flex flex-col gap-1.5 max-w-3xl">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-authority-teal/10 text-authority-teal font-label-sm text-label-sm font-semibold">SKB 3 Menteri v2026.4</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-charcoal-ink font-code-sm text-code-sm">Asia/Makassar (WITA)</span>
+<span class="inline-flex items-center gap-1 text-operational-teal font-label-sm text-label-sm">
+<span class="w-2 h-2 rounded-full bg-operational-teal animate-pulse"></span>
+            Cron Engine Standby
+          </span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-charcoal-ink tracking-tight">Kalender Diseminasi &amp; Sinkronisasi Libur Nasional</h1>
+<p class="font-body-md text-body-md text-muted-slate leading-relaxed">
+          Sinkronisasi otomatis kalender siaran WhatsApp dengan Surat Keputusan Bersama (SKB 3 Menteri) Hari Libur Nasional, Cuti Bersama, dan Kalender Rilis Resmi BPS Sulawesi Tengah 2026.
+        </p>
+</div>
+<div class="flex flex-wrap items-center gap-2.5">
+<button class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-charcoal-ink font-label-md text-label-md transition-colors" title="Verifikasi SKB 2026.4 Terverifikasi" type="button">
+<span class="material-symbols-outlined text-[18px] text-authority-teal">sync</span>
+<span>Sinkronkan SKB</span>
+</button>
+<button class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-charcoal-ink font-label-md text-label-md transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px] text-muted-slate">download</span>
+<span>Ekspor Jadwal</span>
+</button>
+<button class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-action-orange hover:bg-primary-container text-on-primary font-label-md text-label-md shadow-sm transition-all active:translate-y-[1px]" type="button">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span>Tambah Jadwal / Exception</span>
+</button>
+</div>
+</div>
+<!-- 4 Key Telemetry Metrics -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Metric 1 -->
+<div class="bg-surface rounded-xl p-4 shadow-sm flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div class="space-y-1">
+<span class="font-label-sm text-label-sm text-muted-slate block">Total Siaran Terjadwal Bulan Ini</span>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-xl text-headline-xl text-charcoal-ink font-bold">28</span>
+<span class="font-label-sm text-label-sm text-muted-slate">Siaran</span>
+</div>
+</div>
+<div class="w-10 h-10 rounded-lg bg-authority-teal/10 text-authority-teal flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">calendar_month</span>
+</div>
+</div>
+<div class="mt-4 pt-3 flex items-center justify-between text-caption font-caption text-muted-slate bg-surface-container-low px-2 py-1.5 rounded-lg">
+<span class="font-code-sm text-code-sm text-authority-teal font-medium">100% Sesuai Rencana</span>
+<span>24 Otomatis • 4 Manual</span>
+</div>
+</div>
+<!-- Metric 2 -->
+<div class="bg-surface rounded-xl p-4 shadow-sm flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div class="space-y-1">
+<span class="font-label-sm text-label-sm text-muted-slate block">Hari Libur &amp; Cuti Bersama</span>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-xl text-headline-xl text-primary font-bold">4</span>
+<span class="font-label-sm text-label-sm text-muted-slate">Hari Non-Kerja</span>
+</div>
+</div>
+<div class="w-10 h-10 rounded-lg bg-warm-sand text-on-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">event_busy</span>
+</div>
+</div>
+<div class="mt-4 pt-3 flex items-center justify-between text-caption font-caption text-muted-slate bg-warm-sand-subtle px-2 py-1.5 rounded-lg">
+<span class="text-on-primary-fixed-variant font-medium">2 Libur Nas. + 2 Cuti</span>
+<span class="font-code-sm text-code-sm">Bypass Aktif</span>
+</div>
+</div>
+<!-- Metric 3 -->
+<div class="bg-surface rounded-xl p-4 shadow-sm flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div class="space-y-1">
+<span class="font-label-sm text-label-sm text-muted-slate block">Proteksi Siaran Hari Kerja</span>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-xl text-headline-xl text-authority-teal font-bold">100%</span>
+<span class="font-label-sm text-label-sm text-operational-teal font-medium">Aman</span>
+</div>
+</div>
+<div class="w-10 h-10 rounded-lg bg-authority-teal/10 text-authority-teal flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">verified_user</span>
+</div>
+</div>
+<div class="mt-4 pt-3 flex items-center justify-between text-caption font-caption text-muted-slate bg-surface-container-low px-2 py-1.5 rounded-lg">
+<span class="text-charcoal-ink font-medium">0 Anomali Pengiriman</span>
+<span class="font-code-sm text-code-sm text-muted-slate">Cron Guard v2.4</span>
+</div>
+</div>
+<!-- Metric 4 -->
+<div class="bg-surface rounded-xl p-4 shadow-sm flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div class="space-y-1">
+<span class="font-label-sm text-label-sm text-muted-slate block">Sinkronisasi Rilis BRS Nasional</span>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-sm text-headline-sm text-charcoal-ink font-semibold">BPS RI Terhubung</span>
+</div>
+</div>
+<div class="w-10 h-10 rounded-lg bg-surface-container text-muted-slate flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">cloud_sync</span>
+</div>
+</div>
+<div class="mt-4 pt-3 flex items-center justify-between text-caption font-caption text-muted-slate bg-surface-container-low px-2 py-1.5 rounded-lg">
+<span class="truncate font-medium text-charcoal-ink">Rilis Terdekat: 01 Okt 09:00</span>
+<span class="font-code-sm text-code-sm text-authority-teal">IHK Sulteng</span>
+</div>
+</div>
+</div>
+<!-- Main 8-Col + 4-Col Asymmetric Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Left Column (8 cols): Interactive Calendar Grid -->
+<section class="lg:col-span-8 flex flex-col gap-4">
+<div class="bg-surface rounded-xl shadow-sm overflow-hidden">
+<!-- Calendar Controls Bar -->
+<div class="p-4 md:p-5 bg-surface-bright flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<div class="flex items-center bg-surface rounded-lg shadow-sm">
+<button aria-label="Bulan sebelumnya" class="p-2 hover:bg-surface-container text-muted-slate hover:text-charcoal-ink rounded-l-lg transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<div class="px-3 py-1 font-headline-sm text-headline-sm text-charcoal-ink tracking-tight font-semibold min-w-[140px] text-center">
+                  Oktober 2026
+                </div>
+<button aria-label="Bulan berikutnya" class="p-2 hover:bg-surface-container text-muted-slate hover:text-charcoal-ink rounded-r-lg transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+<button class="px-3 py-1.5 rounded-lg bg-surface text-charcoal-ink font-label-sm text-label-sm shadow-sm hover:bg-surface-container transition-colors flex items-center gap-1.5" type="button">
+<span class="w-2 h-2 rounded-full bg-action-orange"></span>
+<span>Hari Ini (01 Okt)</span>
+</button>
+</div>
+<!-- View Modes -->
+<div class="flex items-center bg-surface-container-high/60 p-1 rounded-lg">
+<button class="px-3 py-1 text-label-sm font-label-sm bg-surface text-charcoal-ink rounded-md shadow-sm font-semibold" type="button">Tampilan Bulan</button>
+<button class="px-3 py-1 text-label-sm font-label-sm text-muted-slate hover:text-charcoal-ink transition-colors" type="button">Agenda Mingguan</button>
+</div>
+</div>
+<!-- Color Legend Indicator Strip -->
+<div class="px-5 py-2.5 bg-surface-container-low flex flex-wrap items-center gap-y-2 gap-x-4 text-caption font-caption text-muted-slate">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-authority-teal"></span>
+<span class="text-charcoal-ink">Siaran Resmi Diseminasi (BRS/Publikasi)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded bg-warm-sand"></span>
+<span class="text-charcoal-ink font-medium">Libur Nasional &amp; Cuti Bersama (Auto-Bypass)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded ring-2 ring-action-orange"></span>
+<span class="text-charcoal-ink font-medium">Hari Ini (Aktif)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded bg-surface-container-highest"></span>
+<span>Akhir Pekan (Standby)</span>
+</div>
+</div>
+<!-- Calendar Table Grid -->
+<div class="p-3 md:p-4 overflow-x-auto">
+<div class="min-w-[720px]">
+<!-- Weekday Header -->
+<div class="grid grid-cols-7 gap-2 mb-2 text-center text-caption font-label-sm font-semibold text-muted-slate">
+<div class="py-1 uppercase">Senin</div>
+<div class="py-1 uppercase">Selasa</div>
+<div class="py-1 uppercase">Rabu</div>
+<div class="py-1 uppercase">Kamis</div>
+<div class="py-1 uppercase">Jumat</div>
+<div class="py-1 uppercase text-error-red">Sabtu</div>
+<div class="py-1 uppercase text-error-red">Minggu</div>
+</div>
+<!-- Calendar Month Cells (Starts Thursday 1 Okt) -->
+<div class="grid grid-cols-7 gap-2">
+<!-- Previous month padded cells (Sept 28, 29, 30) -->
+<div class="min-h-[110px] bg-surface-container-lowest/50 p-2 rounded-lg opacity-40 flex flex-col justify-between">
+<span class="font-code-sm text-code-sm text-muted-slate">28</span>
+<span class="text-[10px] font-caption text-muted-slate">Sep</span>
+</div>
+<div class="min-h-[110px] bg-surface-container-lowest/50 p-2 rounded-lg opacity-40 flex flex-col justify-between">
+<span class="font-code-sm text-code-sm text-muted-slate">29</span>
+<span class="text-[10px] font-caption text-muted-slate">Sep</span>
+</div>
+<div class="min-h-[110px] bg-surface-container-lowest/50 p-2 rounded-lg opacity-40 flex flex-col justify-between">
+<span class="font-code-sm text-code-sm text-muted-slate">30</span>
+<span class="text-[10px] font-caption text-muted-slate">Sep</span>
+</div>
+<!-- Day 01 (Thursday - TODAY, highlighted) -->
+<div class="min-h-[110px] bg-warm-sand-subtle/80 p-2 rounded-lg shadow-sm flex flex-col justify-between relative ring-2 ring-action-orange">
+<div>
+<div class="flex items-center justify-between mb-1.5">
+<span class="font-code-md text-code-md font-bold text-action-orange">01</span>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-label-sm font-semibold bg-action-orange text-on-primary">Hari Ini</span>
+</div>
+<div class="space-y-1">
+<div class="px-1.5 py-1 rounded bg-authority-teal text-on-primary font-caption text-[11px] leading-tight flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[12px]">broadcast_on_personal</span>
+<span class="truncate font-medium">09:00 WITA • BRS Inflasi</span>
+</div>
+<div class="px-1.5 py-0.5 rounded bg-surface-container text-charcoal-ink font-caption text-[10px] truncate">
+                        07:15 • Reminder Presensi
+                      </div>
+<div class="px-1.5 py-0.5 rounded bg-surface-container text-charcoal-ink font-caption text-[10px] truncate">
+                        15:45 • Reminder Pulang
+                      </div>
+</div>
+</div>
+<div class="mt-1 text-[10px] font-code-sm text-muted-slate text-right">3 Siaran</div>
+</div>
+<!-- Day 02 (Friday) -->
+<div class="min-h-[110px] bg-surface-container-lowest p-2 rounded-lg flex flex-col justify-between hover:bg-surface-container-low transition-colors">
+<div>
+<div class="flex items-center justify-between mb-1.5">
+<span class="font-code-md text-code-md text-charcoal-ink">02</span>
+</div>
+<div class="space-y-1">
+<div class="px-1.5 py-0.5 rounded bg-surface-container text-charcoal-ink font-caption text-[10px] truncate">
+                        07:15 &amp; 15:45 Presensi ASN
+                      </div>
+</div>
+</div>
+<span class="text-[10px] font-caption text-muted-slate">Reguler</span>
+</div>
+<!-- Day 03 (Saturday - Weekend) -->
+<div class="min-h-[110px] bg-surface-container-low/60 p-2 rounded-lg flex flex-col justify-between text-muted-slate">
+<div class="flex items-center justify-between mb-1.5">
+<span class="font-code-md text-code-md text-muted-slate">03</span>
+<span class="text-[10px] font-caption">Sabtu</span>
+</div>
+<div class="text-[11px] font-caption text-center py-2 text-muted-slate/80">Standby</div>
+<span class="text-[10px] font-code-sm text-muted-slate/60 text-right">Libur Rutin</span>
+</div>
+<!-- Day 04 (Sunday - Weekend) -->
+<div class="min-h-[110px] bg-surface-container-low/60 p-2 rounded-lg flex flex-col justify-between text-muted-slate">
+<div class="flex items-center justify-between mb-1.5">
+<span class="font-code-md text-code-md text-muted-slate">04</span>
+<span class="text-[10px] font-caption">Minggu</span>
+</div>
+<div class="text-[11px] font-caption text-center py-2 text-muted-slate/80">Standby</div>
+<span class="text-[10px] font-code-sm text-muted-slate/60 text-right">Libur Rutin</span>
+</div>
+<!-- Day 05 (Monday) -->
+<div class="min-h-[110px] bg-surface-container-lowest p-2 rounded-lg flex flex-col justify-between hover:bg-surface-container-low transition-colors">
+<div>
+<span class="font-code-md text-code-md text-charcoal-ink">05</span>
+<div class="mt-1 px-1.5 py-0.5 rounded bg-surface-container text-charcoal-ink font-caption text-[10px] truncate">Presensi Harian</div>
+</div>
+<span class="text-[10px] font-caption text-muted-slate">2 Siaran</span>
+</div>
+<!-- Day 06 (Tuesday) -->
+<div class="min-h-[110px] bg-surface-container-lowest p-2 rounded-lg flex flex-col justify-between hover:bg-surface-container-low transition-colors">
+<span class="font-code-md text-code-md text-charcoal-ink">06</span>
+<span class="text-[10px] font-caption text-muted-slate">2 Siaran</span>
+</div>
+<!-- Day 07 (Wednesday) -->
+<div class="min-h-[110px] bg-surface-container-lowest p-2 rounded-lg flex flex-col justify-between hover:bg-surface-container-low transition-colors">
+<span class="font-code-md text-code-md text-charcoal-ink">07</span>
+<span class="text-[10px] font-caption text-muted-slate">2 Siaran</span>
+</div>
+<!-- Day 08 (Thursday) -->
+<div class="min-h-[110px] bg-surface-container-lowest p-2 rounded-lg flex flex-col justify-between hover:bg-surface-container-low transition-colors">
+<div>
+<span class="font-code-md text-code-md text-charcoal-ink">08</span>
+<div class="mt-1 px-1.5 py-1 rounded bg-authority-teal text-on-primary font-caption text-[11px] leading-tight truncate">
+                      09:00 • BRS Pertanian
+                    </div>
+</div>
+<span class="text-[10px] font-code-sm text-muted-slate text-right">3 Siaran</span>
+</div>
+<!-- Day 09 (Friday) -->
+<div class="min-h-[110px] bg-surface-container-lowest p-2 rounded-lg flex flex-col justify-between hover:bg-surface-container-low transition-colors">
+<span class="font-code-md text-code-md text-charcoal-ink">09</span>
+<span class="text-[10px] font-caption text-muted-slate">2 Siaran</span>
+</div>
+<!-- Day 10 (Saturday) -->
+<div class="min-h-[110px] bg-surface-container-low/60 p-2 rounded-lg flex flex-col justify-between text-muted-slate">
+<span class="font-code-md text-code-md text-muted-slate">10</span>
+<span class="text-[10px] font-code-sm text-muted-slate/60 text-right">Standby</span>
+</div>
+<!-- Day 11 (Sunday) -->
+<div class="min-h-[110px] bg-surface-container-low/60 p-2 rounded-lg flex flex-col justify-between text-muted-slate">
+<span class="font-code-md text-code-md text-muted-slate">11</span>
+<span class="text-[10px] font-code-sm text-muted-slate/60 text-right">Standby</span>
+</div>
+<!-- Day 12 to 14 -->
+<div class="min-h-[110px] bg-surface-container-lowest p-2 rounded-lg flex flex-col justify-between hover:bg-surface-container-low transition-colors"><span class="font-code-md text-code-md text-charcoal-ink">12</span><span class="text-[10px] font-caption text-muted-slate">2 Siaran</span></div>
+<div class="min-h-[110px] bg-surface-container-lowest p-2 rounded-lg flex flex-col justify-between hover:bg-surface-container-low transition-colors"><span class="font-code-md text-code-md text-charcoal-ink">13</span><span class="text-[10px] font-caption text-muted-slate">2 Siaran</span></div>
+<div class="min-h-[110px] bg-surface-container-lowest p-2 rounded-lg flex flex-col justify-between hover:bg-surface-container-low transition-colors"><span class="font-code-md text-code-md text-charcoal-ink">14</span><span class="text-[10px] font-caption text-muted-slate">2 Siaran</span></div>
+<!-- Day 15 (Thursday - Major Publication) -->
+<div class="min-h-[110px] bg-surface-container-lowest p-2 rounded-lg flex flex-col justify-between hover:bg-surface-container-low transition-colors">
+<div>
+<span class="font-code-md text-code-md text-charcoal-ink font-semibold">15</span>
+<div class="mt-1 px-1.5 py-1 rounded bg-authority-teal text-on-primary font-caption text-[11px] leading-tight truncate">
+                      09:00 • Ekspor Impor Sulteng
+                    </div>
+</div>
+<span class="text-[10px] font-code-sm text-muted-slate text-right">3 Siaran</span>
+</div>
+<div class="min-h-[110px] bg-surface-container-lowest p-2 rounded-lg flex flex-col justify-between hover:bg-surface-container-low transition-colors"><span class="font-code-md text-code-md text-charcoal-ink">16</span><span class="text-[10px] font-caption text-muted-slate">2 Siaran</span></div>
+<div class="min-h-[110px] bg-surface-container-low/60 p-2 rounded-lg flex flex-col justify-between text-muted-slate"><span class="font-code-md text-code-md text-muted-slate">17</span><span class="text-[10px] font-code-sm text-muted-slate/60 text-right">Standby</span></div>
+<div class="min-h-[110px] bg-surface-container-low/60 p-2 rounded-lg flex flex-col justify-between text-muted-slate"><span class="font-code-md text-code-md text-muted-slate">18</span><span class="text-[10px] font-code-sm text-muted-slate/60 text-right">Standby</span></div>
+<div class="min-h-[110px] bg-surface-container-lowest p-2 rounded-lg flex flex-col justify-between hover:bg-surface-container-low transition-colors"><span class="font-code-md text-code-md text-charcoal-ink">19</span><span class="text-[10px] font-caption text-muted-slate">2 Siaran</span></div>
+<div class="min-h-[110px] bg-surface-container-lowest p-2 rounded-lg flex flex-col justify-between hover:bg-surface-container-low transition-colors"><span class="font-code-md text-code-md text-charcoal-ink">20</span><span class="text-[10px] font-caption text-muted-slate">2 Siaran</span></div>
+<div class="min-h-[110px] bg-surface-container-lowest p-2 rounded-lg flex flex-col justify-between hover:bg-surface-container-low transition-colors"><span class="font-code-md text-code-md text-charcoal-ink">21</span><span class="text-[10px] font-caption text-muted-slate">2 Siaran</span></div>
+<div class="min-h-[110px] bg-surface-container-lowest p-2 rounded-lg flex flex-col justify-between hover:bg-surface-container-low transition-colors"><span class="font-code-md text-code-md text-charcoal-ink">22</span><span class="text-[10px] font-caption text-muted-slate">2 Siaran</span></div>
+<div class="min-h-[110px] bg-surface-container-lowest p-2 rounded-lg flex flex-col justify-between hover:bg-surface-container-low transition-colors"><span class="font-code-md text-code-md text-charcoal-ink">23</span><span class="text-[10px] font-caption text-muted-slate">2 Siaran</span></div>
+<div class="min-h-[110px] bg-surface-container-low/60 p-2 rounded-lg flex flex-col justify-between text-muted-slate"><span class="font-code-md text-code-md text-muted-slate">24</span><span class="text-[10px] font-code-sm text-muted-slate/60 text-right">Standby</span></div>
+<!-- Day 25 (Sunday - Special Deadline Reminder) -->
+<div class="min-h-[110px] bg-surface-container-low/60 p-2 rounded-lg flex flex-col justify-between text-muted-slate">
+<div>
+<span class="font-code-md text-code-md text-muted-slate font-semibold">25</span>
+<div class="mt-1 px-1.5 py-0.5 rounded bg-action-orange/15 text-action-orange font-caption text-[10px] font-medium leading-tight truncate">
+                      08:30 • Deadline Survei
+                    </div>
+</div>
+<span class="text-[10px] font-code-sm text-action-orange text-right">Khusus 13 Kab</span>
+</div>
+<div class="min-h-[110px] bg-surface-container-lowest p-2 rounded-lg flex flex-col justify-between hover:bg-surface-container-low transition-colors"><span class="font-code-md text-code-md text-charcoal-ink">26</span><span class="text-[10px] font-caption text-muted-slate">2 Siaran</span></div>
+<div class="min-h-[110px] bg-surface-container-lowest p-2 rounded-lg flex flex-col justify-between hover:bg-surface-container-low transition-colors"><span class="font-code-md text-code-md text-charcoal-ink">27</span><span class="text-[10px] font-caption text-muted-slate">2 Siaran</span></div>
+<!-- Day 28 (Wednesday - LIBUR NASIONAL SKB) -->
+<div class="min-h-[110px] bg-warm-sand/40 p-2 rounded-lg flex flex-col justify-between shadow-sm relative">
+<div>
+<div class="flex items-center justify-between mb-1">
+<span class="font-code-md text-code-md font-bold text-primary">28</span>
+<span class="material-symbols-outlined text-[16px] text-primary">flag</span>
+</div>
+<div class="px-1.5 py-1 rounded bg-warm-sand text-on-surface-variant font-caption text-[10px] font-semibold leading-tight mb-1">
+                      HARI LIBUR NASIONAL
+                    </div>
+<div class="text-[10px] font-caption text-primary leading-tight">
+                      Sumpah Pemuda / SKB
+                    </div>
+</div>
+<div class="flex items-center justify-between mt-1 text-[10px] font-code-sm">
+<span class="text-primary font-medium">Bypass Aktif</span>
+<span class="text-muted-slate">ASN Off</span>
+</div>
+</div>
+<!-- Day 29 (Thursday - CUTI BERSAMA SKB) -->
+<div class="min-h-[110px] bg-warm-sand/30 p-2 rounded-lg flex flex-col justify-between shadow-sm relative">
+<div>
+<div class="flex items-center justify-between mb-1">
+<span class="font-code-md text-code-md font-bold text-primary">29</span>
+<span class="material-symbols-outlined text-[16px] text-primary">beach_access</span>
+</div>
+<div class="px-1.5 py-1 rounded bg-warm-sand/70 text-on-surface-variant font-caption text-[10px] font-semibold leading-tight mb-1">
+                      CUTI BERSAMA RESMI
+                    </div>
+<div class="text-[10px] font-caption text-muted-slate leading-tight">
+                      SKB 3 Menteri 2026
+                    </div>
+</div>
+<div class="flex items-center justify-between mt-1 text-[10px] font-code-sm">
+<span class="text-primary font-medium">Siaran ASN Diliburkan</span>
+</div>
+</div>
+<!-- Day 30 (Friday) -->
+<div class="min-h-[110px] bg-surface-container-lowest p-2 rounded-lg flex flex-col justify-between hover:bg-surface-container-low transition-colors">
+<div>
+<span class="font-code-md text-code-md text-charcoal-ink font-semibold">30</span>
+<div class="mt-1 px-1.5 py-1 rounded bg-authority-teal text-on-primary font-caption text-[11px] leading-tight truncate">
+                      09:00 • Indikator Strategis
+                    </div>
+</div>
+<span class="text-[10px] font-code-sm text-muted-slate text-right">3 Siaran</span>
+</div>
+<!-- Day 31 (Saturday) -->
+<div class="min-h-[110px] bg-surface-container-low/60 p-2 rounded-lg flex flex-col justify-between text-muted-slate">
+<span class="font-code-md text-code-md text-muted-slate">31</span>
+<span class="text-[10px] font-code-sm text-muted-slate/60 text-right">Standby</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Calendar Footer Information Bar -->
+<div class="px-5 py-3 bg-surface-bright flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-caption font-caption text-muted-slate">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-authority-teal">cloud_done</span>
+<span>Koneksi API SKB Kemenpan-RB &amp; BPS RI Aktif (Sinkron Terakhir: Hari ini 06:00 WITA)</span>
+</div>
+<div class="flex items-center gap-3 font-code-sm text-code-sm">
+<span class="text-charcoal-ink font-medium">Zona Waktu: WITA (Asia/Makassar)</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Column (4 cols): Schedule Rules, Upcoming Queue & Exceptions -->
+<aside class="lg:col-span-4 flex flex-col gap-5">
+<!-- Card 1: Cron Engine Rules -->
+<div class="bg-surface rounded-xl p-5 shadow-sm space-y-4">
+<div class="flex items-center justify-between pb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-authority-teal">rule_settings</span>
+<h2 class="font-headline-sm text-headline-sm text-charcoal-ink">Aturan Logika Penjadwalan</h2>
+</div>
+<span class="px-2 py-0.5 rounded text-[11px] font-code-sm font-semibold bg-authority-teal/10 text-authority-teal">3 Aktif</span>
+</div>
+<!-- Rule Items -->
+<div class="space-y-3.5">
+<!-- Rule 1 -->
+<div class="p-3 bg-surface-container-low rounded-lg space-y-1.5">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm font-semibold text-charcoal-ink">Holiday Bypass ASN</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-label-sm font-medium bg-operational-teal/15 text-authority-teal">Aktif</span>
+</div>
+<p class="font-body-sm text-body-sm text-muted-slate leading-relaxed">
+                Mendeteksi kalender SKB 3 Menteri secara mandiri. Otomatis menonaktifkan trigger reminder absensi masuk &amp; pulang ASN pada tanggal merah tanpa intervensi manual.
+              </p>
+</div>
+<!-- Rule 2 -->
+<div class="p-3 bg-surface-container-low rounded-lg space-y-1.5">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm font-semibold text-charcoal-ink">Buffer Anti-Spam Meta API</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-code-sm text-muted-slate bg-surface-container">45 msg/mnt</span>
+</div>
+<p class="font-body-sm text-body-sm text-muted-slate leading-relaxed">
+                Jarak antar siaran publik minimal 30 menit demi mencegah rate-limiting Meta WhatsApp Cloud API untuk nomor resmi instansi.
+              </p>
+</div>
+<!-- Rule 3 -->
+<div class="p-3 bg-surface-container-low rounded-lg space-y-1.5">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm font-semibold text-charcoal-ink">Window Jam Kerja Diseminasi</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-code-sm text-authority-teal bg-authority-teal/10">08:00 - 17:00 WITA</span>
+</div>
+<p class="font-body-sm text-body-sm text-muted-slate leading-relaxed">
+                Siaran BRS dan Publikasi dibatasi ketat hanya pada jam kerja resmi demi menjaga reputasi institusional lembaga.
+              </p>
+</div>
+</div>
+</div>
+<!-- Card 2: Upcoming Queue -->
+<div class="bg-surface rounded-xl p-5 shadow-sm space-y-4">
+<div class="flex items-center justify-between pb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-action-orange">schedule_send</span>
+<h2 class="font-headline-sm text-headline-sm text-charcoal-ink">Antrean Terdekat</h2>
+</div>
+<span class="font-code-sm text-code-sm text-muted-slate">WITA Queue</span>
+</div>
+<div class="space-y-3">
+<!-- Queue 1 -->
+<div class="p-3 bg-warm-sand-subtle rounded-lg space-y-2">
+<div class="flex items-start justify-between gap-2">
+<div>
+<div class="font-label-sm text-label-sm font-semibold text-charcoal-ink">Siaran BRS Inflasi &amp; IHK</div>
+<div class="font-caption text-caption text-muted-slate">Wartawan &amp; Stakeholder Daerah</div>
+</div>
+<span class="px-2 py-0.5 rounded text-[10px] font-code-sm bg-authority-teal text-on-primary font-medium">09:00 WITA</span>
+</div>
+<div class="flex items-center justify-between text-caption font-code-sm text-muted-slate pt-1">
+<span>Sasaran: 3,450 Kontak</span>
+<span class="text-operational-teal font-medium">Siap Disiarkan</span>
+</div>
+</div>
+<!-- Queue 2 -->
+<div class="p-3 bg-surface-container-low rounded-lg space-y-2">
+<div class="flex items-start justify-between gap-2">
+<div>
+<div class="font-label-sm text-label-sm font-semibold text-charcoal-ink">Reminder Presensi Pulang</div>
+<div class="font-caption text-caption text-muted-slate">Internal ASN BPS Sulteng</div>
+</div>
+<span class="px-2 py-0.5 rounded text-[10px] font-code-sm bg-surface-container-high text-charcoal-ink">15:45 WITA</span>
+</div>
+<div class="flex items-center justify-between text-caption font-code-sm text-muted-slate pt-1">
+<span>Sasaran: 84 Pegawai</span>
+<span class="text-muted-slate">Menunggu Cron</span>
+</div>
+</div>
+<!-- Queue 3 -->
+<div class="p-3 bg-surface-container-low rounded-lg space-y-2">
+<div class="flex items-start justify-between gap-2">
+<div>
+<div class="font-label-sm text-label-sm font-semibold text-charcoal-ink">Statistik Pertanian 2026</div>
+<div class="font-caption text-caption text-muted-slate">OPD &amp; Akademisi Sulteng</div>
+</div>
+<span class="px-2 py-0.5 rounded text-[10px] font-code-sm bg-surface-container-high text-charcoal-ink">08 Okt 09:00</span>
+</div>
+<div class="flex items-center justify-between text-caption font-code-sm text-muted-slate pt-1">
+<span>Sasaran: 1,820 Kontak</span>
+<span class="text-authority-teal font-medium">Terjadwal</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 3: Daftar Exception & Hari Libur Terdata -->
+<div class="bg-surface rounded-xl p-5 shadow-sm space-y-4">
+<div class="flex items-center justify-between pb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-primary">event_available</span>
+<h2 class="font-headline-sm text-headline-sm text-charcoal-ink">Daftar Pengecualian Resmi</h2>
+</div>
+<span class="font-code-sm text-code-sm text-muted-slate">Okt 2026</span>
+</div>
+<div class="space-y-2.5">
+<div class="p-2.5 rounded-lg bg-warm-sand/30 flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<span class="font-code-md text-code-md font-bold text-primary">28</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm font-semibold text-charcoal-ink leading-tight">Hari Libur Nasional SKB</span>
+<span class="font-caption text-caption text-muted-slate">Presensi ASN dimatikan</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded text-[10px] font-code-sm bg-warm-sand text-on-surface-variant font-medium">Bypass</span>
+</div>
+<div class="p-2.5 rounded-lg bg-warm-sand/20 flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<span class="font-code-md text-code-md font-bold text-primary">29</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm font-semibold text-charcoal-ink leading-tight">Cuti Bersama Resmi SKB</span>
+<span class="font-caption text-caption text-muted-slate">Siaran darurat siaga</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded text-[10px] font-code-sm bg-warm-sand text-on-surface-variant font-medium">Bypass</span>
+</div>
+</div>
+<button class="w-full mt-2 py-2 px-3 rounded-lg bg-surface-container hover:bg-surface-container-high text-charcoal-ink font-label-sm text-label-sm transition-colors flex items-center justify-center gap-2" type="button">
+<span class="material-symbols-outlined text-[16px] text-action-orange">add</span>
+<span>Tambah Pengecualian Khusus (Pilkada / HUT)</span>
+</button>
+</div>
+</aside>
+</div>
+<!-- Compliance & Operational Audit Strip -->
+<div class="bg-surface rounded-xl p-4 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4 text-caption font-caption text-muted-slate">
+<div class="flex flex-wrap items-center gap-3">
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded bg-surface-container-low text-charcoal-ink font-label-sm">
+<span class="material-symbols-outlined text-[16px] text-authority-teal">verified</span>
+<span>SKB 3 Menteri No. 855/2026</span>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded bg-surface-container-low text-charcoal-ink font-label-sm">
+<span class="material-symbols-outlined text-[16px] text-authority-teal">schedule</span>
+<span>Presisi WITA (UTC+8)</span>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded bg-surface-container-low text-charcoal-ink font-label-sm">
+<span class="material-symbols-outlined text-[16px] text-authority-teal">policy</span>
+<span>SOP Diseminasi BPS No. 04/2025</span>
+</div>
+</div>
+<div class="flex items-center gap-2 text-right font-code-sm text-code-sm">
+<span class="w-2 h-2 rounded-full bg-operational-teal"></span>
+<span>Node Palu Cluster: Sinkronisasi Otomatis Terhubung</span>
+</div>
+</div>
+</div>
+</div></main></div></body></html>

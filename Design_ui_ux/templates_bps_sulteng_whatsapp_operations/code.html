@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+
+<html lang="id"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={"darkMode":"class","theme":{"extend":{"colors":{"inverse-primary":"#ffb691","on-primary-fixed":"#341100","authority-teal":"#007979","surface-container-high":"#e0eae9","tertiary-fixed":"#7bf5f5","on-primary-fixed-variant":"#793100","inverse-on-surface":"#e9f3f2","on-background":"#141d1d","on-tertiary-container":"#003232","on-tertiary-fixed-variant":"#004f50","on-primary":"#ffffff","secondary-fixed":"#97f2f1","operational-teal":"#24B1B1","primary-container":"#e37434","secondary":"#006a6a","on-error-container":"#93000a","on-surface-variant":"#564239","surface":"#FFFFFF","surface-dim":"#d2dcdb","tertiary-container":"#00a4a4","background":"#f2fbfb","on-secondary":"#ffffff","primary-fixed-dim":"#ffb691","tertiary":"#006a6a","surface-tint":"#9e4200","on-secondary-container":"#007070","primary-fixed":"#ffdbcb","on-tertiary":"#ffffff","on-surface":"#141d1d","surface-container-highest":"#dbe4e4","surface-bright":"#f2fbfb","secondary-fixed-dim":"#7bd5d5","on-secondary-fixed-variant":"#004f4f","error-red-subtle":"#FEF3F2","outline":"#8a7267","inverse-surface":"#293232","secondary-container":"#97f2f1","outline-variant":"#ddc1b4","surface-container-low":"#ecf6f5","surface-container":"#e6f0ef","action-orange":"#E37434","surface-container-lowest":"#ffffff","primary":"#9e4200","structural-border":"#DCE2DF","error":"#ba1a1a","tertiary-fixed-dim":"#5bd9d8","warm-sand-subtle":"#FFF8EC","warm-sand":"#FFE2AF","charcoal-ink":"#172020","on-tertiary-fixed":"#002020","on-primary-container":"#4e1d00","canvas":"#F7F7F3","error-container":"#ffdad6","muted-slate":"#66706F","on-secondary-fixed":"#002020","error-red":"#B42318","on-error":"#ffffff","surface-variant":"#dbe4e4"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"gutter-desktop":"1.5rem","margin":"1rem","space-lg":"1.5rem","space-xl":"2rem","space-md":"1rem","space-xs":"0.25rem","margin-desktop":"2rem","space-sm":"0.5rem","gutter":"1rem"},"fontFamily":{"headline-xl-mobile":["Geist"],"headline-sm":["Geist"],"body-md":["Geist"],"caption":["Geist"],"label-md":["Geist"],"label-sm":["Geist"],"headline-lg-mobile":["Geist"],"headline-lg":["Geist"],"body-sm":["Geist"],"body-lg":["Geist"],"code-md":["Geist Mono"],"headline-md":["Geist"],"code-lg":["Geist Mono"],"code-sm":["Geist Mono"],"headline-xl":["Geist"]},"fontSize":{"headline-xl-mobile":["26px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-sm":["16px",{"lineHeight":"24px","fontWeight":"600"}],"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}],"caption":["12px",{"lineHeight":"16px","fontWeight":"400"}],"label-md":["14px",{"lineHeight":"20px","fontWeight":"500"}],"label-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.01em","fontWeight":"500"}],"headline-lg-mobile":["22px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-lg":["28px",{"lineHeight":"36px","letterSpacing":"-0.02em","fontWeight":"600"}],"body-sm":["13px",{"lineHeight":"18px","fontWeight":"400"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}],"code-md":["14px",{"lineHeight":"20px","fontWeight":"500"}],"headline-md":["20px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"600"}],"code-lg":["24px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"600"}],"code-sm":["12px",{"lineHeight":"16px","fontWeight":"500"}],"headline-xl":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"600"}]}}}};</script></head><body class="bg-canvas font-body-md text-on-surface antialiased selection:bg-action-orange selection:text-on-primary"><aside class="fixed left-0 top-0 h-screen w-64 bg-authority-teal text-on-primary z-50 flex flex-col justify-between overflow-y-auto border-r border-structural-border/20 shadow-[0_1px_8px_rgba(0,0,0,0.06)]"><div class="flex flex-col"><div class="h-14 px-4 flex items-center gap-3 border-b border-white/10 bg-secondary/20"><img alt="Logo BPS Provinsi Sulawesi Tengah" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UH5MpLrhbhuehZ-dnQCWS0NVx7DC5Nb6esC2poNV4h7CHrqxB8IZO-aRjQz1rqpTqOwGgn6UOJhq_UhMzm5f4uuhxmBUo3U7s37s8nvM-LycHq4wDMkzZGfNMf_97M-N9wQyVLQls-xOunkquv66hEg_LBy-DMWGt6gdUOLDoHCAnqYscFdox5pinwbcvavFqxbgUBy8blEX7MUpOCgQbSlF1bNLZ_23cwMByVprNjoH1yePx8iSHbv2Y"/><div class="flex flex-col min-w-0"><span class="font-label-md text-label-md text-on-primary truncate tracking-tight">BPS Sulteng</span><span class="font-caption text-caption text-secondary-fixed opacity-90 truncate leading-none">WhatsApp Operations</span></div></div><div class="px-3 py-3"><div class="text-[10px] uppercase tracking-wider font-semibold text-secondary-fixed/70 px-3 mb-1.5 font-label-sm">Diseminasi &amp; Komunikasi</div><nav class="flex flex-col gap-0.5" data-active-classes="bg-action-orange text-on-primary font-label-md rounded-lg shadow-sm"><a class="flex items-center px-3 py-2 rounded-lg text-secondary-fixed hover:bg-white/10 hover:text-on-primary transition-colors text-body-sm font-body-sm" data-path="overview" href="#">Overview</a><a class="flex items-center px-3 py-2 rounded-lg text-secondary-fixed hover:bg-white/10 hover:text-on-primary transition-colors text-body-sm font-body-sm" data-path="campaigns" href="#">Campaigns</a><a class="flex items-center px-3 py-2 rounded-lg text-secondary-fixed hover:bg-white/10 hover:text-on-primary transition-colors text-body-sm font-body-sm" data-path="automations" href="#">Automations</a><a aria-current="page" class="flex items-center px-3 py-2 transition-colors bg-action-orange text-on-primary font-label-md rounded-lg shadow-sm" data-path="templates" href="#">Templates</a></nav></div><div class="px-3 py-2"><div class="text-[10px] uppercase tracking-wider font-semibold text-secondary-fixed/70 px-3 mb-1.5 font-label-sm">Direktori &amp; Distribusi</div><nav class="flex flex-col gap-0.5" data-active-classes="bg-action-orange text-on-primary font-label-md rounded-lg shadow-sm"><a class="flex items-center px-3 py-2 rounded-lg text-secondary-fixed hover:bg-white/10 hover:text-on-primary transition-colors text-body-sm font-body-sm" data-path="contacts" href="#">Contacts</a><a class="flex items-center px-3 py-2 rounded-lg text-secondary-fixed hover:bg-white/10 hover:text-on-primary transition-colors text-body-sm font-body-sm" data-path="subscriptions" href="#">Subscriptions</a><a class="flex items-center px-3 py-2 rounded-lg text-secondary-fixed hover:bg-white/10 hover:text-on-primary transition-colors text-body-sm font-body-sm" data-path="schedules-and-calendar" href="#">Schedules &amp; Calendar</a><a class="flex items-center px-3 py-2 rounded-lg text-secondary-fixed hover:bg-white/10 hover:text-on-primary transition-colors text-body-sm font-body-sm" data-path="message-logs" href="#">Message Logs</a></nav></div><div class="px-3 py-2"><div class="text-[10px] uppercase tracking-wider font-semibold text-secondary-fixed/70 px-3 mb-1.5 font-label-sm">Infrastruktur &amp; Sistem</div><nav class="flex flex-col gap-0.5" data-active-classes="bg-action-orange text-on-primary font-label-md rounded-lg shadow-sm"><a class="flex items-center px-3 py-2 rounded-lg text-secondary-fixed hover:bg-white/10 hover:text-on-primary transition-colors text-body-sm font-body-sm" data-path="integrations" href="#">Integrations</a><a class="flex items-center px-3 py-2 rounded-lg text-secondary-fixed hover:bg-white/10 hover:text-on-primary transition-colors text-body-sm font-body-sm" data-path="users-and-roles" href="#">Users &amp; Roles</a><a class="flex items-center px-3 py-2 rounded-lg text-secondary-fixed hover:bg-white/10 hover:text-on-primary transition-colors text-body-sm font-body-sm" data-path="audit-and-settings" href="#">Audit &amp; Settings</a></nav></div></div><div class="p-3 border-t border-white/10 bg-secondary/30"><div class="flex items-center justify-between text-[11px] text-secondary-fixed/80"><span class="font-code-sm text-code-sm">BPS WABA v2.4</span><span class="px-1.5 py-0.5 rounded bg-authority-teal border border-secondary-fixed/30 text-[10px] text-on-primary font-code-sm">PROD</span></div></div></aside><div class="pl-64 flex flex-col min-h-screen"><header class="fixed top-0 left-64 right-0 h-14 bg-surface/95 backdrop-blur-md border-b border-structural-border z-40 px-6 flex items-center justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center gap-3"><div class="flex items-center gap-2"><span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-authority-teal/10 text-authority-teal border border-authority-teal/20 tracking-wide font-label-sm">PROD - Palu Cluster</span></div><div class="h-4 w-px bg-structural-border"></div><div class="flex items-center gap-1.5 text-caption font-caption text-muted-slate"><a class="hover:text-charcoal-ink transition-colors font-body-sm" href="#">Diseminasi &amp; Komunikasi</a><span class="material-symbols-outlined text-[14px] text-muted-slate">chevron_right</span><span class="font-label-sm text-charcoal-ink">Templates</span></div><div class="h-4 w-px bg-structural-border hidden sm:block"></div><div class="hidden md:flex items-center gap-2 text-caption font-caption text-muted-slate"><div class="flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container-low border border-structural-border"><span class="w-1.5 h-1.5 rounded-full bg-operational-teal"></span><span class="text-[11px] font-label-sm text-charcoal-ink">WABA: Terhubung</span></div><div class="flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container-low border border-structural-border"><span class="w-1.5 h-1.5 rounded-full bg-operational-teal"></span><span class="text-[11px] font-label-sm text-charcoal-ink">Cron: Aktif</span></div><div class="flex items-center gap-1 px-1.5 text-muted-slate"><span class="material-symbols-outlined text-[14px]">schedule</span><span class="text-[11px] font-code-sm">WITA / Asia/Makassar</span></div></div></div><div class="flex items-center gap-3"><button aria-label="Notifikasi" class="relative p-1.5 text-muted-slate hover:text-charcoal-ink hover:bg-surface-container rounded-lg transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-action-orange ring-2 ring-surface"></span></button><div class="h-5 w-px bg-structural-border"></div><div class="flex items-center gap-2.5 pl-1"><div class="flex flex-col text-right"><span class="font-label-md text-label-md text-charcoal-ink leading-tight">Ainun</span><span class="text-[11px] font-caption text-muted-slate leading-none">Admin Diseminasi - BPS Sulteng</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-14 flex-1"><div class="flex flex-col w-full">
+<!-- Content Container with max width 1440px -->
+<div class="max-w-[1440px] w-full mx-auto px-4 sm:px-6 py-6 space-y-6">
+<!-- Top Operational Header & Metadata -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-1">
+<div class="space-y-1">
+<div class="flex items-center gap-2.5">
+<span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-authority-teal/10 text-authority-teal">
+<span class="material-symbols-outlined text-[18px]">rule_folder</span>
+</span>
+<h1 class="font-headline-lg text-headline-lg text-charcoal-ink tracking-tight">Katalog &amp; Manajemen Template Meta WABA</h1>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-label-sm bg-operational-teal/10 text-authority-teal font-semibold">v20.0 Ready</span>
+</div>
+<p class="font-body-md text-body-md text-muted-slate max-w-3xl">
+          Sinkronisasi HSM (Highly Structured Message) resmi Meta Cloud API, inspeksi kepatuhan kategori Utility, validasi variabel dinamis, serta pengujian tampilan pratinjau pesan.
+        </p>
+</div>
+<div class="flex flex-wrap items-center gap-2.5 sm:self-start lg:self-center">
+<button class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-surface text-charcoal-ink hover:bg-canvas transition-colors shadow-sm font-label-md text-label-md active:translate-y-[1px]" type="button">
+<span class="material-symbols-outlined text-[18px] text-authority-teal animate-spin-hover">sync</span>
+<span>Sinkronkan Meta Cloud API</span>
+<span class="font-code-sm text-caption text-muted-slate pl-1 border-l border-structural-border/60">14:26 WITA</span>
+</button>
+<a class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-surface-container-low text-muted-slate hover:text-charcoal-ink hover:bg-surface-container font-label-md text-label-md transition-colors" href="#panduan-meta">
+<span class="material-symbols-outlined text-[18px]">help_outline</span>
+<span>Panduan Pengajuan HSM</span>
+</a>
+</div>
+</div>
+<!-- Official Account Lockdown & Policy Banner -->
+<div class="rounded-xl bg-warm-sand-subtle p-3.5 text-charcoal-ink shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-3">
+<div class="flex items-center gap-3 min-w-0">
+<div class="flex-shrink-0 w-8 h-8 rounded-lg bg-warm-sand/80 flex items-center justify-center text-action-orange">
+<span class="material-symbols-outlined text-[20px]">verified_user</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex flex-wrap items-center gap-2">
+<span class="font-label-md text-label-md font-semibold text-charcoal-ink">Akun WABA Resmi: BPS Provinsi Sulawesi Tengah</span>
+<span class="font-code-sm text-caption bg-surface/80 px-2 py-0.5 rounded text-muted-slate font-medium">WABA ID: 109284729104820</span>
+<span class="inline-flex items-center gap-1 text-[11px] font-label-sm text-authority-teal font-medium bg-surface/80 px-2 py-0.5 rounded">
+<span class="w-1.5 h-1.5 rounded-full bg-operational-teal"></span>
+              Kunci Kepatuhan Aktif
+            </span>
+</div>
+<p class="font-body-sm text-body-sm text-muted-slate mt-0.5">
+            Template disetujui terkunci secara permanen di Meta Business Suite. Penyesuaian redaksi wajib diajukan melalui proses kurasi Meta untuk menjaga integritas kategori Utility.
+          </p>
+</div>
+</div>
+<a class="flex-shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 text-action-orange hover:text-action-orange/90 font-label-sm text-label-sm font-medium self-end md:self-center" href="https://business.facebook.com" rel="noopener noreferrer" target="_blank">
+<span>Buka Meta Business Suite</span>
+<span class="material-symbols-outlined text-[16px]">open_in_new</span>
+</a>
+</div>
+<!-- Operational KPI Telemetry Bar -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3.5">
+<!-- Card 1 -->
+<div class="bg-surface rounded-xl p-4 shadow-sm relative overflow-hidden flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-muted-slate uppercase tracking-wider block">Total Disetujui</span>
+<span class="font-headline-xl text-headline-xl text-charcoal-ink font-semibold mt-1 block">12 <span class="text-headline-sm font-body-md text-muted-slate">Template</span></span>
+</div>
+<span class="w-9 h-9 rounded-lg bg-surface-container-low text-authority-teal flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">task_alt</span>
+</span>
+</div>
+<div class="mt-3 flex items-center gap-1.5 text-caption font-caption text-authority-teal font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-operational-teal"></span>
+<span>100% Meta Verified (Utility &amp; Auth)</span>
+</div>
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-authority-teal"></div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface rounded-xl p-4 shadow-sm relative overflow-hidden flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-muted-slate uppercase tracking-wider block">Status Sinkronisasi</span>
+<span class="font-headline-md text-headline-md text-charcoal-ink font-semibold mt-1 block">Tersinkron Penuh</span>
+</div>
+<span class="w-9 h-9 rounded-lg bg-surface-container-low text-operational-teal flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">cloud_done</span>
+</span>
+</div>
+<div class="mt-3 flex items-center gap-2 text-caption font-code-sm text-muted-slate">
+<span>Meta Graph API v20.0</span>
+<span>•</span>
+<span class="text-authority-teal font-medium">Latensi 110ms</span>
+</div>
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-operational-teal"></div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface rounded-xl p-4 shadow-sm relative overflow-hidden flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-muted-slate uppercase tracking-wider block">Sedang Digunakan</span>
+<span class="font-headline-xl text-headline-xl text-charcoal-ink font-semibold mt-1 block">8 <span class="text-headline-sm font-body-md text-muted-slate">Aktif</span></span>
+</div>
+<span class="w-9 h-9 rounded-lg bg-surface-container-low text-action-orange flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">bolt</span>
+</span>
+</div>
+<div class="mt-3 flex items-center gap-1.5 text-caption font-caption text-muted-slate">
+<span>7 Automasi</span>
+<span>•</span>
+<span>4 Campaign Berjalan</span>
+</div>
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-action-orange"></div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface rounded-xl p-4 shadow-sm relative overflow-hidden flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-muted-slate uppercase tracking-wider block">Tingkat Kualitas</span>
+<div class="flex items-center gap-2 mt-1">
+<span class="font-headline-md text-headline-md text-charcoal-ink font-semibold">Tinggi (High)</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-label-sm bg-operational-teal/15 text-authority-teal font-semibold">99.8%</span>
+</div>
+</div>
+<span class="w-9 h-9 rounded-lg bg-surface-container-low text-authority-teal flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">verified</span>
+</span>
+</div>
+<div class="mt-3 flex items-center gap-1.5 text-caption font-caption text-authority-teal font-medium">
+<span class="material-symbols-outlined text-[14px]">format_image_left</span>
+<span>0 Penalti Spam Meta Policy</span>
+</div>
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-operational-teal"></div>
+</div>
+</div>
+<!-- Main Asymmetric Master-Detail Workplace -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+<!-- LEFT SIDE: Catalog & Filter Matrix (7/12 ~ 58%) -->
+<div class="lg:col-span-7 space-y-4">
+<div class="bg-surface rounded-xl shadow-sm overflow-hidden">
+<!-- Filters & Operational Toolbar -->
+<div class="p-4 space-y-3.5 bg-surface">
+<!-- Search & Dropdowns -->
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5">
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-muted-slate text-[18px]">search</span>
+<input class="w-full pl-9 pr-3 py-2 rounded-lg bg-canvas text-charcoal-ink font-body-sm text-body-sm focus:outline-none focus:ring-2 focus:ring-action-orange/30 placeholder:text-muted-slate/70" placeholder="Cari nama template, kode Meta ID, atau parameter..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<select class="px-3 py-2 rounded-lg bg-canvas text-charcoal-ink font-label-sm text-label-sm focus:outline-none focus:ring-2 focus:ring-action-orange/30">
+<option value="all">Semua Status (Meta: Approved)</option>
+<option value="approved">Approved (12)</option>
+<option value="in_review">In Review (0)</option>
+<option value="rejected">Rejected (0)</option>
+</select>
+<select class="px-3 py-2 rounded-lg bg-canvas text-charcoal-ink font-label-sm text-label-sm focus:outline-none focus:ring-2 focus:ring-action-orange/30">
+<option value="all">Semua Bahasa</option>
+<option selected="" value="id">id (Indonesian)</option>
+<option value="en">en_US (English)</option>
+</select>
+</div>
+</div>
+<!-- Segmented Category Tabs -->
+<div class="flex items-center gap-1 overflow-x-auto pb-1 text-label-sm font-label-sm no-scrollbar">
+<button class="px-3 py-1.5 rounded-lg bg-authority-teal text-on-primary font-medium whitespace-nowrap shadow-sm" type="button">
+                Semua Template (12)
+              </button>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-low text-muted-slate hover:text-charcoal-ink hover:bg-surface-container whitespace-nowrap transition-colors" type="button">
+                Rilis &amp; Publikasi (5)
+              </button>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-low text-muted-slate hover:text-charcoal-ink hover:bg-surface-container whitespace-nowrap transition-colors" type="button">
+                Layanan Silastik (3)
+              </button>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-low text-muted-slate hover:text-charcoal-ink hover:bg-surface-container whitespace-nowrap transition-colors" type="button">
+                Internal ASN (4)
+              </button>
+</div>
+</div>
+<!-- Catalog Table View (Density 7/10) -->
+<div class="overflow-x-auto">
+<table class="w-full text-left font-body-sm text-body-sm">
+<thead class="bg-canvas text-muted-slate font-label-sm text-[11px] uppercase tracking-wider">
+<tr>
+<th class="py-2.5 px-3.5 font-semibold" scope="col">Nama &amp; Metadata Template</th>
+<th class="py-2.5 px-3 font-semibold" scope="col">Kategori</th>
+<th class="py-2.5 px-3 font-semibold" scope="col">Variabel</th>
+<th class="py-2.5 px-3 font-semibold" scope="col">Terpasang Di</th>
+<th class="py-2.5 px-3.5 text-right font-semibold" scope="col">Status Meta</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-structural-border/30 bg-surface">
+<!-- Row 1: Selected / Highlighted -->
+<tr class="bg-warm-sand-subtle relative cursor-pointer transition-colors" onclick="selectTemplate('brs_ihk_rilis_v2')">
+<td class="py-3 px-3.5 relative">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-action-orange"></div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-code-sm text-code-sm font-semibold text-charcoal-ink">brs_ihk_rilis_v2</span>
+<span class="px-1.5 py-0.2 rounded bg-action-orange text-on-primary text-[10px] font-code-sm font-medium">AKTIF</span>
+</div>
+<div class="flex items-center gap-2 mt-0.5 text-caption font-code-sm text-muted-slate">
+<span>ID: 889104</span>
+<span>•</span>
+<span>id (Indonesian)</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-label-sm bg-authority-teal/10 text-authority-teal font-medium">
+<span class="material-symbols-outlined text-[13px]">analytics</span>
+                      Utility (Resmi)
+                    </span>
+</td>
+<td class="py-3 px-3 font-code-sm text-charcoal-ink">
+<span class="px-1.5 py-0.5 rounded bg-surface text-muted-slate">4 param</span>
+</td>
+<td class="py-3 px-3 text-caption font-body-sm text-muted-slate">
+<span class="line-clamp-1">1 Campaign, 1 Automasi Rilis</span>
+</td>
+<td class="py-3 px-3.5 text-right">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-label-sm bg-operational-teal/15 text-authority-teal font-semibold">
+<span class="material-symbols-outlined text-[13px]">check_circle</span>
+                      Disetujui
+                    </span>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-canvas/60 transition-colors cursor-pointer" onclick="selectTemplate('reminder_presensi_pagi')">
+<td class="py-2.5 px-3.5">
+<div class="flex flex-col min-w-0">
+<span class="font-code-sm text-code-sm font-medium text-charcoal-ink hover:text-authority-teal">reminder_presensi_pagi</span>
+<div class="flex items-center gap-2 text-caption font-code-sm text-muted-slate">
+<span>ID: 889105</span>
+<span>•</span>
+<span>id (Indonesian)</span>
+</div>
+</div>
+</td>
+<td class="py-2.5 px-3">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-label-sm bg-surface-container text-muted-slate">
+<span class="material-symbols-outlined text-[13px]">schedule</span>
+                      Utility (Internal)
+                    </span>
+</td>
+<td class="py-2.5 px-3 font-code-sm text-muted-slate">
+<span class="px-1.5 py-0.5 rounded bg-canvas">3 param</span>
+</td>
+<td class="py-2.5 px-3 text-caption font-body-sm text-muted-slate">
+<span class="line-clamp-1">Automasi Presensi Pagi</span>
+</td>
+<td class="py-2.5 px-3.5 text-right">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-label-sm bg-operational-teal/15 text-authority-teal font-medium">
+<span class="material-symbols-outlined text-[13px]">check_circle</span>
+                      Disetujui
+                    </span>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-canvas/60 transition-colors cursor-pointer" onclick="selectTemplate('reminder_presensi_pulang')">
+<td class="py-2.5 px-3.5">
+<div class="flex flex-col min-w-0">
+<span class="font-code-sm text-code-sm font-medium text-charcoal-ink hover:text-authority-teal">reminder_presensi_pulang</span>
+<div class="flex items-center gap-2 text-caption font-code-sm text-muted-slate">
+<span>ID: 889106</span>
+<span>•</span>
+<span>id (Indonesian)</span>
+</div>
+</div>
+</td>
+<td class="py-2.5 px-3">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-label-sm bg-surface-container text-muted-slate">
+<span class="material-symbols-outlined text-[13px]">schedule</span>
+                      Utility (Internal)
+                    </span>
+</td>
+<td class="py-2.5 px-3 font-code-sm text-muted-slate">
+<span class="px-1.5 py-0.5 rounded bg-canvas">2 param</span>
+</td>
+<td class="py-2.5 px-3 text-caption font-body-sm text-muted-slate">
+<span class="line-clamp-1">Automasi Presensi Sore</span>
+</td>
+<td class="py-2.5 px-3.5 text-right">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-label-sm bg-operational-teal/15 text-authority-teal font-medium">
+<span class="material-symbols-outlined text-[13px]">check_circle</span>
+                      Disetujui
+                    </span>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-canvas/60 transition-colors cursor-pointer" onclick="selectTemplate('katalog_publikasi_baru')">
+<td class="py-2.5 px-3.5">
+<div class="flex flex-col min-w-0">
+<span class="font-code-sm text-code-sm font-medium text-charcoal-ink hover:text-authority-teal">katalog_publikasi_baru</span>
+<div class="flex items-center gap-2 text-caption font-code-sm text-muted-slate">
+<span>ID: 889110</span>
+<span>•</span>
+<span>id (Indonesian)</span>
+</div>
+</div>
+</td>
+<td class="py-2.5 px-3">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-label-sm bg-authority-teal/10 text-authority-teal">
+<span class="material-symbols-outlined text-[13px]">menu_book</span>
+                      Utility (Publikasi)
+                    </span>
+</td>
+<td class="py-2.5 px-3 font-code-sm text-muted-slate">
+<span class="px-1.5 py-0.5 rounded bg-canvas">4 param</span>
+</td>
+<td class="py-2.5 px-3 text-caption font-body-sm text-muted-slate">
+<span class="line-clamp-1">Automasi Rilis Dokumen</span>
+</td>
+<td class="py-2.5 px-3.5 text-right">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-label-sm bg-operational-teal/15 text-authority-teal font-medium">
+<span class="material-symbols-outlined text-[13px]">check_circle</span>
+                      Disetujui
+                    </span>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-canvas/60 transition-colors cursor-pointer" onclick="selectTemplate('notif_silastik_tiket')">
+<td class="py-2.5 px-3.5">
+<div class="flex flex-col min-w-0">
+<span class="font-code-sm text-code-sm font-medium text-charcoal-ink hover:text-authority-teal">notif_silastik_tiket</span>
+<div class="flex items-center gap-2 text-caption font-code-sm text-muted-slate">
+<span>ID: 889112</span>
+<span>•</span>
+<span>id (Indonesian)</span>
+</div>
+</div>
+</td>
+<td class="py-2.5 px-3">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-label-sm bg-operational-teal/10 text-authority-teal">
+<span class="material-symbols-outlined text-[13px]">support_agent</span>
+                      Utility (Silastik)
+                    </span>
+</td>
+<td class="py-2.5 px-3 font-code-sm text-muted-slate">
+<span class="px-1.5 py-0.5 rounded bg-canvas">4 param</span>
+</td>
+<td class="py-2.5 px-3 text-caption font-body-sm text-muted-slate">
+<span class="line-clamp-1">Webhook PST Sulteng</span>
+</td>
+<td class="py-2.5 px-3.5 text-right">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-label-sm bg-operational-teal/15 text-authority-teal font-medium">
+<span class="material-symbols-outlined text-[13px]">check_circle</span>
+                      Disetujui
+                    </span>
+</td>
+</tr>
+<!-- Row 6 -->
+<tr class="hover:bg-canvas/60 transition-colors cursor-pointer" onclick="selectTemplate('notif_silastik_selesai')">
+<td class="py-2.5 px-3.5">
+<div class="flex flex-col min-w-0">
+<span class="font-code-sm text-code-sm font-medium text-charcoal-ink hover:text-authority-teal">notif_silastik_selesai</span>
+<div class="flex items-center gap-2 text-caption font-code-sm text-muted-slate">
+<span>ID: 889115</span>
+<span>•</span>
+<span>id (Indonesian)</span>
+</div>
+</div>
+</td>
+<td class="py-2.5 px-3">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-label-sm bg-operational-teal/10 text-authority-teal">
+<span class="material-symbols-outlined text-[13px]">support_agent</span>
+                      Utility (Silastik)
+                    </span>
+</td>
+<td class="py-2.5 px-3 font-code-sm text-muted-slate">
+<span class="px-1.5 py-0.5 rounded bg-canvas">3 param</span>
+</td>
+<td class="py-2.5 px-3 text-caption font-body-sm text-muted-slate">
+<span class="line-clamp-1">Webhook PST Sulteng</span>
+</td>
+<td class="py-2.5 px-3.5 text-right">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-label-sm bg-operational-teal/15 text-authority-teal font-medium">
+<span class="material-symbols-outlined text-[13px]">check_circle</span>
+                      Disetujui
+                    </span>
+</td>
+</tr>
+<!-- Row 7 -->
+<tr class="hover:bg-canvas/60 transition-colors cursor-pointer" onclick="selectTemplate('reminder_deadline_survei')">
+<td class="py-2.5 px-3.5">
+<div class="flex flex-col min-w-0">
+<span class="font-code-sm text-code-sm font-medium text-charcoal-ink hover:text-authority-teal">reminder_deadline_survei</span>
+<div class="flex items-center gap-2 text-caption font-code-sm text-muted-slate">
+<span>ID: 889120</span>
+<span>•</span>
+<span>id (Indonesian)</span>
+</div>
+</div>
+</td>
+<td class="py-2.5 px-3">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-label-sm bg-surface-container text-muted-slate">
+<span class="material-symbols-outlined text-[13px]">fact_check</span>
+                      Utility (Internal)
+                    </span>
+</td>
+<td class="py-2.5 px-3 font-code-sm text-muted-slate">
+<span class="px-1.5 py-0.5 rounded bg-canvas">3 param</span>
+</td>
+<td class="py-2.5 px-3 text-caption font-body-sm text-muted-slate">
+<span class="line-clamp-1">Automasi Bulanan Rekonsiliasi</span>
+</td>
+<td class="py-2.5 px-3.5 text-right">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-label-sm bg-operational-teal/15 text-authority-teal font-medium">
+<span class="material-symbols-outlined text-[13px]">check_circle</span>
+                      Disetujui
+                    </span>
+</td>
+</tr>
+<!-- Row 8 -->
+<tr class="hover:bg-canvas/60 transition-colors cursor-pointer" onclick="selectTemplate('auth_otp_login_petugas')">
+<td class="py-2.5 px-3.5">
+<div class="flex flex-col min-w-0">
+<span class="font-code-sm text-code-sm font-medium text-charcoal-ink hover:text-authority-teal">auth_otp_login_petugas</span>
+<div class="flex items-center gap-2 text-caption font-code-sm text-muted-slate">
+<span>ID: 889130</span>
+<span>•</span>
+<span>id (Indonesian)</span>
+</div>
+</div>
+</td>
+<td class="py-2.5 px-3">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-label-sm bg-action-orange/10 text-primary font-medium">
+<span class="material-symbols-outlined text-[13px]">password</span>
+                      Authentication
+                    </span>
+</td>
+<td class="py-2.5 px-3 font-code-sm text-muted-slate">
+<span class="px-1.5 py-0.5 rounded bg-canvas">1 param</span>
+</td>
+<td class="py-2.5 px-3 text-caption font-body-sm text-muted-slate">
+<span class="line-clamp-1">SSO &amp; Portal Petugas</span>
+</td>
+<td class="py-2.5 px-3.5 text-right">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-label-sm bg-operational-teal/15 text-authority-teal font-medium">
+<span class="material-symbols-outlined text-[13px]">check_circle</span>
+                      Disetujui
+                    </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Footer Pagination/Status Info -->
+<div class="px-4 py-3 bg-canvas/40 flex items-center justify-between text-caption font-caption text-muted-slate">
+<span>Menampilkan 8 dari 12 template aktif</span>
+<div class="flex items-center gap-2">
+<span class="font-code-sm text-[11px]">Sync ID: META-SYNC-202609-8801</span>
+</div>
+</div>
+</div>
+</div>
+<!-- RIGHT SIDE: Live WhatsApp Mockup Preview & Parameter Inspector (5/12 ~ 42%) -->
+<div class="lg:col-span-5 space-y-4">
+<!-- Detail Inspector Card -->
+<div class="bg-surface rounded-xl p-4 shadow-sm space-y-4">
+<!-- Inspector Header -->
+<div class="flex items-start justify-between pb-3 bg-surface">
+<div>
+<div class="flex items-center gap-2">
+<span class="font-code-md text-code-md text-charcoal-ink font-semibold">brs_ihk_rilis_v2</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-label-sm bg-operational-teal/15 text-authority-teal font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">verified</span> Approved
+                </span>
+</div>
+<p class="font-caption text-caption text-muted-slate mt-0.5">
+                Meta ID: <span class="font-code-sm text-charcoal-ink">889104</span> • Kategori: <span class="font-label-sm text-charcoal-ink font-medium">UTILITY</span> • Bahasa: <span class="font-label-sm text-charcoal-ink font-medium">id (Indonesian)</span>
+</p>
+</div>
+<div class="flex items-center gap-1.5">
+<button class="p-1.5 rounded-lg text-muted-slate hover:text-charcoal-ink hover:bg-canvas transition-colors" title="Salin Kode Template">
+<span class="material-symbols-outlined text-[18px]">content_copy</span>
+</button>
+<button class="p-1.5 rounded-lg text-muted-slate hover:text-charcoal-ink hover:bg-canvas transition-colors" title="Log Audit Meta">
+<span class="material-symbols-outlined text-[18px]">history</span>
+</button>
+</div>
+</div>
+<!-- WhatsApp Chat Room Viewport (Authentic Mobile Mockup) -->
+<div class="rounded-xl overflow-hidden shadow-sm" style="background-color: #EFEAE2;">
+<!-- Chat Top Bar -->
+<div class="bg-[#005E54] text-white px-3.5 py-2.5 flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-white flex items-center justify-center p-0.5 overflow-hidden">
+<img class="w-full h-full object-contain" data-alt="Official round emblem logo of Badan Pusat Statistik Republic of Indonesia with deep navy blue, orange accent ribbon, and gold statistical pyramid silhouette on pristine white background, vector institutional asset" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkRiMf8gr15dG8w2S_wanCjJfoEh72PWPAFDQtyFTcCaoPGIeCWo_02ZBCPyfIlR3eJXcuY-QhQorHksKNPMsvXM8U98Izaei9QgJRACQKzUAPN0aHuMOB4zrQuQpOTP8w7_0lycOL2qQd6_vu5xu2vc7581UDhFeCh8x1_BZrolatdZKhqPb1I3OO_bGXNOOMkWbhCjsxNvVmB1KZUIfCeT77oocMxkyKJ0rm6vEacweMSCbJOtj1"/>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1">
+<span class="font-label-md text-label-md font-medium text-white leading-tight">BPS Prov Sulteng</span>
+<span class="material-symbols-outlined text-[15px] text-[#25D366]">verified</span>
+</div>
+<span class="text-[10px] font-caption text-white/80 leading-none">Official Business Account</span>
+</div>
+</div>
+<div class="flex items-center gap-1 text-white/80">
+<span class="material-symbols-outlined text-[18px]">videocam</span>
+<span class="material-symbols-outlined text-[18px] ml-1">call</span>
+<span class="material-symbols-outlined text-[18px] ml-1">more_vert</span>
+</div>
+</div>
+<!-- Encryption & WABA Security Disclaimer Banner -->
+<div class="p-3">
+<div class="bg-warm-sand/40 rounded-lg p-2 text-center text-[10px] font-caption text-[#4A4A4A] shadow-xs max-w-[92%] mx-auto leading-relaxed">
+<span class="material-symbols-outlined text-[11px] align-middle mr-0.5">lock</span>
+                Pesan ini dikirim menggunakan WhatsApp Cloud API Resmi BPS Sulteng. Terenkripsi secara end-to-end.
+              </div>
+</div>
+<!-- Message Balloon Container -->
+<div class="px-3 pb-3">
+<div class="bg-surface rounded-lg rounded-tl-none shadow-sm max-w-[96%] overflow-hidden">
+<!-- Media Header Image Preview -->
+<div class="relative bg-surface-container-high aspect-[16/9] overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Infographic release cover of Central Sulawesi Inflation September 2026 showing stylized economic bar charts, agricultural indices, and Palu city landscape in deep institutional teal and warm orange gradient" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAe9qkIsGyWCkDUtu6SfG-3C4333Ai2bdGBf_hUCDaBWv14WQYuE4zXwH940AwhfO023LFfa1mPnErxm7iR_KJSg5axQ09KYtff7SHYRc2akp7It4f02N0JSe2h7vc0KguiGTcULXhZMBRKxn8Ow7gvKRL-wffCGcQAx1dFPcRsR3eGMG_8Ttmismfp2x9ogldirtbN7Mk44t6jQno2Ai5_rLmwyUi_fe-lok-0y8J8_Qe6vOWja6Cz"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-2.5">
+<span class="text-[11px] font-label-sm font-semibold text-white tracking-wide">BRS Perkembangan IHK &amp; Inflasi • Sept 2026</span>
+</div>
+</div>
+<!-- Message Body with Parameter Pills -->
+<div class="p-3 text-[13px] leading-relaxed text-charcoal-ink space-y-2">
+<p>
+                    Yth. <strong>Bapak/Ibu <span class="bg-warm-sand px-1.5 py-0.5 rounded text-charcoal-ink font-code-sm font-medium" title="Variabel {{1}}">Anwar Hafid</span></strong> di Sulawesi Tengah,
+                  </p>
+<p>
+                    Badan Pusat Statistik Provinsi Sulawesi Tengah merilis <strong>Berita Resmi Statistik (BRS) Perkembangan Indeks Harga Konsumen (IHK) <span class="bg-warm-sand px-1.5 py-0.5 rounded text-charcoal-ink font-code-sm font-medium" title="Variabel {{2}}">September 2026</span></strong>.
+                  </p>
+<div class="bg-surface-container-low p-2 rounded text-caption font-body-sm space-y-0.5 text-charcoal-ink">
+<div class="flex justify-between">
+<span class="text-muted-slate">Inflasi m-to-m:</span>
+<strong class="font-code-sm font-semibold">0.18%</strong>
+</div>
+<div class="flex justify-between">
+<span class="text-muted-slate">Inflasi y-on-y:</span>
+<strong class="font-code-sm font-semibold">2.45%</strong>
+</div>
+<div class="flex justify-between">
+<span class="text-muted-slate">Andil Terbesar:</span>
+<span class="font-medium">Beras, Cabai Rawit</span>
+</div>
+</div>
+<p>
+                    Unduh naskah lengkap melalui portal resmi BPS Sulteng:<br/>
+<span class="text-authority-teal underline font-code-sm text-[11px] break-all bg-warm-sand/50 px-1 py-0.5 rounded" title="Variabel {{3}}">https://sulteng.bps.go.id/brs/2026/ihk-sep</span>
+</p>
+<p>
+                    Untuk konsultasi statistik, hubungi layanan PST BPS Sulteng:<br/>
+<span class="text-authority-teal underline font-code-sm text-[11px] break-all bg-warm-sand/50 px-1 py-0.5 rounded" title="Variabel {{4}}">https://sulteng.bps.go.id/silastik</span>
+</p>
+<p class="text-[11px] text-muted-slate italic pt-1">
+                    Balas STOP untuk berhenti berlangganan siaran BRS BPS Sulteng.
+                  </p>
+<!-- Timestamp & WhatsApp status checkmarks -->
+<div class="flex items-center justify-end gap-1 pt-1 text-[10px] text-muted-slate font-code-sm">
+<span>09:00 WITA</span>
+<span class="material-symbols-outlined text-[14px] text-[#53bdeb]">done_all</span>
+</div>
+</div>
+<!-- Meta HSM CTA Interactive Action Buttons -->
+<div class="bg-surface">
+<a class="w-full py-2.5 px-3 flex items-center justify-center gap-2 text-authority-teal hover:bg-canvas text-body-sm font-label-md transition-colors" href="#">
+<span class="material-symbols-outlined text-[17px]">download</span>
+<span>Unduh Dokumen Lengkap (PDF)</span>
+</a>
+<a class="w-full py-2.5 px-3 flex items-center justify-center gap-2 text-authority-teal hover:bg-canvas text-body-sm font-label-md transition-colors" href="#">
+<span class="material-symbols-outlined text-[17px]">support_agent</span>
+<span>Hubungi PST BPS Sulteng</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Variable Mapping Engine Table -->
+<div class="space-y-2 pt-2">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-semibold text-charcoal-ink">Pemetaan Parameter Meta (HSM)</span>
+<span class="text-[11px] font-caption text-muted-slate">4 Variabel Terikat</span>
+</div>
+<div class="rounded-lg overflow-hidden bg-canvas/30">
+<table class="w-full text-left font-body-sm text-[12px]">
+<thead class="bg-canvas text-muted-slate font-label-sm text-[10px] uppercase tracking-wider">
+<tr>
+<th class="py-2 px-2.5 font-semibold">Parameter</th>
+<th class="py-2 px-2.5 font-semibold">Contoh Nilai</th>
+<th class="py-2 px-2.5 font-semibold">Sumber Field Database</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-structural-border/30 bg-surface">
+<tr>
+<td class="py-2 px-2.5 font-code-sm font-semibold text-action-orange">{{1}}</td>
+<td class="py-2 px-2.5 text-charcoal-ink">Anwar Hafid</td>
+<td class="py-2 px-2.5 font-code-sm text-muted-slate">
+<span class="text-authority-teal">contact.full_name</span>
+<span class="block text-[10px] text-muted-slate/80">Fallback: "Bapak/Ibu"</span>
+</td>
+</tr>
+<tr>
+<td class="py-2 px-2.5 font-code-sm font-semibold text-action-orange">{{2}}</td>
+<td class="py-2 px-2.5 text-charcoal-ink">September 2026</td>
+<td class="py-2 px-2.5 font-code-sm text-muted-slate">
+<span class="text-authority-teal">campaign.period_month_year</span>
+</td>
+</tr>
+<tr>
+<td class="py-2 px-2.5 font-code-sm font-semibold text-action-orange">{{3}}</td>
+<td class="py-2 px-2.5 text-charcoal-ink truncate max-w-[120px]">https://sulteng.bps...</td>
+<td class="py-2 px-2.5 font-code-sm text-muted-slate">
+<span class="text-authority-teal">document.download_url</span>
+</td>
+</tr>
+<tr>
+<td class="py-2 px-2.5 font-code-sm font-semibold text-action-orange">{{4}}</td>
+<td class="py-2 px-2.5 text-charcoal-ink truncate max-w-[120px]">https://sulteng.bps...</td>
+<td class="py-2 px-2.5 font-code-sm text-muted-slate">
+<span class="text-authority-teal">system.silastik_url</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Live Sandbox Test-Send Box -->
+<div class="rounded-xl bg-canvas p-3.5 space-y-2.5">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm font-semibold text-charcoal-ink flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-action-orange">send</span>
+                Kirim Pengujian HSM (Sandbox QA)
+              </span>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-code-sm bg-operational-teal/15 text-authority-teal">QUOTA EXEMPT</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-2.5 top-2 text-muted-slate text-[16px]">phone_iphone</span>
+<input class="w-full pl-8 pr-2.5 py-1.5 rounded-lg bg-surface text-charcoal-ink font-code-sm text-code-sm focus:outline-none focus:ring-2 focus:ring-action-orange/30" type="text" value="+62 812-4567-8901"/>
+</div>
+<button class="px-3.5 py-1.5 rounded-lg bg-action-orange text-on-primary font-label-md text-label-md font-medium hover:bg-primary transition-all active:translate-y-[1px] shadow-xs flex items-center gap-1.5 whitespace-nowrap" type="button">
+<span>Kirim Uji Coba</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+<p class="font-caption text-[11px] text-muted-slate leading-relaxed">
+              Pengiriman uji coba ini dieksekusi melalui Meta Test Environment tanpa memotong kuota siaran resmi BPS Sulteng.
+            </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Institutional Guidelines & Meta Compliance Hub -->
+<div class="pt-2" id="panduan-meta">
+<div class="text-[11px] uppercase tracking-wider font-semibold text-muted-slate mb-3 font-label-sm flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">policy</span>
+        Standar Kepatuhan Meta WhatsApp Cloud API &amp; Tata Kelola Data BPS
+      </div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Card 1 -->
+<div class="bg-surface rounded-xl p-4 shadow-sm space-y-2">
+<div class="flex items-center gap-2 text-authority-teal">
+<span class="material-symbols-outlined text-[20px]">verified</span>
+<h2 class="font-label-md text-label-md font-semibold text-charcoal-ink">Regulasi Kategori Utility Meta</h2>
+</div>
+<p class="font-body-sm text-body-sm text-muted-slate leading-relaxed">
+            Template Utility diverifikasi ketat untuk pesan transaksional, pembaruan statistik resmi, dan notifikasi kepegawaian. Dilarang menyisipkan materi promosi atau pemasaran langsung.
+          </p>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface rounded-xl p-4 shadow-sm space-y-2">
+<div class="flex items-center gap-2 text-operational-teal">
+<span class="material-symbols-outlined text-[20px]">sync_alt</span>
+<h2 class="font-label-md text-label-md font-semibold text-charcoal-ink">Sinkronisasi Webhook Otomatis</h2>
+</div>
+<p class="font-body-sm text-body-sm text-muted-slate leading-relaxed">
+            Setiap perubahan status template (misal: <em>In Review</em> menjadi <em>Approved</em>) di Meta Business Suite secara instan disinkronkan ke kluster Palu dalam waktu kurang dari 60 detik.
+          </p>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface rounded-xl p-4 shadow-sm space-y-2">
+<div class="flex items-center gap-2 text-action-orange">
+<span class="material-symbols-outlined text-[20px]">gavel</span>
+<h2 class="font-label-md text-label-md font-semibold text-charcoal-ink">Proteksi Opt-Out UU PDP</h2>
+</div>
+<p class="font-body-sm text-body-sm text-muted-slate leading-relaxed">
+            Sesuai UU Perlindungan Data Pribadi dan standar Meta, setiap pesan siaran statistik publik wajib memuat instruksi pembatalan langganan (STOP) di baris penutup pesan.
+          </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  function selectTemplate(templateCode) {
+    // Interactive client-side row selection indicator
+    console.log("Template dipilih untuk inspeksi:", templateCode);
+  }
+</script></main></div></body></html>

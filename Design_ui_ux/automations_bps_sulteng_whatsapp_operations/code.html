@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+
+<html lang="id"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={"darkMode":"class","theme":{"extend":{"colors":{"inverse-primary":"#ffb691","on-primary-fixed":"#341100","authority-teal":"#007979","surface-container-high":"#e0eae9","tertiary-fixed":"#7bf5f5","on-primary-fixed-variant":"#793100","inverse-on-surface":"#e9f3f2","on-background":"#141d1d","on-tertiary-container":"#003232","on-tertiary-fixed-variant":"#004f50","on-primary":"#ffffff","secondary-fixed":"#97f2f1","operational-teal":"#24B1B1","primary-container":"#e37434","secondary":"#006a6a","on-error-container":"#93000a","on-surface-variant":"#564239","surface":"#FFFFFF","surface-dim":"#d2dcdb","tertiary-container":"#00a4a4","background":"#f2fbfb","on-secondary":"#ffffff","primary-fixed-dim":"#ffb691","tertiary":"#006a6a","surface-tint":"#9e4200","on-secondary-container":"#007070","primary-fixed":"#ffdbcb","on-tertiary":"#ffffff","on-surface":"#141d1d","surface-container-highest":"#dbe4e4","surface-bright":"#f2fbfb","secondary-fixed-dim":"#7bd5d5","on-secondary-fixed-variant":"#004f4f","error-red-subtle":"#FEF3F2","outline":"#8a7267","inverse-surface":"#293232","secondary-container":"#97f2f1","outline-variant":"#ddc1b4","surface-container-low":"#ecf6f5","surface-container":"#e6f0ef","action-orange":"#E37434","surface-container-lowest":"#ffffff","primary":"#9e4200","structural-border":"#DCE2DF","error":"#ba1a1a","tertiary-fixed-dim":"#5bd9d8","warm-sand-subtle":"#FFF8EC","warm-sand":"#FFE2AF","charcoal-ink":"#172020","on-tertiary-fixed":"#002020","on-primary-container":"#4e1d00","canvas":"#F7F7F3","error-container":"#ffdad6","muted-slate":"#66706F","on-secondary-fixed":"#002020","error-red":"#B42318","on-error":"#ffffff","surface-variant":"#dbe4e4"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"gutter-desktop":"1.5rem","margin":"1rem","space-lg":"1.5rem","space-xl":"2rem","space-md":"1rem","space-xs":"0.25rem","margin-desktop":"2rem","space-sm":"0.5rem","gutter":"1rem"},"fontFamily":{"headline-xl-mobile":["Geist"],"headline-sm":["Geist"],"body-md":["Geist"],"caption":["Geist"],"label-md":["Geist"],"label-sm":["Geist"],"headline-lg-mobile":["Geist"],"headline-lg":["Geist"],"body-sm":["Geist"],"body-lg":["Geist"],"code-md":["Geist Mono"],"headline-md":["Geist"],"code-lg":["Geist Mono"],"code-sm":["Geist Mono"],"headline-xl":["Geist"]},"fontSize":{"headline-xl-mobile":["26px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-sm":["16px",{"lineHeight":"24px","fontWeight":"600"}],"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}],"caption":["12px",{"lineHeight":"16px","fontWeight":"400"}],"label-md":["14px",{"lineHeight":"20px","fontWeight":"500"}],"label-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.01em","fontWeight":"500"}],"headline-lg-mobile":["22px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-lg":["28px",{"lineHeight":"36px","letterSpacing":"-0.02em","fontWeight":"600"}],"body-sm":["13px",{"lineHeight":"18px","fontWeight":"400"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}],"code-md":["14px",{"lineHeight":"20px","fontWeight":"500"}],"headline-md":["20px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"600"}],"code-lg":["24px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"600"}],"code-sm":["12px",{"lineHeight":"16px","fontWeight":"500"}],"headline-xl":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"600"}]}}}};</script></head><body class="bg-canvas font-body-md text-on-surface antialiased selection:bg-action-orange selection:text-on-primary"><aside class="fixed left-0 top-0 h-screen w-64 bg-authority-teal text-on-primary z-50 flex flex-col justify-between overflow-y-auto border-r border-structural-border/20 shadow-[0_1px_8px_rgba(0,0,0,0.06)]"><div class="flex flex-col"><div class="h-14 px-4 flex items-center gap-3 border-b border-white/10 bg-secondary/20"><img alt="Logo BPS Provinsi Sulawesi Tengah" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UH5MpLrhbhuehZ-dnQCWS0NVx7DC5Nb6esC2poNV4h7CHrqxB8IZO-aRjQz1rqpTqOwGgn6UOJhq_UhMzm5f4uuhxmBUo3U7s37s8nvM-LycHq4wDMkzZGfNMf_97M-N9wQyVLQls-xOunkquv66hEg_LBy-DMWGt6gdUOLDoHCAnqYscFdox5pinwbcvavFqxbgUBy8blEX7MUpOCgQbSlF1bNLZ_23cwMByVprNjoH1yePx8iSHbv2Y"/><div class="flex flex-col min-w-0"><span class="font-label-md text-label-md text-on-primary truncate tracking-tight">BPS Sulteng</span><span class="font-caption text-caption text-secondary-fixed opacity-90 truncate leading-none">WhatsApp Operations</span></div></div><div class="px-3 py-3"><div class="text-[10px] uppercase tracking-wider font-semibold text-secondary-fixed/70 px-3 mb-1.5 font-label-sm">Diseminasi &amp; Komunikasi</div><nav class="flex flex-col gap-0.5" data-active-classes="bg-action-orange text-on-primary font-label-md rounded-lg shadow-sm"><a class="flex items-center px-3 py-2 rounded-lg text-secondary-fixed hover:bg-white/10 hover:text-on-primary transition-colors text-body-sm font-body-sm" data-path="overview" href="#">Overview</a><a class="flex items-center px-3 py-2 rounded-lg text-secondary-fixed hover:bg-white/10 hover:text-on-primary transition-colors text-body-sm font-body-sm" data-path="campaigns" href="#">Campaigns</a><a aria-current="page" class="flex items-center px-3 py-2 transition-colors bg-action-orange text-on-primary font-label-md rounded-lg shadow-sm" data-path="automations" href="#">Automations</a><a class="flex items-center px-3 py-2 rounded-lg text-secondary-fixed hover:bg-white/10 hover:text-on-primary transition-colors text-body-sm font-body-sm" data-path="templates" href="#">Templates</a></nav></div><div class="px-3 py-2"><div class="text-[10px] uppercase tracking-wider font-semibold text-secondary-fixed/70 px-3 mb-1.5 font-label-sm">Direktori &amp; Distribusi</div><nav class="flex flex-col gap-0.5" data-active-classes="bg-action-orange text-on-primary font-label-md rounded-lg shadow-sm"><a class="flex items-center px-3 py-2 rounded-lg text-secondary-fixed hover:bg-white/10 hover:text-on-primary transition-colors text-body-sm font-body-sm" data-path="contacts" href="#">Contacts</a><a class="flex items-center px-3 py-2 rounded-lg text-secondary-fixed hover:bg-white/10 hover:text-on-primary transition-colors text-body-sm font-body-sm" data-path="subscriptions" href="#">Subscriptions</a><a class="flex items-center px-3 py-2 rounded-lg text-secondary-fixed hover:bg-white/10 hover:text-on-primary transition-colors text-body-sm font-body-sm" data-path="schedules-and-calendar" href="#">Schedules &amp; Calendar</a><a class="flex items-center px-3 py-2 rounded-lg text-secondary-fixed hover:bg-white/10 hover:text-on-primary transition-colors text-body-sm font-body-sm" data-path="message-logs" href="#">Message Logs</a></nav></div><div class="px-3 py-2"><div class="text-[10px] uppercase tracking-wider font-semibold text-secondary-fixed/70 px-3 mb-1.5 font-label-sm">Infrastruktur &amp; Sistem</div><nav class="flex flex-col gap-0.5" data-active-classes="bg-action-orange text-on-primary font-label-md rounded-lg shadow-sm"><a class="flex items-center px-3 py-2 rounded-lg text-secondary-fixed hover:bg-white/10 hover:text-on-primary transition-colors text-body-sm font-body-sm" data-path="integrations" href="#">Integrations</a><a class="flex items-center px-3 py-2 rounded-lg text-secondary-fixed hover:bg-white/10 hover:text-on-primary transition-colors text-body-sm font-body-sm" data-path="users-and-roles" href="#">Users &amp; Roles</a><a class="flex items-center px-3 py-2 rounded-lg text-secondary-fixed hover:bg-white/10 hover:text-on-primary transition-colors text-body-sm font-body-sm" data-path="audit-and-settings" href="#">Audit &amp; Settings</a></nav></div></div><div class="p-3 border-t border-white/10 bg-secondary/30"><div class="flex items-center justify-between text-[11px] text-secondary-fixed/80"><span class="font-code-sm text-code-sm">BPS WABA v2.4</span><span class="px-1.5 py-0.5 rounded bg-authority-teal border border-secondary-fixed/30 text-[10px] text-on-primary font-code-sm">PROD</span></div></div></aside><div class="pl-64 flex flex-col min-h-screen"><header class="fixed top-0 left-64 right-0 h-14 bg-surface/95 backdrop-blur-md border-b border-structural-border z-40 px-6 flex items-center justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center gap-3"><div class="flex items-center gap-2"><span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-authority-teal/10 text-authority-teal border border-authority-teal/20 tracking-wide">PROD - Palu Cluster</span></div><div class="h-4 w-px bg-structural-border"></div><div class="flex items-center gap-2 text-caption font-caption text-muted-slate"><div class="flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container-low border border-structural-border"><span class="w-1.5 h-1.5 rounded-full bg-operational-teal"></span><span class="text-[11px] font-label-sm text-charcoal-ink">WABA: Terhubung</span></div><div class="flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container-low border border-structural-border"><span class="w-1.5 h-1.5 rounded-full bg-operational-teal"></span><span class="text-[11px] font-label-sm text-charcoal-ink">Cron: Aktif</span></div><div class="flex items-center gap-1 px-1.5 text-muted-slate"><span class="material-symbols-outlined text-[14px]">schedule</span><span class="text-[11px] font-code-sm">WITA / Asia/Makassar</span></div></div></div><div class="flex items-center gap-3"><button aria-label="Notifikasi" class="relative p-1.5 text-muted-slate hover:text-charcoal-ink hover:bg-surface-container rounded-lg transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-action-orange ring-2 ring-surface"></span></button><div class="h-5 w-px bg-structural-border"></div><div class="flex items-center gap-2.5 pl-1"><div class="flex flex-col text-right"><span class="font-label-md text-label-md text-charcoal-ink leading-tight">Ainun</span><span class="text-[11px] font-caption text-muted-slate leading-none">Admin Diseminasi - BPS Sulteng</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-14 flex-1"><div class="flex flex-col w-full">
+<!-- Content Container (1440px constrained) -->
+<div class="w-full max-w-[1440px] mx-auto px-6 py-5 flex flex-col gap-5">
+<!-- Top Operational Header Bar -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-surface p-5 rounded-xl shadow-sm border border-structural-border">
+<div class="flex flex-col gap-1.5 max-w-3xl">
+<div class="flex items-center gap-2.5">
+<h1 class="font-headline-lg text-headline-lg text-charcoal-ink tracking-tight">Manajemen Otomasi &amp; Alur Siaran Otomatis</h1>
+<span class="px-2 py-0.5 rounded bg-authority-teal/10 text-authority-teal font-code-sm text-code-sm font-semibold">ENGINE v2.4</span>
+</div>
+<p class="font-body-md text-body-md text-muted-slate leading-relaxed">
+          Konfigurasi pemicu terjadwal, integrasi webhook sistem internal (Presensi ASN, Katalog Diseminasi, Silastik PST), serta dispatch siaran otomatis terverifikasi via Meta WhatsApp Cloud API.
+        </p>
+<!-- Live System Heartbeat & Diagnostic Strip -->
+<div class="flex flex-wrap items-center gap-2 mt-2">
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded bg-surface-container-low border border-structural-border">
+<span class="w-2 h-2 rounded-full bg-operational-teal animate-pulse"></span>
+<span class="font-caption text-caption text-charcoal-ink font-medium">Cron Dispatcher: Berjalan Normal</span>
+<span class="font-code-sm text-code-sm text-muted-slate text-[11px]">(0.8s heartbeat)</span>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded bg-surface-container-low border border-structural-border">
+<span class="w-2 h-2 rounded-full bg-operational-teal"></span>
+<span class="font-caption text-caption text-charcoal-ink font-medium">Webhook Gateway: Aktif</span>
+</div>
+<div class="flex items-center gap-1 px-2 py-1 rounded bg-warm-sand-subtle border border-warm-sand text-on-surface-variant font-code-sm text-code-sm text-[11px]">
+<span class="material-symbols-outlined text-[14px] text-action-orange">schedule</span>
+<span>Zona Basis: WITA (Asia/Makassar)</span>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex items-center gap-2.5 self-start lg:self-center shrink-0">
+<button class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-surface text-charcoal-ink font-label-md text-label-md border border-structural-border hover:bg-canvas transition-colors shadow-sm" id="btn-test-webhook" type="button">
+<span class="material-symbols-outlined text-[18px] text-muted-slate">terminal</span>
+<span>Uji Trigger Webhook</span>
+</button>
+<button class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-surface text-charcoal-ink font-label-md text-label-md border border-structural-border hover:bg-canvas transition-colors shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px] text-muted-slate">history</span>
+<span>Log Eksekusi</span>
+</button>
+<button class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-action-orange text-on-primary font-label-md text-label-md shadow hover:brightness-105 active:translate-y-[1px] transition-all" id="btn-add-automation" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span>Tambah Otomasi Baru</span>
+</button>
+</div>
+</div>
+<!-- Operational KPI Matrix (4 Cards) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- KPI 1 -->
+<div class="bg-surface p-4 rounded-xl border border-structural-border shadow-sm flex flex-col justify-between relative overflow-hidden">
+<div class="absolute top-0 left-0 right-0 h-1 bg-authority-teal"></div>
+<div class="flex items-center justify-between text-muted-slate mb-2">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-muted-slate">Status Alur Otomasi</span>
+<span class="material-symbols-outlined text-[20px] text-authority-teal">toggle_on</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg text-charcoal-ink">7 Aktif</span>
+<span class="font-body-sm text-body-sm text-muted-slate">/ 9 Terdaftar</span>
+</div>
+<div class="mt-2.5 pt-2 border-t border-structural-border/60 flex items-center justify-between text-caption font-caption">
+<span class="text-operational-teal font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">check_circle</span> 1 Siap Validasi
+          </span>
+<span class="text-muted-slate font-code-sm text-[11px]">1 Dijeda Manual</span>
+</div>
+</div>
+<!-- KPI 2 -->
+<div class="bg-surface p-4 rounded-xl border border-structural-border shadow-sm flex flex-col justify-between relative overflow-hidden">
+<div class="absolute top-0 left-0 right-0 h-1 bg-operational-teal"></div>
+<div class="flex items-center justify-between text-muted-slate mb-2">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-muted-slate">Eksekusi Hari Ini</span>
+<span class="material-symbols-outlined text-[20px] text-operational-teal">mark_chat_read</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg text-charcoal-ink">142</span>
+<span class="font-body-sm text-body-sm text-muted-slate">Pesan Otomatis</span>
+</div>
+<div class="mt-2.5 pt-2 border-t border-structural-border/60 flex items-center justify-between text-caption font-caption">
+<span class="text-operational-teal font-medium">99.3% Sukses Terkirim</span>
+<span class="text-muted-slate font-code-sm text-[11px]">Rata-rata 42ms</span>
+</div>
+</div>
+<!-- KPI 3 -->
+<div class="bg-surface p-4 rounded-xl border border-structural-border shadow-sm flex flex-col justify-between relative overflow-hidden">
+<div class="absolute top-0 left-0 right-0 h-1 bg-action-orange"></div>
+<div class="flex items-center justify-between text-muted-slate mb-2">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-muted-slate">Jadwal Dispatch Terdekat</span>
+<span class="material-symbols-outlined text-[20px] text-action-orange">alarm</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg text-charcoal-ink font-code-md">15:45</span>
+<span class="font-code-sm text-code-sm text-action-orange font-semibold">WITA</span>
+</div>
+<div class="mt-2.5 pt-2 border-t border-structural-border/60 flex items-center justify-between text-caption font-caption">
+<span class="text-charcoal-ink font-medium truncate">Absensi Pulang ASN</span>
+<span class="text-muted-slate font-code-sm text-[11px]">~84 Target</span>
+</div>
+</div>
+<!-- KPI 4 -->
+<div class="bg-surface p-4 rounded-xl border border-structural-border shadow-sm flex flex-col justify-between relative overflow-hidden">
+<div class="absolute top-0 left-0 right-0 h-1 bg-authority-teal"></div>
+<div class="flex items-center justify-between text-muted-slate mb-2">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-muted-slate">Konektor Sumber Data</span>
+<span class="material-symbols-outlined text-[20px] text-authority-teal">hub</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg text-charcoal-ink">3 Sistem</span>
+<span class="font-body-sm text-body-sm text-operational-teal font-medium">Terhubung</span>
+</div>
+<div class="mt-2.5 pt-2 border-t border-structural-border/60 flex items-center justify-between text-caption font-caption">
+<span class="text-muted-slate">Presensi, Silastik, BRS</span>
+<span class="inline-flex items-center px-1.5 py-0.2 rounded bg-operational-teal/10 text-operational-teal font-code-sm text-[10px] font-semibold">SEMUA SEHAT</span>
+</div>
+</div>
+</div>
+<!-- Filter Bar & Categorization Tabs -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-3 bg-surface p-3.5 rounded-xl border border-structural-border">
+<!-- Category Tabs -->
+<div class="flex items-center gap-1 overflow-x-auto pb-1 md:pb-0" id="category-tabs">
+<button class="tab-btn px-3 py-1.5 rounded-lg bg-authority-teal text-on-primary font-label-sm text-label-sm whitespace-nowrap shadow-sm" data-filter="all" type="button">
+          Semua Otomasi (9)
+        </button>
+<button class="tab-btn px-3 py-1.5 rounded-lg bg-surface-container-low text-charcoal-ink font-label-sm text-label-sm hover:bg-surface-container whitespace-nowrap transition-colors" data-filter="Internal Pegawai" type="button">
+          Internal Pegawai (3)
+        </button>
+<button class="tab-btn px-3 py-1.5 rounded-lg bg-surface-container-low text-charcoal-ink font-label-sm text-label-sm hover:bg-surface-container whitespace-nowrap transition-colors" data-filter="Diseminasi &amp; Publikasi" type="button">
+          Diseminasi &amp; Publikasi (3)
+        </button>
+<button class="tab-btn px-3 py-1.5 rounded-lg bg-surface-container-low text-charcoal-ink font-label-sm text-label-sm hover:bg-surface-container whitespace-nowrap transition-colors" data-filter="Layanan Silastik" type="button">
+          Layanan Silastik (3)
+        </button>
+</div>
+<!-- Quick Search & Select Controls -->
+<div class="flex flex-wrap items-center gap-2.5">
+<div class="relative min-w-[220px]">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-muted-slate text-[18px]">search</span>
+<input class="w-full pl-9 pr-3 py-1.5 h-9 rounded-lg bg-canvas border border-structural-border text-charcoal-ink font-body-sm text-body-sm focus:outline-none focus:border-action-orange focus:ring-2 focus:ring-action-orange/15 transition-all placeholder:text-muted-slate/70" id="search-input" placeholder="Cari ID / nama otomasi..." type="text"/>
+</div>
+<select class="h-9 px-3 py-1 rounded-lg bg-canvas border border-structural-border text-charcoal-ink font-body-sm text-body-sm focus:outline-none focus:border-action-orange" id="filter-status">
+<option value="">Status: Semua</option>
+<option value="Aktif">Hanya Aktif</option>
+<option value="Dijeda">Nonaktif / Dijeda</option>
+</select>
+<button class="h-9 w-9 flex items-center justify-center rounded-lg border border-structural-border text-muted-slate hover:text-charcoal-ink hover:bg-canvas transition-colors" id="btn-reset-filters" title="Reset Filter" type="button">
+<span class="material-symbols-outlined text-[18px]">restart_alt</span>
+</button>
+</div>
+</div>
+<!-- Structured Automation Table Engine -->
+<div class="bg-surface rounded-xl border border-structural-border shadow-sm overflow-hidden flex flex-col">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse" id="automations-table">
+<thead>
+<tr class="bg-canvas border-b border-structural-border text-muted-slate font-label-sm text-label-sm uppercase tracking-wider text-[11px]">
+<th class="py-3 px-4 w-[280px]">Nama &amp; Kode Otomasi</th>
+<th class="py-3 px-4 w-[240px]">Trigger &amp; Jadwal (WITA)</th>
+<th class="py-3 px-4 w-[220px]">Sumber Data Terhubung</th>
+<th class="py-3 px-4 w-[190px]">Template Meta WABA</th>
+<th class="py-3 px-4 text-center w-[100px]">Status</th>
+<th class="py-3 px-4 w-[180px]">Eksekusi Terakhir</th>
+<th class="py-3 px-4 w-[160px]">Jadwal Berikutnya</th>
+<th class="py-3 px-4 text-right w-[110px]">Aksi</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-structural-border font-body-sm text-body-sm text-charcoal-ink">
+<!-- Row 1: Reminder Presensi Pagi -->
+<tr class="hover:bg-warm-sand-subtle/40 transition-colors group cursor-pointer" onclick="openDrawer('ATM-PRS-001')">
+<td class="py-3.5 px-4">
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-1.5">
+<span class="font-headline-sm text-headline-sm text-charcoal-ink group-hover:text-action-orange transition-colors">Reminder Absensi Masuk (Pagi)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-code-sm text-[11px] text-muted-slate bg-surface-container px-1.5 py-0.2 rounded font-semibold">ATM-PRS-001</span>
+<span class="font-caption text-[11px] text-authority-teal">Internal Pegawai</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-1 text-charcoal-ink font-medium">
+<span class="material-symbols-outlined text-[16px] text-authority-teal">update</span>
+<span>Setiap Hari Kerja (Sen-Jum)</span>
+</div>
+<span class="font-code-sm text-[12px] text-muted-slate">07:15 WITA <span class="text-[10px] text-action-orange font-sans">(-15m cutoff)</span></span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col gap-0.5">
+<span class="font-medium text-charcoal-ink">API Presensi ASN BPS Sulteng</span>
+<span class="font-code-sm text-[11px] text-muted-slate truncate max-w-[200px]">/api/v2/presensi/unregistered</span>
+<span class="text-[11px] text-operational-teal font-medium">Sasaran: ~84 Pegawai</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1">
+<span class="font-code-sm text-code-sm text-charcoal-ink bg-surface-container-low px-1.5 py-0.5 rounded border border-structural-border">reminder_presensi_pagi</span>
+</div>
+<span class="font-caption text-[11px] text-operational-teal flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">verified</span> Utility v2 • Approved
+                  </span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-center" onclick="event.stopPropagation()">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-9 h-5 bg-structural-border peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-authority-teal"></div>
+</label>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="font-code-sm text-[12px] text-charcoal-ink font-medium">Hari ini 07:15 WITA</span>
+<span class="text-[11px] text-operational-teal flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">done_all</span> 18 ASN Terkirim (100%)
+                  </span>
+<span class="text-[10px] text-muted-slate font-code-sm">Latensi 38ms</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="font-code-sm text-[12px] text-charcoal-ink">Besok 07:15 WITA</span>
+<span class="text-[11px] text-muted-slate">Terkunci via Cron</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right" onclick="event.stopPropagation()">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1.5 rounded hover:bg-canvas text-muted-slate hover:text-action-orange transition-colors" title="Jalankan Sekarang (Manual Dispatch)" type="button">
+<span class="material-symbols-outlined text-[18px]">play_arrow</span>
+</button>
+<button class="p-1.5 rounded hover:bg-canvas text-muted-slate hover:text-authority-teal transition-colors" onclick="openDrawer('ATM-PRS-001')" title="Edit Konfigurasi" type="button">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</button>
+<button class="p-1.5 rounded hover:bg-canvas text-muted-slate hover:text-charcoal-ink transition-colors" title="Log Eksekusi" type="button">
+<span class="material-symbols-outlined text-[18px]">receipt_long</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2: Reminder Absensi Pulang -->
+<tr class="hover:bg-warm-sand-subtle/40 transition-colors group cursor-pointer" onclick="openDrawer('ATM-PRS-002')">
+<td class="py-3.5 px-4">
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-1.5">
+<span class="font-headline-sm text-headline-sm text-charcoal-ink group-hover:text-action-orange transition-colors">Reminder Absensi Pulang Kerja</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-code-sm text-[11px] text-muted-slate bg-surface-container px-1.5 py-0.2 rounded font-semibold">ATM-PRS-002</span>
+<span class="font-caption text-[11px] text-authority-teal">Internal Pegawai</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-1 text-charcoal-ink font-medium">
+<span class="material-symbols-outlined text-[16px] text-authority-teal">update</span>
+<span>Setiap Hari Kerja (Sen-Jum)</span>
+</div>
+<span class="font-code-sm text-[12px] text-muted-slate">15:45 WITA <span class="text-[10px] text-action-orange font-sans">(-15m batas pulang)</span></span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col gap-0.5">
+<span class="font-medium text-charcoal-ink">API Presensi ASN Sulteng</span>
+<span class="font-code-sm text-[11px] text-muted-slate truncate max-w-[200px]">/api/v2/presensi/aktif-kantor</span>
+<span class="text-[11px] text-operational-teal font-medium">Sasaran: Seluruh ASN Kantor</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1">
+<span class="font-code-sm text-code-sm text-charcoal-ink bg-surface-container-low px-1.5 py-0.5 rounded border border-structural-border">reminder_presensi_pulang</span>
+</div>
+<span class="font-caption text-[11px] text-operational-teal flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">verified</span> Utility v1 • Approved
+                  </span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-center" onclick="event.stopPropagation()">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-9 h-5 bg-structural-border peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-authority-teal"></div>
+</label>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="font-code-sm text-[12px] text-charcoal-ink font-medium">Kemarin 15:45 WITA</span>
+<span class="text-[11px] text-operational-teal flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">done_all</span> 62 Pesan Terkirim
+                  </span>
+<span class="text-[10px] text-muted-slate font-code-sm">Latensi 40ms</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="font-code-sm text-[12px] text-action-orange font-semibold">Hari ini 15:45 WITA</span>
+<span class="text-[11px] text-action-orange font-medium flex items-center gap-0.5">
+<span class="w-1.5 h-1.5 rounded-full bg-action-orange animate-ping"></span> Dalam ~2 Jam
+                  </span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right" onclick="event.stopPropagation()">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1.5 rounded hover:bg-canvas text-muted-slate hover:text-action-orange transition-colors" title="Jalankan Sekarang" type="button">
+<span class="material-symbols-outlined text-[18px]">play_arrow</span>
+</button>
+<button class="p-1.5 rounded hover:bg-canvas text-muted-slate hover:text-authority-teal transition-colors" onclick="openDrawer('ATM-PRS-002')" title="Edit Konfigurasi" type="button">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</button>
+<button class="p-1.5 rounded hover:bg-canvas text-muted-slate hover:text-charcoal-ink transition-colors" title="Log Eksekusi" type="button">
+<span class="material-symbols-outlined text-[18px]">receipt_long</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3: Siaran Otomatis Rilis BRS -->
+<tr class="hover:bg-warm-sand-subtle/40 transition-colors group cursor-pointer" onclick="openDrawer('ATM-BRS-001')">
+<td class="py-3.5 px-4">
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-1.5">
+<span class="font-headline-sm text-headline-sm text-charcoal-ink group-hover:text-action-orange transition-colors">Siaran Otomatis Rilis BRS Sulteng</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-code-sm text-[11px] text-muted-slate bg-surface-container px-1.5 py-0.2 rounded font-semibold">ATM-BRS-001</span>
+<span class="font-caption text-[11px] text-action-orange">Diseminasi &amp; Publikasi</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-1 text-charcoal-ink font-medium">
+<span class="material-symbols-outlined text-[16px] text-action-orange">webhook</span>
+<span>Webhook Event + Tgl 1 &amp; 15</span>
+</div>
+<span class="font-code-sm text-[12px] text-muted-slate">09:00:05 WITA <span class="text-[10px] text-muted-slate font-sans">(Presisi Detik)</span></span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col gap-0.5">
+<span class="font-medium text-charcoal-ink">Webhook Katalog Rilis BPS</span>
+<span class="font-code-sm text-[11px] text-muted-slate">ID: #PUB-SYNC-SULTENG</span>
+<span class="text-[11px] text-operational-teal font-medium">Sasaran: 3,450 Media &amp; Mitra</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1">
+<span class="font-code-sm text-code-sm text-charcoal-ink bg-surface-container-low px-1.5 py-0.5 rounded border border-structural-border">brs_ihk_rilis_v2</span>
+</div>
+<span class="font-caption text-[11px] text-operational-teal flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">verified</span> Utility • Approved
+                  </span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-center" onclick="event.stopPropagation()">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-9 h-5 bg-structural-border peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-authority-teal"></div>
+</label>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="font-code-sm text-[12px] text-charcoal-ink font-medium">01 Sep 2026 09:00</span>
+<span class="text-[11px] text-operational-teal flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">done_all</span> 3,450 Msg (98.4% Deliv)
+                  </span>
+<span class="text-[10px] text-muted-slate font-code-sm">Throttling 50 msg/m</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="font-code-sm text-[12px] text-charcoal-ink">01 Okt 2026 09:00</span>
+<span class="text-[11px] text-muted-slate">Rilis Inflasi/IHK</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right" onclick="event.stopPropagation()">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1.5 rounded hover:bg-canvas text-muted-slate hover:text-action-orange transition-colors" title="Jalankan Sekarang" type="button">
+<span class="material-symbols-outlined text-[18px]">play_arrow</span>
+</button>
+<button class="p-1.5 rounded hover:bg-canvas text-muted-slate hover:text-authority-teal transition-colors" onclick="openDrawer('ATM-BRS-001')" title="Edit Konfigurasi" type="button">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</button>
+<button class="p-1.5 rounded hover:bg-canvas text-muted-slate hover:text-charcoal-ink transition-colors" title="Log Eksekusi" type="button">
+<span class="material-symbols-outlined text-[18px]">receipt_long</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4: Notifikasi Pembaruan Publikasi -->
+<tr class="hover:bg-warm-sand-subtle/40 transition-colors group cursor-pointer" onclick="openDrawer('ATM-PUB-002')">
+<td class="py-3.5 px-4">
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-1.5">
+<span class="font-headline-sm text-headline-sm text-charcoal-ink group-hover:text-action-orange transition-colors">Notifikasi Publikasi Statistik Daerah</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-code-sm text-[11px] text-muted-slate bg-surface-container px-1.5 py-0.2 rounded font-semibold">ATM-PUB-002</span>
+<span class="font-caption text-[11px] text-action-orange">Diseminasi &amp; Publikasi</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-1 text-charcoal-ink font-medium">
+<span class="material-symbols-outlined text-[16px] text-action-orange">bolt</span>
+<span>Event-Driven Webhook</span>
+</div>
+<span class="font-caption text-[12px] text-muted-slate">Saat status doc = "Published"</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col gap-0.5">
+<span class="font-medium text-charcoal-ink">Repositori bps.go.id Sulteng</span>
+<span class="font-code-sm text-[11px] text-muted-slate">Webhook event: doc_released</span>
+<span class="text-[11px] text-operational-teal font-medium">Sasaran: 1,820 OPD &amp; Univ</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1">
+<span class="font-code-sm text-code-sm text-charcoal-ink bg-surface-container-low px-1.5 py-0.5 rounded border border-structural-border">katalog_publikasi_baru</span>
+</div>
+<span class="font-caption text-[11px] text-operational-teal flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">verified</span> Utility • Approved
+                  </span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-center" onclick="event.stopPropagation()">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-9 h-5 bg-structural-border peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-authority-teal"></div>
+</label>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="font-code-sm text-[12px] text-charcoal-ink font-medium">21 Sep 2026 14:10</span>
+<span class="text-[11px] text-operational-teal flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">done_all</span> 1,820 Terkirim
+                  </span>
+<span class="text-[10px] text-muted-slate font-code-sm">Batch Throttling 45/m</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="font-caption text-[12px] text-muted-slate italic">Menunggu Event Terbit</span>
+<span class="text-[11px] text-operational-teal font-code-sm">Listener Aktif</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right" onclick="event.stopPropagation()">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1.5 rounded hover:bg-canvas text-muted-slate hover:text-action-orange transition-colors" title="Jalankan Sekarang" type="button">
+<span class="material-symbols-outlined text-[18px]">play_arrow</span>
+</button>
+<button class="p-1.5 rounded hover:bg-canvas text-muted-slate hover:text-authority-teal transition-colors" onclick="openDrawer('ATM-PUB-002')" title="Edit Konfigurasi" type="button">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</button>
+<button class="p-1.5 rounded hover:bg-canvas text-muted-slate hover:text-charcoal-ink transition-colors" title="Log Eksekusi" type="button">
+<span class="material-symbols-outlined text-[18px]">receipt_long</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 5: Tiket Silastik PST -->
+<tr class="hover:bg-warm-sand-subtle/40 transition-colors group cursor-pointer" onclick="openDrawer('ATM-SLS-001')">
+<td class="py-3.5 px-4">
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-1.5">
+<span class="font-headline-sm text-headline-sm text-charcoal-ink group-hover:text-action-orange transition-colors">Tiket Konsultasi PST Silastik</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-code-sm text-[11px] text-muted-slate bg-surface-container px-1.5 py-0.2 rounded font-semibold">ATM-SLS-001</span>
+<span class="font-caption text-[11px] text-secondary">Layanan Silastik</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-1 text-charcoal-ink font-medium">
+<span class="material-symbols-outlined text-[16px] text-operational-teal">flash_on</span>
+<span>Real-time Trigger</span>
+</div>
+<span class="font-caption text-[12px] text-muted-slate">Event: tiket_created</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col gap-0.5">
+<span class="font-medium text-charcoal-ink">PostgreSQL DB Silastik Sulteng</span>
+<span class="font-code-sm text-[11px] text-muted-slate">CDC Connector: pst_ticket</span>
+<span class="text-[11px] text-operational-teal font-medium">Sasaran: Pemohon Data</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1">
+<span class="font-code-sm text-code-sm text-charcoal-ink bg-surface-container-low px-1.5 py-0.5 rounded border border-structural-border">notif_silastik_tiket</span>
+</div>
+<span class="font-caption text-[11px] text-operational-teal flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">verified</span> Utility • Approved
+                  </span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-center" onclick="event.stopPropagation()">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-9 h-5 bg-structural-border peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-authority-teal"></div>
+</label>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="font-code-sm text-[12px] text-charcoal-ink font-medium">Hari ini 10:24 WITA</span>
+<span class="text-[11px] text-operational-teal flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">done_all</span> Trx #51193 Terkirim
+                  </span>
+<span class="text-[10px] text-muted-slate font-code-sm">Latensi 1.1s (Real-time)</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="font-caption text-[12px] text-operational-teal font-medium">Standby Real-time</span>
+<span class="text-[11px] text-muted-slate font-code-sm">Event-driven</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right" onclick="event.stopPropagation()">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1.5 rounded hover:bg-canvas text-muted-slate hover:text-action-orange transition-colors" title="Jalankan Sekarang" type="button">
+<span class="material-symbols-outlined text-[18px]">play_arrow</span>
+</button>
+<button class="p-1.5 rounded hover:bg-canvas text-muted-slate hover:text-authority-teal transition-colors" onclick="openDrawer('ATM-SLS-001')" title="Edit Konfigurasi" type="button">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</button>
+<button class="p-1.5 rounded hover:bg-canvas text-muted-slate hover:text-charcoal-ink transition-colors" title="Log Eksekusi" type="button">
+<span class="material-symbols-outlined text-[18px]">receipt_long</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 6: Dokumen Selesai Silastik -->
+<tr class="hover:bg-warm-sand-subtle/40 transition-colors group cursor-pointer" onclick="openDrawer('ATM-SLS-002')">
+<td class="py-3.5 px-4">
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-1.5">
+<span class="font-headline-sm text-headline-sm text-charcoal-ink group-hover:text-action-orange transition-colors">Dokumen Data Selesai (Silastik)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-code-sm text-[11px] text-muted-slate bg-surface-container px-1.5 py-0.2 rounded font-semibold">ATM-SLS-002</span>
+<span class="font-caption text-[11px] text-secondary">Layanan Silastik</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-1 text-charcoal-ink font-medium">
+<span class="material-symbols-outlined text-[16px] text-operational-teal">flash_on</span>
+<span>Real-time Trigger</span>
+</div>
+<span class="font-caption text-[12px] text-muted-slate">Operator click: "Selesai"</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col gap-0.5">
+<span class="font-medium text-charcoal-ink">Sistem PST Sulteng (Loket)</span>
+<span class="font-code-sm text-[11px] text-muted-slate">Dispatch via Agent: Yayan</span>
+<span class="text-[11px] text-operational-teal font-medium">Sasaran: Pemohon Terkait</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1">
+<span class="font-code-sm text-code-sm text-charcoal-ink bg-surface-container-low px-1.5 py-0.5 rounded border border-structural-border">notif_silastik_selesai</span>
+</div>
+<span class="font-caption text-[11px] text-operational-teal flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">verified</span> Utility • Approved
+                  </span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-center" onclick="event.stopPropagation()">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-9 h-5 bg-structural-border peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-authority-teal"></div>
+</label>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="font-code-sm text-[12px] text-charcoal-ink font-medium">Hari ini 09:42 WITA</span>
+<span class="text-[11px] text-operational-teal flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">done_all</span> Trx #51189 Terkirim
+                  </span>
+<span class="text-[10px] text-muted-slate font-code-sm">Latensi 850ms</span>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<div class="flex flex-col">
+<span class="font-caption text-[12px] text-operational-teal font-medium">Standby Real-time</span>
+<span class="text-[11px] text-muted-slate font-code-sm">Event-driven</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right" onclick="event.stopPropagation()">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1.5 rounded hover:bg-canvas text-muted-slate hover:text-action-orange transition-colors" title="Jalankan Sekarang" type="button">
+<span class="material-symbols-outlined text-[18px]">play_arrow</span>
+</button>
+<button class="p-1.5 rounded hover:bg-canvas text-muted-slate hover:text-authority-teal transition-colors" onclick="openDrawer('ATM-SLS-002')" title="Edit Konfigurasi" type="button">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</button>
+<button class="p-1.5 rounded hover:bg-canvas text-muted-slate hover:text-charcoal-ink transition-colors" title="Log Eksekusi" type="button">
+<span class="material-symbols-outlined text-[18px]">receipt_long</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 7: Batas Waktu Survei Harga (Nonaktif/Paused) -->
+<tr class="hover:bg-warm-sand-subtle/40 transition-colors group cursor-pointer bg-surface-container-low/40" onclick="openDrawer('ATM-SRV-003')">
+<td class="py-3.5 px-4">
+<div class="flex flex-col gap-0.5 opacity-80 group-hover:opacity-100">
+<div class="flex items-center gap-1.5">
+<span class="font-headline-sm text-headline-sm text-charcoal-ink">Batas Waktu Rekonsiliasi Survei</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container text-muted-slate font-caption text-[10px]">PAUSED</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-code-sm text-[11px] text-muted-slate bg-surface-container px-1.5 py-0.2 rounded font-semibold">ATM-SRV-003</span>
+<span class="font-caption text-[11px] text-authority-teal">Internal Pegawai</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 opacity-80 group-hover:opacity-100">
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-1 text-charcoal-ink font-medium">
+<span class="material-symbols-outlined text-[16px] text-muted-slate">calendar_month</span>
+<span>Tiap Tanggal 25 Bulanan</span>
+</div>
+<span class="font-code-sm text-[12px] text-muted-slate">08:30 WITA</span>
+</div>
+</td>
+<td class="py-3.5 px-4 opacity-80 group-hover:opacity-100">
+<div class="flex flex-col gap-0.5">
+<span class="font-medium text-charcoal-ink">Sistem Monitoring Survei</span>
+<span class="font-code-sm text-[11px] text-muted-slate">API /survei/rekon-pending</span>
+<span class="text-[11px] text-muted-slate font-medium">Sasaran: 13 Mitra &amp; ASN Kab/Kota</span>
+</div>
+</td>
+<td class="py-3.5 px-4 opacity-80 group-hover:opacity-100">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1">
+<span class="font-code-sm text-code-sm text-charcoal-ink bg-surface-container-low px-1.5 py-0.5 rounded border border-structural-border">reminder_deadline_survei</span>
+</div>
+<span class="font-caption text-[11px] text-muted-slate flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">verified</span> Utility • Approved
+                  </span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-center" onclick="event.stopPropagation()">
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-9 h-5 bg-structural-border peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-authority-teal"></div>
+</label>
+</td>
+<td class="py-3.5 px-4 opacity-80 group-hover:opacity-100">
+<div class="flex flex-col">
+<span class="font-code-sm text-[12px] text-charcoal-ink font-medium">25 Agu 2026 08:30</span>
+<span class="text-[11px] text-muted-slate flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">schedule</span> Dijeda manual oleh Ainun
+                  </span>
+</div>
+</td>
+<td class="py-3.5 px-4 opacity-80 group-hover:opacity-100">
+<div class="flex flex-col">
+<span class="font-caption text-[12px] text-muted-slate italic">Dijeda Sementara</span>
+<span class="text-[11px] text-muted-slate font-code-sm">Tidak dijadwalkan</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right" onclick="event.stopPropagation()">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1.5 rounded hover:bg-canvas text-muted-slate hover:text-action-orange transition-colors" title="Jalankan Sekarang" type="button">
+<span class="material-symbols-outlined text-[18px]">play_arrow</span>
+</button>
+<button class="p-1.5 rounded hover:bg-canvas text-muted-slate hover:text-authority-teal transition-colors" onclick="openDrawer('ATM-SRV-003')" title="Edit Konfigurasi" type="button">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</button>
+<button class="p-1.5 rounded hover:bg-canvas text-muted-slate hover:text-charcoal-ink transition-colors" title="Log Eksekusi" type="button">
+<span class="material-symbols-outlined text-[18px]">receipt_long</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Footer / Dense Pagination & Summary -->
+<div class="px-4 py-3 bg-canvas border-t border-structural-border flex flex-col sm:flex-row items-center justify-between gap-3 text-caption font-caption text-muted-slate">
+<div class="flex items-center gap-2">
+<span>Menampilkan <strong class="text-charcoal-ink font-medium">7 aturan aktif</strong> dari total 9 konfigurasi otomasi WABA</span>
+<span class="h-3 w-px bg-structural-border"></span>
+<span class="font-code-sm text-[11px] text-operational-teal font-semibold">Cron Node: cluster-palu-01 (Healthy)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<button class="px-2.5 py-1 rounded border border-structural-border bg-surface text-muted-slate/50 font-label-sm text-label-sm cursor-not-allowed" disabled="" type="button">Sebelumnya</button>
+<button class="px-2.5 py-1 rounded border border-authority-teal bg-authority-teal text-on-primary font-label-sm text-label-sm" type="button">1</button>
+<button class="px-2.5 py-1 rounded border border-structural-border bg-surface text-muted-slate/50 font-label-sm text-label-sm cursor-not-allowed" disabled="" type="button">Selanjutnya</button>
+</div>
+</div>
+</div>
+<!-- Institutional Policy & WABA Compliance Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-1">
+<div class="p-4 rounded-xl bg-surface border border-structural-border flex flex-col gap-2">
+<div class="flex items-center gap-2 text-authority-teal">
+<span class="material-symbols-outlined text-[20px]">verified_user</span>
+<h2 class="font-headline-sm text-headline-sm text-charcoal-ink">Kepatuhan Template Utility</h2>
+</div>
+<p class="font-body-sm text-body-sm text-muted-slate leading-relaxed">
+          Seluruh pesan berjadwal diwajibkan menggunakan kategori <strong>Utility Template</strong> resmi Meta. Konten pengingat absensi dan nomor tiket dilarang menyisipkan materi promosi guna mempertahankan skor kualitas akun WABA kategori <em>HIGH</em>.
+        </p>
+</div>
+<div class="p-4 rounded-xl bg-surface border border-structural-border flex flex-col gap-2">
+<div class="flex items-center gap-2 text-action-orange">
+<span class="material-symbols-outlined text-[20px]">event_busy</span>
+<h2 class="font-headline-sm text-headline-sm text-charcoal-ink">Kalender Hari Libur Otomatis</h2>
+</div>
+<p class="font-body-sm text-body-sm text-muted-slate leading-relaxed">
+          Dispatcher secara otomatis menyelaraskan pemicu Cron dengan basis data <code>kalender_libur_nasional</code> &amp; Surat Keputusan Bersama (SKB) Pemprov Sulteng. Seluruh notifikasi internal ASN otomatis dijeda tanpa perlu intervensi manual.
+        </p>
+</div>
+<div class="p-4 rounded-xl bg-surface border border-structural-border flex flex-col gap-2">
+<div class="flex items-center gap-2 text-operational-teal">
+<span class="material-symbols-outlined text-[20px]">sync_saved_locally</span>
+<h2 class="font-headline-sm text-headline-sm text-charcoal-ink">Fail-safe &amp; Exponential Retry</h2>
+</div>
+<p class="font-body-sm text-body-sm text-muted-slate leading-relaxed">
+          Jika API Meta mengembalikan galat sementara (HTTP 5xx / Rate Limit Throttling), alur otomasi akan mengisolasi pesan ke <em>Dead-Letter-Queue (DLQ)</em> dan melakukan percobaan ulang otomatis hingga 3 kali dengan jeda eksponensial 2 menit.
+        </p>
+</div>
+</div>
+</div>
+<!-- SLIDE-OVER DRAWER (Rule Configuration Editor: ATM-PRS-001) -->
+<div class="fixed inset-0 bg-charcoal-ink/40 backdrop-blur-xs z-50 hidden transition-opacity opacity-0" id="drawer-backdrop" onclick="closeDrawer()">
+<div class="absolute top-0 right-0 h-full w-full max-w-[620px] bg-surface shadow-2xl flex flex-col border-l border-structural-border transition-transform transform translate-x-full overflow-hidden" id="drawer-panel" onclick="event.stopPropagation()">
+<!-- Drawer Header -->
+<div class="px-6 py-4 bg-canvas border-b border-structural-border flex items-center justify-between">
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-authority-teal/10 text-authority-teal font-code-sm text-code-sm font-semibold">ATM-PRS-001</span>
+<span class="px-2 py-0.5 rounded bg-operational-teal/15 text-operational-teal font-label-sm text-label-sm font-semibold">Aktif</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-charcoal-ink mt-1">Konfigurasi Aturan Otomasi</h2>
+<span class="font-caption text-caption text-muted-slate">Reminder Absensi Masuk Kerja (Shift Pagi)</span>
+</div>
+<button class="p-2 rounded-lg text-muted-slate hover:text-charcoal-ink hover:bg-surface transition-colors" onclick="closeDrawer()" title="Tutup" type="button">
+<span class="material-symbols-outlined text-[22px]">close</span>
+</button>
+</div>
+<!-- Drawer Body (Scrollable Form Settings) -->
+<div class="flex-1 overflow-y-auto px-6 py-5 flex flex-col gap-6">
+<!-- Section 1: Identitas & Pemicu -->
+<div class="flex flex-col gap-4">
+<div class="border-b border-structural-border pb-1.5">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-muted-slate font-semibold">1. Parameter Pemicu (Trigger &amp; Schedule)</span>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-charcoal-ink font-medium">Nama Aturan Otomasi <span class="text-action-orange">*</span></label>
+<input class="w-full h-10 px-3 rounded-lg bg-surface border border-structural-border text-charcoal-ink font-body-md text-body-md focus:outline-none focus:border-action-orange focus:ring-2 focus:ring-action-orange/15" type="text" value="Reminder Absensi Masuk Kerja (Shift Pagi)"/>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-charcoal-ink font-medium">Tipe Pemicu</label>
+<select class="w-full h-10 px-3 rounded-lg bg-surface border border-structural-border text-charcoal-ink font-body-md text-body-md focus:outline-none focus:border-action-orange">
+<option selected="">Cron Terjadwal (Recurring)</option>
+<option>Event Webhook (Real-time)</option>
+<option>Database Change Listener</option>
+</select>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-charcoal-ink font-medium">Cron Expression (WITA)</label>
+<input class="w-full h-10 px-3 rounded-lg bg-canvas border border-structural-border font-code-md text-code-md text-charcoal-ink focus:outline-none focus:border-action-orange" type="text" value="15 7 * * 1-5"/>
+<span class="font-caption text-[11px] text-muted-slate">Pukul 07:15 WITA, setiap Senin hingga Jumat</span>
+</div>
+</div>
+<!-- Logical Conditional Rules -->
+<div class="p-3 bg-canvas rounded-lg border border-structural-border flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-charcoal-ink font-medium">Kondisi Eksekusi (Rule Guard)</span>
+<span class="font-code-sm text-[11px] text-authority-teal">SYNTAX: SQL / JSONLogic</span>
+</div>
+<div class="p-2 rounded bg-surface border border-structural-border font-code-sm text-code-sm text-charcoal-ink">
+<code>status_presensi == NULL &amp;&amp; is_libur_nasional == false</code>
+</div>
+<span class="font-caption text-[11px] text-muted-slate">Hanya targetkan pegawai dengan status presensi kosong pada jam eksekusi dan bukan hari libur kalender.</span>
+</div>
+</div>
+<!-- Section 2: Integrasi Sumber Data & Sasaran -->
+<div class="flex flex-col gap-4">
+<div class="border-b border-structural-border pb-1.5">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-muted-slate font-semibold">2. Sumber Data &amp; Konektor Endpoint</span>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-charcoal-ink font-medium">Endpoint API Presensi BPS Sulteng</label>
+<div class="flex items-center gap-2">
+<span class="h-10 px-3 rounded-lg bg-surface-container flex items-center font-code-sm text-code-sm text-muted-slate font-semibold">GET</span>
+<input class="flex-1 h-10 px-3 rounded-lg bg-canvas border border-structural-border font-code-sm text-code-sm text-charcoal-ink" readonly="" type="text" value="https://presensi.sulteng.bps.go.id/api/v2/presensi/unregistered"/>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-charcoal-ink font-medium">API Token (Secret Key)</label>
+<input class="w-full h-10 px-3 rounded-lg bg-canvas border border-structural-border font-code-sm text-code-sm text-muted-slate" readonly="" type="password" value="sk_live_9941a87e0292a"/>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-charcoal-ink font-medium">Throttling Rate Limit</label>
+<input class="w-full h-10 px-3 rounded-lg bg-surface border border-structural-border font-body-md text-body-md text-charcoal-ink focus:outline-none focus:border-action-orange" type="text" value="30 pesan / menit"/>
+</div>
+</div>
+</div>
+<!-- Section 3: Meta Template & Dynamic Mapping -->
+<div class="flex flex-col gap-4">
+<div class="border-b border-structural-border pb-1.5">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-muted-slate font-semibold">3. Template Meta WhatsApp &amp; Pemetaan Variabel</span>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-charcoal-ink font-medium">Template Terverifikasi</label>
+<div class="flex items-center justify-between p-3 rounded-lg border border-structural-border bg-surface-container-low">
+<div class="flex flex-col">
+<span class="font-code-md text-code-md text-charcoal-ink font-medium">reminder_presensi_pagi</span>
+<span class="font-caption text-caption text-muted-slate">ID: #WABA-TPL-9021 • Kategori: Utility • Bahasa: id_ID</span>
+</div>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-operational-teal/15 text-operational-teal font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">check</span> Approved
+              </span>
+</div>
+</div>
+<!-- Variable Mapper -->
+<div class="flex flex-col gap-2">
+<span class="font-label-sm text-label-sm text-charcoal-ink font-medium">Pemetaan Variabel Pesan Dinamis:</span>
+<div class="flex items-center gap-2 bg-canvas p-2.5 rounded-lg border border-structural-border">
+<span class="font-code-sm text-code-sm px-2 py-1 rounded bg-surface border border-structural-border text-charcoal-ink font-bold">{{1}}</span>
+<span class="material-symbols-outlined text-[16px] text-muted-slate">arrow_forward</span>
+<input class="flex-1 h-8 px-2 rounded bg-surface border border-structural-border font-code-sm text-code-sm text-charcoal-ink" type="text" value="pegawai.nama_lengkap"/>
+<span class="font-caption text-[11px] text-muted-slate">Fallback: "Bapak/Ibu Rekan Pegawai"</span>
+</div>
+<div class="flex items-center gap-2 bg-canvas p-2.5 rounded-lg border border-structural-border">
+<span class="font-code-sm text-code-sm px-2 py-1 rounded bg-surface border border-structural-border text-charcoal-ink font-bold">{{2}}</span>
+<span class="material-symbols-outlined text-[16px] text-muted-slate">arrow_forward</span>
+<input class="flex-1 h-8 px-2 rounded bg-surface border border-structural-border font-code-sm text-code-sm text-charcoal-ink" type="text" value="sistem.waktu_cutoff_presensi"/>
+<span class="font-caption text-[11px] text-muted-slate">Nilai: "07:30 WITA"</span>
+</div>
+<div class="flex items-center gap-2 bg-canvas p-2.5 rounded-lg border border-structural-border">
+<span class="font-code-sm text-code-sm px-2 py-1 rounded bg-surface border border-structural-border text-charcoal-ink font-bold">{{3}}</span>
+<span class="material-symbols-outlined text-[16px] text-muted-slate">arrow_forward</span>
+<input class="flex-1 h-8 px-2 rounded bg-surface border border-structural-border font-code-sm text-code-sm text-charcoal-ink" type="text" value="sistem.tautan_presensi_online"/>
+<span class="font-caption text-[11px] text-muted-slate">URL Web Presensi</span>
+</div>
+</div>
+</div>
+<!-- Section 4: Security & Compliance Confirmation -->
+<div class="flex flex-col gap-2.5 p-3.5 bg-warm-sand-subtle rounded-xl border border-warm-sand">
+<div class="flex items-center gap-2 text-action-orange font-medium font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px]">security</span>
+<span>Kepatuhan &amp; Pengamanan Data BPS</span>
+</div>
+<div class="flex flex-col gap-2 text-body-sm text-body-sm text-charcoal-ink">
+<label class="flex items-start gap-2 cursor-pointer">
+<input checked="" class="mt-0.5 rounded border-structural-border text-action-orange focus:ring-action-orange" type="checkbox"/>
+<span>Hanya kirimkan ke nomor WhatsApp yang telah diverifikasi oleh Subbagian Umum BPS Sulteng.</span>
+</label>
+<label class="flex items-start gap-2 cursor-pointer">
+<input checked="" class="mt-0.5 rounded border-structural-border text-action-orange focus:ring-action-orange" type="checkbox"/>
+<span>Catat log audit forensik pengiriman lengkap (ID WhatsApp, waktu dispatch WITA, respons kode gateway).</span>
+</label>
+</div>
+</div>
+</div>
+<!-- Drawer Footer Actions -->
+<div class="px-6 py-4 bg-canvas border-t border-structural-border flex items-center justify-between">
+<button class="px-4 py-2 rounded-lg bg-surface border border-structural-border text-charcoal-ink font-label-md text-label-md hover:bg-canvas transition-colors" onclick="closeDrawer()" type="button">
+          Batal
+        </button>
+<div class="flex items-center gap-2">
+<button class="px-3.5 py-2 rounded-lg bg-surface border border-authority-teal text-authority-teal font-label-md text-label-md hover:bg-authority-teal/5 transition-colors flex items-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[16px]">bug_report</span>
+<span>Uji Coba Kirim</span>
+</button>
+<button class="px-4 py-2 rounded-lg bg-action-orange text-on-primary font-label-md text-label-md hover:brightness-105 active:translate-y-[1px] transition-all shadow-sm" onclick="closeDrawer()" type="button">
+            Simpan Konfigurasi
+          </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Inline Script for Interactive Tab Filters, Search, and Drawer Control -->
+<script>
+    // Tab filtering logic
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tableRows = document.querySelectorAll('#automations-table tbody tr');
+    const searchInput = document.getElementById('search-input');
+    const statusSelect = document.getElementById('filter-status');
+    const resetBtn = document.getElementById('btn-reset-filters');
+
+    let currentFilter = 'all';
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabButtons.forEach(b => {
+          b.classList.remove('bg-authority-teal', 'text-on-primary', 'shadow-sm');
+          b.classList.add('bg-surface-container-low', 'text-charcoal-ink');
+        });
+        btn.classList.add('bg-authority-teal', 'text-on-primary', 'shadow-sm');
+        btn.classList.remove('bg-surface-container-low', 'text-charcoal-ink');
+        
+        currentFilter = btn.getAttribute('data-filter');
+        applyFilters();
+      });
+    });
+
+    function applyFilters() {
+      const term = searchInput.value.toLowerCase().trim();
+      const statusFilter = statusSelect.value;
+
+      tableRows.forEach(row => {
+        const text = row.innerText.toLowerCase();
+        const matchesCategory = (currentFilter === 'all') || text.includes(currentFilter.toLowerCase());
+        const matchesSearch = term === '' || text.includes(term);
+        
+        let matchesStatus = true;
+        if (statusFilter === 'Aktif') {
+          matchesStatus = !text.includes('paused') && !text.includes('dijeda');
+        } else if (statusFilter === 'Dijeda') {
+          matchesStatus = text.includes('paused') || text.includes('dijeda');
+        }
+
+        if (matchesCategory && matchesSearch && matchesStatus) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    }
+
+    searchInput.addEventListener('input', applyFilters);
+    statusSelect.addEventListener('change', applyFilters);
+
+    resetBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      statusSelect.value = '';
+      tabButtons[0].click();
+    });
+
+    // Drawer management
+    function openDrawer(automationId) {
+      const backdrop = document.getElementById('drawer-backdrop');
+      const panel = document.getElementById('drawer-panel');
+      backdrop.classList.remove('hidden');
+      setTimeout(() => {
+        backdrop.classList.remove('opacity-0');
+        panel.classList.remove('translate-x-full');
+      }, 10);
+    }
+
+    function closeDrawer() {
+      const backdrop = document.getElementById('drawer-backdrop');
+      const panel = document.getElementById('drawer-panel');
+      panel.classList.add('translate-x-full');
+      backdrop.classList.add('opacity-0');
+      setTimeout(() => {
+        backdrop.classList.add('hidden');
+      }, 250);
+    }
+
+    // Trigger test webhook demo button
+    document.getElementById('btn-test-webhook').addEventListener('click', () => {
+      alert('Panggilan pengujian webhook berhasil dikirim ke node: cluster-palu-01. Respon: 200 OK (38ms latency).');
+    });
+
+    document.getElementById('btn-add-automation').addEventListener('click', () => {
+      openDrawer('NEW-ATM');
+    });
+  </script>
+</div></main></div></body></html>

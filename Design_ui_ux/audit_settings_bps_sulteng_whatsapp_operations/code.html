@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+
+<html lang="id"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={"darkMode":"class","theme":{"extend":{"colors":{"inverse-surface":"#293232","on-background":"#141d1d","background":"#f2fbfb","on-secondary-fixed":"#002020","warm-sand":"#FFE2AF","surface-container-lowest":"#ffffff","warm-sand-subtle":"#FFF8EC","on-tertiary-fixed":"#002020","surface-tint":"#9e4200","surface-container-highest":"#dbe4e4","on-secondary":"#ffffff","tertiary":"#006a6a","on-surface":"#141d1d","tertiary-fixed-dim":"#5bd9d8","primary-fixed":"#ffdbcb","on-secondary-fixed-variant":"#004f4f","surface-container":"#e6f0ef","on-tertiary":"#ffffff","primary":"#9e4200","secondary-fixed":"#97f2f1","error-red":"#B42318","on-tertiary-container":"#003232","surface-dim":"#d2dcdb","on-tertiary-fixed-variant":"#004f50","secondary-fixed-dim":"#7bd5d5","on-primary":"#ffffff","structural-border":"#DCE2DF","inverse-primary":"#ffb691","secondary-container":"#97f2f1","operational-teal":"#24B1B1","on-primary-fixed-variant":"#793100","primary-fixed-dim":"#ffb691","surface-variant":"#dbe4e4","canvas":"#F7F7F3","surface":"#FFFFFF","on-error":"#ffffff","tertiary-container":"#00a4a4","on-surface-variant":"#564239","error-container":"#ffdad6","on-error-container":"#93000a","on-secondary-container":"#007070","outline":"#8a7267","on-primary-fixed":"#341100","action-orange":"#E37434","surface-bright":"#f2fbfb","charcoal-ink":"#172020","authority-teal":"#007979","tertiary-fixed":"#7bf5f5","surface-container-high":"#e0eae9","error-red-subtle":"#FEF3F2","error":"#ba1a1a","on-primary-container":"#4e1d00","primary-container":"#e37434","muted-slate":"#66706F","inverse-on-surface":"#e9f3f2","secondary":"#006a6a","outline-variant":"#ddc1b4","surface-container-low":"#ecf6f5"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"space-md":"1rem","space-xl":"2rem","space-lg":"1.5rem","margin-desktop":"2rem","margin":"1rem","space-sm":"0.5rem","space-xs":"0.25rem","gutter-desktop":"1.5rem","gutter":"1rem"},"fontFamily":{"headline-xl":["Geist"],"body-md":["Geist"],"headline-md":["Geist"],"caption":["Geist"],"headline-xl-mobile":["Geist"],"headline-lg":["Geist"],"label-sm":["Geist"],"code-md":["Geist Mono"],"headline-lg-mobile":["Geist"],"code-lg":["Geist Mono"],"code-sm":["Geist Mono"],"label-md":["Geist"],"headline-sm":["Geist"],"body-sm":["Geist"],"body-lg":["Geist"]},"fontSize":{"headline-xl":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"600"}],"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}],"headline-md":["20px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"600"}],"caption":["12px",{"lineHeight":"16px","fontWeight":"400"}],"headline-xl-mobile":["26px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-lg":["28px",{"lineHeight":"36px","letterSpacing":"-0.02em","fontWeight":"600"}],"label-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.01em","fontWeight":"500"}],"code-md":["14px",{"lineHeight":"20px","fontWeight":"500"}],"headline-lg-mobile":["22px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"600"}],"code-lg":["24px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"600"}],"code-sm":["12px",{"lineHeight":"16px","fontWeight":"500"}],"label-md":["14px",{"lineHeight":"20px","fontWeight":"500"}],"headline-sm":["16px",{"lineHeight":"24px","fontWeight":"600"}],"body-sm":["13px",{"lineHeight":"18px","fontWeight":"400"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}]}}}};</script></head><body class="bg-canvas font-body-md text-on-surface antialiased selection:bg-action-orange selection:text-on-primary"><aside class="fixed left-0 top-0 h-screen w-64 bg-authority-teal text-on-primary z-50 flex flex-col justify-between overflow-y-auto border-r border-structural-border/20 shadow-[0_1px_8px_rgba(0,0,0,0.06)]"><div class="flex flex-col"><div class="h-14 px-4 flex items-center gap-3 border-b border-white/10 bg-secondary/20"><img alt="Logo BPS Provinsi Sulawesi Tengah" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UH5MpLrhbhuehZ-dnQCWS0NVx7DC5Nb6esC2poNV4h7CHrqxB8IZO-aRjQz1rqpTqOwGgn6UOJhq_UhMzm5f4uuhxmBUo3U7s37s8nvM-LycHq4wDMkzZGfNMf_97M-N9wQyVLQls-xOunkquv66hEg_LBy-DMWGt6gdUOLDoHCAnqYscFdox5pinwbcvavFqxbgUBy8blEX7MUpOCgQbSlF1bNLZ_23cwMByVprNjoH1yePx8iSHbv2Y"/><div class="flex flex-col min-w-0"><span class="font-label-md text-label-md text-on-primary truncate tracking-tight">BPS Sulteng</span><span class="font-caption text-caption text-secondary-fixed opacity-90 truncate leading-none">WhatsApp Operations</span></div></div><div class="px-3 py-3"><div class="text-[10px] uppercase tracking-wider font-semibold text-secondary-fixed/70 px-3 mb-1.5 font-label-sm">Diseminasi &amp; Komunikasi</div><nav class="flex flex-col gap-0.5" data-active-classes="bg-action-orange text-on-primary font-label-md rounded-lg shadow-sm"><a class="flex items-center px-3 py-2 rounded-lg text-secondary-fixed hover:bg-white/10 hover:text-on-primary transition-colors text-body-sm font-body-sm" data-path="overview" href="#">Overview</a><a class="flex items-center px-3 py-2 rounded-lg text-secondary-fixed hover:bg-white/10 hover:text-on-primary transition-colors text-body-sm font-body-sm" data-path="campaigns" href="#">Campaigns</a><a class="flex items-center px-3 py-2 rounded-lg text-secondary-fixed hover:bg-white/10 hover:text-on-primary transition-colors text-body-sm font-body-sm" data-path="automations" href="#">Automations</a><a class="flex items-center px-3 py-2 rounded-lg text-secondary-fixed hover:bg-white/10 hover:text-on-primary transition-colors text-body-sm font-body-sm" data-path="templates" href="#">Templates</a></nav></div><div class="px-3 py-2"><div class="text-[10px] uppercase tracking-wider font-semibold text-secondary-fixed/70 px-3 mb-1.5 font-label-sm">Direktori &amp; Distribusi</div><nav class="flex flex-col gap-0.5" data-active-classes="bg-action-orange text-on-primary font-label-md rounded-lg shadow-sm"><a class="flex items-center px-3 py-2 rounded-lg text-secondary-fixed hover:bg-white/10 hover:text-on-primary transition-colors text-body-sm font-body-sm" data-path="contacts" href="#">Contacts</a><a class="flex items-center px-3 py-2 rounded-lg text-secondary-fixed hover:bg-white/10 hover:text-on-primary transition-colors text-body-sm font-body-sm" data-path="subscriptions" href="#">Subscriptions</a><a class="flex items-center px-3 py-2 rounded-lg text-secondary-fixed hover:bg-white/10 hover:text-on-primary transition-colors text-body-sm font-body-sm" data-path="schedules-and-calendar" href="#">Schedules &amp; Calendar</a><a class="flex items-center px-3 py-2 rounded-lg text-secondary-fixed hover:bg-white/10 hover:text-on-primary transition-colors text-body-sm font-body-sm" data-path="message-logs" href="#">Message Logs</a></nav></div><div class="px-3 py-2"><div class="text-[10px] uppercase tracking-wider font-semibold text-secondary-fixed/70 px-3 mb-1.5 font-label-sm">Infrastruktur &amp; Sistem</div><nav class="flex flex-col gap-0.5" data-active-classes="bg-action-orange text-on-primary font-label-md rounded-lg shadow-sm"><a class="flex items-center px-3 py-2 rounded-lg text-secondary-fixed hover:bg-white/10 hover:text-on-primary transition-colors text-body-sm font-body-sm" data-path="integrations" href="#">Integrations</a><a class="flex items-center px-3 py-2 rounded-lg text-secondary-fixed hover:bg-white/10 hover:text-on-primary transition-colors text-body-sm font-body-sm" data-path="users-and-roles" href="#">Users &amp; Roles</a><a class="flex items-center px-3 py-2 rounded-lg bg-action-orange text-on-primary font-label-md shadow-sm text-body-sm" data-path="audit-and-settings" href="#">Audit &amp; Settings</a></nav></div></div><div class="p-3 border-t border-white/10 bg-secondary/30"><div class="flex items-center justify-between text-[11px] text-secondary-fixed/80"><span class="font-code-sm text-code-sm">BPS WABA v2.4</span><span class="px-1.5 py-0.5 rounded bg-authority-teal border border-secondary-fixed/30 text-[10px] text-on-primary font-code-sm">PROD</span></div></div></aside><div class="pl-64 flex flex-col min-h-screen"><header class="fixed top-0 left-64 right-0 h-14 bg-surface/95 backdrop-blur-md border-b border-structural-border z-40 px-6 flex items-center justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center gap-3"><div class="flex items-center gap-2"><span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-authority-teal/10 text-authority-teal border border-authority-teal/20 tracking-wide font-label-sm">PROD - Palu Cluster</span></div><div class="h-4 w-px bg-structural-border"></div><div class="flex items-center gap-1.5 text-caption font-caption text-muted-slate"><a class="hover:text-charcoal-ink transition-colors font-body-sm" href="#">Infrastruktur &amp; Sistem</a><span class="material-symbols-outlined text-[14px] text-muted-slate">chevron_right</span><span class="font-label-sm text-charcoal-ink">Audit &amp; Settings</span></div><div class="h-4 w-px bg-structural-border hidden sm:block"></div><div class="hidden md:flex items-center gap-2 text-caption font-caption text-muted-slate"><div class="flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container-low border border-structural-border"><span class="w-1.5 h-1.5 rounded-full bg-operational-teal"></span><span class="text-[11px] font-label-sm text-charcoal-ink">Meta WABA: Terhubung</span></div><div class="flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container-low border border-structural-border"><span class="w-1.5 h-1.5 rounded-full bg-operational-teal"></span><span class="text-[11px] font-label-sm text-charcoal-ink">Cron: Aktif</span></div><div class="flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container-low border border-structural-border"><span class="w-1.5 h-1.5 rounded-full bg-operational-teal"></span><span class="text-[11px] font-label-sm text-charcoal-ink">Redis/Worker: Sehat</span></div><div class="flex items-center gap-1 px-1.5 text-muted-slate"><span class="material-symbols-outlined text-[14px]">schedule</span><span class="text-[11px] font-code-sm">WITA / Asia/Makassar</span></div></div></div><div class="flex items-center gap-3"><button aria-label="Notifikasi" class="relative p-1.5 text-muted-slate hover:text-charcoal-ink hover:bg-surface-container rounded-lg transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-action-orange ring-2 ring-surface"></span></button><div class="h-5 w-px bg-structural-border"></div><div class="flex items-center gap-2.5 pl-1"><div class="flex flex-col text-right"><span class="font-label-md text-label-md text-charcoal-ink leading-tight">Ainun</span><span class="text-[11px] font-caption text-muted-slate leading-none">Admin Diseminasi - BPS Sulteng</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-14 flex-1"><div class="flex flex-col w-full">
+<div class="px-6 py-6 flex flex-col gap-6 max-w-[1440px] mx-auto w-full">
+<!-- Top Header & Authority Badges -->
+<div class="flex flex-col gap-3">
+<div class="flex flex-wrap items-center justify-between gap-3">
+<div class="flex flex-wrap items-center gap-2">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-authority-teal/10 border border-authority-teal/20 text-authority-teal font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[15px]" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span>SPBE Tier-3 Security Audit Validated</span>
+</div>
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-surface-container-low border border-structural-border text-charcoal-ink font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[15px] text-operational-teal" style="font-variation-settings: 'FILL' 1;">shield</span>
+<span>ISO/IEC 27001:2022 &amp; UU PDP No. 27/2022 Compliant</span>
+</div>
+<span class="text-caption font-code-sm text-muted-slate flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-operational-teal animate-pulse"></span>
+            Ledger Node: ID-PLW-SPBE-01
+          </span>
+</div>
+<div class="flex items-center gap-2">
+<button class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-surface border border-structural-border hover:bg-canvas text-charcoal-ink font-label-md text-label-md transition-all shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span>Verifikasi Integritas SHA-256</span>
+</button>
+<button class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-surface border border-structural-border hover:bg-canvas text-charcoal-ink font-label-md text-label-md transition-all shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">download</span>
+<span>Ekspor Forensik (CSV/JSON-LD)</span>
+</button>
+<button class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-action-orange text-on-primary font-label-md text-label-md shadow-sm hover:brightness-105 active:translate-y-[1px] transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">save</span>
+<span>Simpan Pengaturan</span>
+</button>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<h1 class="font-headline-lg text-headline-lg text-charcoal-ink tracking-tight">
+          Jejak Audit Forensik &amp; Pengaturan Operasional
+        </h1>
+<p class="font-body-md text-body-md text-muted-slate max-w-5xl">
+          Pencatatan aktivitas sistem yang tidak dapat diubah (<span class="font-medium text-charcoal-ink">immutable ledger</span>), pelacakan mutasi hak akses, ekspor forensik bertanda tangan digital Balai Sertifikasi Elektronik (BSrE BSSN), serta tata kelola parameter operasional WhatsApp Cloud API BPS Provinsi Sulawesi Tengah.
+        </p>
+</div>
+</div>
+<!-- 4 KPI Telemetry Cards (Density 7/10) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Card 1 -->
+<div class="bg-surface rounded-xl p-4 border border-structural-border shadow-sm flex flex-col justify-between relative overflow-hidden">
+<div class="absolute right-0 top-0 bottom-0 w-1 bg-authority-teal"></div>
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-muted-slate uppercase tracking-wider">Total Entri Audit</span>
+<span class="font-code-lg text-code-lg text-charcoal-ink font-semibold mt-1">48,219</span>
+</div>
+<div class="w-9 h-9 rounded-lg bg-authority-teal/10 flex items-center justify-center text-authority-teal">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">description</span>
+</div>
+</div>
+<div class="mt-3 pt-2.5 border-t border-structural-border/60 flex items-center gap-1.5 text-caption font-caption text-muted-slate">
+<span class="w-1.5 h-1.5 rounded-full bg-authority-teal"></span>
+<span>30 Hari Terakhir • 0 Rekaman Dihapus (WORM Storage)</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface rounded-xl p-4 border border-structural-border shadow-sm flex flex-col justify-between relative overflow-hidden">
+<div class="absolute right-0 top-0 bottom-0 w-1 bg-operational-teal"></div>
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-muted-slate uppercase tracking-wider">Integritas Rantai Hash</span>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-code-lg text-code-lg text-charcoal-ink font-semibold">100% Valid</span>
+</div>
+</div>
+<div class="w-9 h-9 rounded-lg bg-operational-teal/10 flex items-center justify-center text-operational-teal">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</div>
+<div class="mt-3 pt-2.5 border-t border-structural-border/60 flex items-center gap-1.5 text-caption font-caption text-muted-slate">
+<span class="w-1.5 h-1.5 rounded-full bg-operational-teal"></span>
+<span>SHA-256 Merkle Root Terverifikasi • 0 Tampering</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface rounded-xl p-4 border border-structural-border shadow-sm flex flex-col justify-between relative overflow-hidden">
+<div class="absolute right-0 top-0 bottom-0 w-1 bg-action-orange"></div>
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-muted-slate uppercase tracking-wider">Peristiwa Sensitif Hari Ini</span>
+<span class="font-code-lg text-code-lg text-charcoal-ink font-semibold mt-1">14 Aksi</span>
+</div>
+<div class="w-9 h-9 rounded-lg bg-warm-sand-subtle flex items-center justify-center text-action-orange">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">security</span>
+</div>
+</div>
+<div class="mt-3 pt-2.5 border-t border-structural-border/60 flex items-center gap-1.5 text-caption font-caption text-muted-slate">
+<span class="w-1.5 h-1.5 rounded-full bg-action-orange"></span>
+<span>2 Ekspor Data, 4 Peran, 8 Dispatch Broadcast</span>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface rounded-xl p-4 border border-structural-border shadow-sm flex flex-col justify-between relative overflow-hidden">
+<div class="absolute right-0 top-0 bottom-0 w-1 bg-muted-slate"></div>
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-muted-slate uppercase tracking-wider">Masa Retensi &amp; Kuota Log</span>
+<span class="font-code-lg text-code-lg text-charcoal-ink font-semibold mt-1">5 Tahun</span>
+</div>
+<div class="w-9 h-9 rounded-lg bg-surface-container-low flex items-center justify-center text-charcoal-ink">
+<span class="material-symbols-outlined text-[20px]">storage</span>
+</div>
+</div>
+<div class="mt-3 pt-2.5 border-t border-structural-border/60 flex items-center gap-1.5 text-caption font-caption text-muted-slate">
+<span class="w-1.5 h-1.5 rounded-full bg-muted-slate"></span>
+<span>SOP BPS No. 14/2024 • Terpakai 1.84 GB / 20 GB</span>
+</div>
+</div>
+</div>
+<!-- Segmented Operational Tab Bar -->
+<div class="bg-surface rounded-xl border border-structural-border p-1.5 shadow-sm">
+<nav class="flex flex-wrap items-center gap-1 text-label-md font-label-md">
+<button class="flex items-center gap-2 px-3.5 py-2 rounded-lg bg-authority-teal text-on-primary font-medium transition-all shadow-sm" type="button">
+<span class="material-symbols-outlined text-[17px]">receipt_long</span>
+<span>Log Jejak Audit Forensik (Immutable Ledger)</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface/20 text-on-primary text-[11px] font-code-sm">Live</span>
+</button>
+<button class="flex items-center gap-2 px-3.5 py-2 rounded-lg text-muted-slate hover:text-charcoal-ink hover:bg-canvas transition-colors" type="button">
+<span class="material-symbols-outlined text-[17px]">tune</span>
+<span>Pengaturan Operasional WABA &amp; API</span>
+</button>
+<button class="flex items-center gap-2 px-3.5 py-2 rounded-lg text-muted-slate hover:text-charcoal-ink hover:bg-canvas transition-colors" type="button">
+<span class="material-symbols-outlined text-[17px]">policy</span>
+<span>Kebijakan Keamanan &amp; Retensi UU PDP</span>
+</button>
+<button class="flex items-center gap-2 px-3.5 py-2 rounded-lg text-muted-slate hover:text-charcoal-ink hover:bg-canvas transition-colors" type="button">
+<span class="material-symbols-outlined text-[17px]">crisis_alert</span>
+<span>Notifikasi Kritis &amp; Siaga Bencana</span>
+</button>
+</nav>
+</div>
+<!-- Asymmetric 8 / 4 Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+<!-- LEFT COLUMN: Integrated Audit Log Table (8 Cols) -->
+<section class="lg:col-span-8 flex flex-col gap-4">
+<!-- Search & Control Header -->
+<div class="bg-surface rounded-xl border border-structural-border p-4 shadow-sm flex flex-col gap-3">
+<div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-muted-slate text-[18px]">search</span>
+<input class="w-full h-10 pl-9 pr-3 rounded-lg bg-surface border border-structural-border font-body-sm text-body-sm text-charcoal-ink placeholder:text-muted-slate focus:outline-none focus:border-action-orange focus:ring-2 focus:ring-action-orange/20" placeholder="Cari berdasarkan Aktor, NIP, Hash, ID Aksi, IP, atau Objek..." type="text" value="CAMPAIGN-BRS-OKT-2026"/>
+</div>
+<div class="flex items-center gap-2">
+<select class="h-10 px-3 rounded-lg bg-surface border border-structural-border text-charcoal-ink font-body-sm text-body-sm focus:outline-none focus:border-action-orange">
+<option value="all">Semua Kategori</option>
+<option selected="" value="broadcast">Broadcast &amp; Siaran</option>
+<option value="role">Mutasi Akses &amp; Peran</option>
+<option value="export">Ekspor Data PDP</option>
+<option value="secrets">Kunci Kredensial</option>
+<option value="automation">Mesin Otomasi</option>
+</select>
+<select class="h-10 px-3 rounded-lg bg-surface border border-structural-border text-charcoal-ink font-body-sm text-body-sm focus:outline-none focus:border-action-orange">
+<option value="all">Tingkat Kepentingan</option>
+<option value="info">INFO</option>
+<option value="warning">PERINGATAN</option>
+<option value="critical">KRITIKAL</option>
+</select>
+<button class="h-10 px-3 rounded-lg bg-canvas hover:bg-surface-container-low border border-structural-border text-charcoal-ink flex items-center justify-center transition-colors" title="Sinkronkan Ledger" type="button">
+<span class="material-symbols-outlined text-[18px]">refresh</span>
+</button>
+</div>
+</div>
+<!-- Active Filter Pills & Live Status -->
+<div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-structural-border/60 text-caption font-caption">
+<div class="flex items-center gap-2">
+<span class="text-muted-slate">Filter Aktif:</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-surface-container-low text-charcoal-ink border border-structural-border font-label-sm text-[11px]">
+                Modul: Broadcast
+                <span class="material-symbols-outlined text-[12px] cursor-pointer hover:text-error-red">close</span>
+</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-surface-container-low text-charcoal-ink border border-structural-border font-label-sm text-[11px]">
+                Rentang: 30 Hari Terakhir
+                <span class="material-symbols-outlined text-[12px] cursor-pointer hover:text-error-red">close</span>
+</span>
+<button class="text-authority-teal hover:underline font-label-sm text-[11px]" type="button">Reset Filter</button>
+</div>
+<div class="flex items-center gap-2 text-muted-slate">
+<span class="inline-flex items-center gap-1.5 text-operational-teal font-code-sm">
+<span class="w-2 h-2 rounded-full bg-operational-teal"></span>
+                Live Ingestion: Sinkron (0.12s lag)
+              </span>
+<span>•</span>
+<span class="font-code-sm">Buffer: 0 Pending</span>
+</div>
+</div>
+</div>
+<!-- Ledger Data Table -->
+<div class="bg-surface rounded-xl border border-structural-border shadow-sm overflow-hidden flex flex-col">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-canvas border-b border-structural-border text-muted-slate font-label-sm text-[11px] uppercase tracking-wider select-none">
+<th class="py-3 px-3.5 w-12 text-center">#</th>
+<th class="py-3 px-3">Timestamp (WITA)</th>
+<th class="py-3 px-3">Aktor / Aparatur</th>
+<th class="py-3 px-3">Aksi &amp; Modul</th>
+<th class="py-3 px-3">Objek Terdampak</th>
+<th class="py-3 px-3">IP &amp; Node</th>
+<th class="py-3 px-3 text-right">Status &amp; Hash</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-structural-border/60 font-body-sm text-body-sm text-charcoal-ink">
+<!-- Row 1 (Selected Row with Action Orange Indicator) -->
+<tr class="bg-warm-sand-subtle hover:bg-warm-sand/20 transition-colors relative cursor-pointer">
+<td class="py-3 px-3.5 text-center relative font-code-sm text-muted-slate">
+<div class="absolute left-0 top-0 bottom-0 w-[3px] bg-action-orange"></div>
+<span class="material-symbols-outlined text-action-orange text-[16px]">chevron_right</span>
+</td>
+<td class="py-3 px-3 font-code-sm whitespace-nowrap">
+<div class="font-medium text-charcoal-ink">01 Okt 2026</div>
+<div class="text-[11px] text-muted-slate font-code-sm">09:00:14.282</div>
+</td>
+<td class="py-3 px-3">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-primary text-caption font-bold">
+                        AI
+                      </div>
+<div class="flex flex-col min-w-0">
+<span class="font-medium text-charcoal-ink truncate">Ainun, S.Tr.Stat.</span>
+<span class="text-[11px] text-muted-slate font-code-sm truncate">NIP 199408152016...</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3">
+<div class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-authority-teal/10 text-authority-teal font-code-sm text-[11px]">
+                      BROADCAST_TRIGGER
+                    </div>
+<div class="text-[11px] text-muted-slate mt-0.5">Meta Cloud WABA</div>
+</td>
+<td class="py-3 px-3">
+<div class="font-code-sm font-medium text-charcoal-ink truncate max-w-[150px]" title="CAMPAIGN-BRS-OKT-2026">
+                      CAMPAIGN-BRS-OKT-2026
+                    </div>
+<div class="text-[11px] text-muted-slate">3,450 Nomor Terverifikasi</div>
+</td>
+<td class="py-3 px-3 font-code-sm text-[12px] whitespace-nowrap">
+<div>10.72.0.14</div>
+<div class="text-[10px] text-muted-slate">LAN BPS Palu</div>
+</td>
+<td class="py-3 px-3 text-right">
+<div class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-operational-teal/15 text-authority-teal font-label-sm text-[11px]">
+<span class="w-1.5 h-1.5 rounded-full bg-operational-teal"></span>
+                      Sukses
+                    </div>
+<div class="font-code-sm text-[10px] text-muted-slate mt-0.5">
+                      #a7f9...3b21
+                    </div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-canvas/80 transition-colors cursor-pointer">
+<td class="py-3 px-3.5 text-center font-code-sm text-muted-slate text-[11px]">02</td>
+<td class="py-3 px-3 font-code-sm whitespace-nowrap">
+<div class="font-medium text-charcoal-ink">01 Okt 2026</div>
+<div class="text-[11px] text-muted-slate font-code-sm">08:30:10.115</div>
+</td>
+<td class="py-3 px-3">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-authority-teal/10 border border-authority-teal/20 flex items-center justify-center text-authority-teal text-caption font-bold">
+                        RP
+                      </div>
+<div class="flex flex-col min-w-0">
+<span class="font-medium text-charcoal-ink truncate">Rizky Pratama, S.Kom.</span>
+<span class="text-[11px] text-muted-slate font-code-sm truncate">Super Admin</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3">
+<div class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-action-orange/10 text-action-orange font-code-sm text-[11px]">
+                      USER_ROLE_MUTATION
+                    </div>
+<div class="text-[11px] text-muted-slate mt-0.5">RBAC Matrix</div>
+</td>
+<td class="py-3 px-3">
+<div class="font-code-sm font-medium text-charcoal-ink truncate max-w-[150px]">
+                      usr_fadli_pst
+                    </div>
+<div class="text-[11px] text-muted-slate">+Operator PST Silastik</div>
+</td>
+<td class="py-3 px-3 font-code-sm text-[12px] whitespace-nowrap">
+<div>10.72.0.4</div>
+<div class="text-[10px] text-muted-slate">LAN IPDS Prov</div>
+</td>
+<td class="py-3 px-3 text-right">
+<div class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-operational-teal/15 text-authority-teal font-label-sm text-[11px]">
+<span class="w-1.5 h-1.5 rounded-full bg-operational-teal"></span>
+                      Sukses
+                    </div>
+<div class="font-code-sm text-[10px] text-muted-slate mt-0.5">
+                      #8c42...990d
+                    </div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-canvas/80 transition-colors cursor-pointer">
+<td class="py-3 px-3.5 text-center font-code-sm text-muted-slate text-[11px]">03</td>
+<td class="py-3 px-3 font-code-sm whitespace-nowrap">
+<div class="font-medium text-charcoal-ink">01 Okt 2026</div>
+<div class="text-[11px] text-muted-slate font-code-sm">07:15:02.040</div>
+</td>
+<td class="py-3 px-3">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-muted-slate/15 flex items-center justify-center text-charcoal-ink text-caption font-bold">
+<span class="material-symbols-outlined text-[15px]">smart_toy</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-medium text-charcoal-ink truncate">Cron Engine v2.4</span>
+<span class="text-[11px] text-muted-slate font-code-sm truncate">System Daemon</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3">
+<div class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-surface-container-high text-charcoal-ink font-code-sm text-[11px]">
+                      AUTOMATION_RUN
+                    </div>
+<div class="text-[11px] text-muted-slate mt-0.5">Cron Subsystem</div>
+</td>
+<td class="py-3 px-3">
+<div class="font-code-sm font-medium text-charcoal-ink truncate max-w-[150px]">
+                      REMINDER_PRESENSI_PAGI
+                    </div>
+<div class="text-[11px] text-muted-slate">84 Kontak Pegawai</div>
+</td>
+<td class="py-3 px-3 font-code-sm text-[12px] whitespace-nowrap">
+<div>127.0.0.1</div>
+<div class="text-[10px] text-muted-slate">Worker #01 Palu</div>
+</td>
+<td class="py-3 px-3 text-right">
+<div class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-operational-teal/15 text-authority-teal font-label-sm text-[11px]">
+<span class="w-1.5 h-1.5 rounded-full bg-operational-teal"></span>
+                      Sukses
+                    </div>
+<div class="font-code-sm text-[10px] text-muted-slate mt-0.5">
+                      #1d8e...55ab
+                    </div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-canvas/80 transition-colors cursor-pointer">
+<td class="py-3 px-3.5 text-center font-code-sm text-muted-slate text-[11px]">04</td>
+<td class="py-3 px-3 font-code-sm whitespace-nowrap">
+<div class="font-medium text-charcoal-ink">30 Sep 2026</div>
+<div class="text-[11px] text-muted-slate font-code-sm">16:45:22.890</div>
+</td>
+<td class="py-3 px-3">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-primary text-caption font-bold">
+                        AI
+                      </div>
+<div class="flex flex-col min-w-0">
+<span class="font-medium text-charcoal-ink truncate">Ainun, S.Tr.Stat.</span>
+<span class="text-[11px] text-muted-slate font-code-sm truncate">Admin Diseminasi</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3">
+<div class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-action-orange/15 text-action-orange font-code-sm text-[11px]">
+                      DATA_EXPORT_PDP
+                    </div>
+<div class="text-[11px] text-muted-slate mt-0.5">Modul Kontak</div>
+</td>
+<td class="py-3 px-3">
+<div class="font-code-sm font-medium text-charcoal-ink truncate max-w-[150px]">
+                      REKAP_SUBSCRIBER_BRS.CSV
+                    </div>
+<div class="text-[11px] text-muted-slate">Masked HP (+62 811-***)</div>
+</td>
+<td class="py-3 px-3 font-code-sm text-[12px] whitespace-nowrap">
+<div>10.72.0.14</div>
+<div class="text-[10px] text-muted-slate">LAN BPS Palu</div>
+</td>
+<td class="py-3 px-3 text-right">
+<div class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-operational-teal/15 text-authority-teal font-label-sm text-[11px]">
+<span class="w-1.5 h-1.5 rounded-full bg-operational-teal"></span>
+                      Sukses
+                    </div>
+<div class="font-code-sm text-[10px] text-muted-slate mt-0.5">
+                      #f412...77ea
+                    </div>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-canvas/80 transition-colors cursor-pointer">
+<td class="py-3 px-3.5 text-center font-code-sm text-muted-slate text-[11px]">05</td>
+<td class="py-3 px-3 font-code-sm whitespace-nowrap">
+<div class="font-medium text-charcoal-ink">30 Sep 2026</div>
+<div class="text-[11px] text-muted-slate font-code-sm">14:10:05.612</div>
+</td>
+<td class="py-3 px-3">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-authority-teal/10 border border-authority-teal/20 flex items-center justify-center text-authority-teal text-caption font-bold">
+                        YK
+                      </div>
+<div class="flex flex-col min-w-0">
+<span class="font-medium text-charcoal-ink truncate">Yayan Kurniawan, A.Md.</span>
+<span class="text-[11px] text-muted-slate font-code-sm truncate">Operator Layanan</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3">
+<div class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-surface-container-high text-charcoal-ink font-code-sm text-[11px]">
+                      CONTACT_BLACKLIST
+                    </div>
+<div class="text-[11px] text-muted-slate mt-0.5">Subskripsi</div>
+</td>
+<td class="py-3 px-3">
+<div class="font-code-sm font-medium text-charcoal-ink truncate max-w-[150px]">
+                      OPT_OUT_KEYWORD_STOP
+                    </div>
+<div class="text-[11px] text-muted-slate">+62 852-11xx-4390</div>
+</td>
+<td class="py-3 px-3 font-code-sm text-[12px] whitespace-nowrap">
+<div>10.72.1.22</div>
+<div class="text-[10px] text-muted-slate">PST Desk lt. 1</div>
+</td>
+<td class="py-3 px-3 text-right">
+<div class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-operational-teal/15 text-authority-teal font-label-sm text-[11px]">
+<span class="w-1.5 h-1.5 rounded-full bg-operational-teal"></span>
+                      Sukses
+                    </div>
+<div class="font-code-sm text-[10px] text-muted-slate mt-0.5">
+                      #33a1...bc90
+                    </div>
+</td>
+</tr>
+<!-- Row 6 (Security Warning / Anomaly) -->
+<tr class="bg-error-red-subtle/50 hover:bg-error-red-subtle transition-colors cursor-pointer">
+<td class="py-3 px-3.5 text-center font-code-sm text-error-red text-[11px]">06</td>
+<td class="py-3 px-3 font-code-sm whitespace-nowrap">
+<div class="font-medium text-error-red">30 Sep 2026</div>
+<div class="text-[11px] text-error-red/80 font-code-sm">11:20:18.441</div>
+</td>
+<td class="py-3 px-3">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-error-red/10 border border-error-red/30 flex items-center justify-center text-error-red text-caption font-bold">
+<span class="material-symbols-outlined text-[15px]">warning</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-medium text-error-red truncate">Unknown Client / Bot</span>
+<span class="text-[11px] text-error-red/80 font-code-sm truncate">Auth Guard WAF</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3">
+<div class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-error-red text-on-error font-code-sm text-[11px]">
+                      AUTH_RATE_LIMIT
+                    </div>
+<div class="text-[11px] text-error-red mt-0.5">5x Percobaan Gagal</div>
+</td>
+<td class="py-3 px-3">
+<div class="font-code-sm font-medium text-charcoal-ink truncate max-w-[150px]">
+                      POST /api/v1/auth/token
+                    </div>
+<div class="text-[11px] text-error-red">Auto-Blocked 60 Min</div>
+</td>
+<td class="py-3 px-3 font-code-sm text-[12px] whitespace-nowrap">
+<div class="text-error-red font-semibold">182.253.94.12</div>
+<div class="text-[10px] text-muted-slate">AS17974 Telkom</div>
+</td>
+<td class="py-3 px-3 text-right">
+<div class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-error-red/15 text-error-red font-label-sm text-[11px]">
+<span class="w-1.5 h-1.5 rounded-full bg-error-red"></span>
+                      Diblokir
+                    </div>
+<div class="font-code-sm text-[10px] text-muted-slate mt-0.5">
+                      #e99b...12c4
+                    </div>
+</td>
+</tr>
+<!-- Row 7 -->
+<tr class="hover:bg-canvas/80 transition-colors cursor-pointer">
+<td class="py-3 px-3.5 text-center font-code-sm text-muted-slate text-[11px]">07</td>
+<td class="py-3 px-3 font-code-sm whitespace-nowrap">
+<div class="font-medium text-charcoal-ink">29 Sep 2026</div>
+<div class="text-[11px] text-muted-slate font-code-sm">15:30:00.000</div>
+</td>
+<td class="py-3 px-3">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-authority-teal/10 border border-authority-teal/20 flex items-center justify-center text-authority-teal text-caption font-bold">
+                        RP
+                      </div>
+<div class="flex flex-col min-w-0">
+<span class="font-medium text-charcoal-ink truncate">Rizky Pratama, S.Kom.</span>
+<span class="text-[11px] text-muted-slate font-code-sm truncate">Super Admin</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3">
+<div class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-surface-container-high text-charcoal-ink font-code-sm text-[11px]">
+                      SECRET_ROTATE
+                    </div>
+<div class="text-[11px] text-muted-slate mt-0.5">Kredensial Vault</div>
+</td>
+<td class="py-3 px-3">
+<div class="font-code-sm font-medium text-charcoal-ink truncate max-w-[150px]">
+                      SIMPEG_BEARER_TOKEN
+                    </div>
+<div class="text-[11px] text-muted-slate">Rotasi Triwulanan BPS</div>
+</td>
+<td class="py-3 px-3 font-code-sm text-[12px] whitespace-nowrap">
+<div>10.72.0.4</div>
+<div class="text-[10px] text-muted-slate">Console Server Palu</div>
+</td>
+<td class="py-3 px-3 text-right">
+<div class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-operational-teal/15 text-authority-teal font-label-sm text-[11px]">
+<span class="w-1.5 h-1.5 rounded-full bg-operational-teal"></span>
+                      Sukses
+                    </div>
+<div class="font-code-sm text-[10px] text-muted-slate mt-0.5">
+                      #52cc...4419
+                    </div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Bar -->
+<div class="p-3 bg-canvas border-t border-structural-border flex flex-col sm:flex-row items-center justify-between gap-3 text-caption font-caption text-muted-slate">
+<div class="flex items-center gap-2">
+<span>Menampilkan <strong class="text-charcoal-ink font-code-sm">1 - 7</strong> dari <strong class="text-charcoal-ink font-code-sm">48,219</strong> entri log forensik</span>
+<span class="text-structural-border">•</span>
+<span class="text-[11px]">Sinkronisasi Real-Time WITA</span>
+</div>
+<div class="flex items-center gap-1 font-label-sm">
+<button class="w-8 h-8 rounded-lg bg-surface border border-structural-border text-muted-slate hover:text-charcoal-ink flex items-center justify-center transition-colors disabled:opacity-50" disabled="" type="button">
+<span class="material-symbols-outlined text-[16px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-authority-teal text-on-primary font-semibold flex items-center justify-center shadow-sm" type="button">1</button>
+<button class="w-8 h-8 rounded-lg bg-surface border border-structural-border text-charcoal-ink hover:bg-canvas flex items-center justify-center transition-colors" type="button">2</button>
+<button class="w-8 h-8 rounded-lg bg-surface border border-structural-border text-charcoal-ink hover:bg-canvas flex items-center justify-center transition-colors" type="button">3</button>
+<span class="px-1 text-muted-slate">...</span>
+<button class="h-8 px-2 rounded-lg bg-surface border border-structural-border text-charcoal-ink hover:bg-canvas flex items-center justify-center font-code-sm text-[11px] transition-colors" type="button">6,888</button>
+<button class="w-8 h-8 rounded-lg bg-surface border border-structural-border text-charcoal-ink hover:bg-canvas flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Inline Visual: System Ingestion Telemetry & Merkle Chain Integrity -->
+<div class="bg-surface rounded-xl border border-structural-border p-4 shadow-sm flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-authority-teal text-[20px]">hub</span>
+<span class="font-headline-sm text-headline-sm text-charcoal-ink">Topologi Validasi Rantai Merkle &amp; Ingestion Throughput</span>
+</div>
+<span class="font-code-sm text-[11px] text-muted-slate">WORM Storage Cluster: /mnt/audit/2026/wita/</span>
+</div>
+<!-- Sparkline / Log Rate Bar Distribution (SVG) -->
+<div class="flex flex-col gap-1.5 pt-1">
+<div class="flex items-center justify-between text-caption font-caption text-muted-slate">
+<span>Distribusi Volume Log 24 Jam Terakhir (Per Jam, WITA)</span>
+<span class="font-code-sm text-charcoal-ink font-medium">Puncak: 4,120 peristiwa/jam (09:00 WITA)</span>
+</div>
+<div class="h-14 w-full bg-canvas rounded-lg p-2 flex items-end gap-1.5 border border-structural-border/60">
+<div class="h-[25%] flex-1 bg-operational-teal/30 hover:bg-operational-teal rounded-sm transition-all" title="00:00 - 320 log"></div>
+<div class="h-[15%] flex-1 bg-operational-teal/30 hover:bg-operational-teal rounded-sm transition-all" title="01:00 - 180 log"></div>
+<div class="h-[10%] flex-1 bg-operational-teal/30 hover:bg-operational-teal rounded-sm transition-all" title="02:00 - 110 log"></div>
+<div class="h-[12%] flex-1 bg-operational-teal/30 hover:bg-operational-teal rounded-sm transition-all" title="03:00 - 140 log"></div>
+<div class="h-[18%] flex-1 bg-operational-teal/30 hover:bg-operational-teal rounded-sm transition-all" title="04:00 - 210 log"></div>
+<div class="h-[30%] flex-1 bg-operational-teal/40 hover:bg-operational-teal rounded-sm transition-all" title="05:00 - 450 log"></div>
+<div class="h-[45%] flex-1 bg-operational-teal/50 hover:bg-operational-teal rounded-sm transition-all" title="06:00 - 890 log"></div>
+<div class="h-[85%] flex-1 bg-authority-teal rounded-sm transition-all" title="07:00 - 3,200 log (Presensi &amp; Reminder Pagi)"></div>
+<div class="h-[70%] flex-1 bg-authority-teal rounded-sm transition-all" title="08:00 - 2,840 log"></div>
+<div class="h-[100%] flex-1 bg-action-orange rounded-sm transition-all" title="09:00 - 4,120 log (Siaran BRS Inflasi Prov Sulteng)"></div>
+<div class="h-[65%] flex-1 bg-authority-teal rounded-sm transition-all" title="10:00 - 2,410 log"></div>
+<div class="h-[55%] flex-1 bg-authority-teal/70 rounded-sm transition-all" title="11:00 - 1,980 log"></div>
+<div class="h-[40%] flex-1 bg-operational-teal/40 rounded-sm transition-all" title="12:00 - 950 log"></div>
+<div class="h-[50%] flex-1 bg-authority-teal/60 rounded-sm transition-all" title="13:00 - 1,840 log"></div>
+<div class="h-[60%] flex-1 bg-authority-teal/80 rounded-sm transition-all" title="14:00 - 2,190 log"></div>
+<div class="h-[58%] flex-1 bg-authority-teal/70 rounded-sm transition-all" title="15:00 - 2,050 log"></div>
+<div class="h-[48%] flex-1 bg-operational-teal/50 rounded-sm transition-all" title="16:00 - 1,420 log"></div>
+<div class="h-[35%] flex-1 bg-operational-teal/40 rounded-sm transition-all" title="17:00 - 810 log"></div>
+<div class="h-[22%] flex-1 bg-operational-teal/30 rounded-sm transition-all" title="18:00 - 430 log"></div>
+<div class="h-[18%] flex-1 bg-operational-teal/30 rounded-sm transition-all" title="19:00 - 320 log"></div>
+<div class="h-[20%] flex-1 bg-operational-teal/30 rounded-sm transition-all" title="20:00 - 390 log"></div>
+<div class="h-[16%] flex-1 bg-operational-teal/20 rounded-sm transition-all" title="21:00 - 280 log"></div>
+<div class="h-[14%] flex-1 bg-operational-teal/20 rounded-sm transition-all" title="22:00 - 190 log"></div>
+<div class="h-[12%] flex-1 bg-operational-teal/20 rounded-sm transition-all" title="23:00 - 150 log"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- RIGHT COLUMN: Forensic Inspector & Operational Parameters (4 Cols) -->
+<aside class="lg:col-span-4 flex flex-col gap-5">
+<!-- Card A: Detail Entri Audit Terpilih (Forensic Inspector) -->
+<div class="bg-surface rounded-xl border border-structural-border shadow-sm p-4 flex flex-col gap-3.5">
+<div class="flex items-center justify-between pb-3 border-b border-structural-border">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-action-orange text-[20px]">fingerprint</span>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-charcoal-ink">Detail Forensik Entri</h3>
+<span class="text-caption font-caption text-muted-slate">Inspeksi Baris Terpilih #01</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded bg-authority-teal/10 text-authority-teal font-code-sm text-[11px]">
+              VERIFIED
+            </span>
+</div>
+<!-- Metadata Fields -->
+<div class="flex flex-col gap-2.5 font-body-sm text-body-sm">
+<div class="flex flex-col gap-1 p-2 rounded-lg bg-canvas border border-structural-border/60">
+<span class="text-caption font-caption text-muted-slate uppercase tracking-wide">ID Peristiwa (Event ID)</span>
+<div class="flex items-center justify-between">
+<span class="font-code-sm text-code-sm text-charcoal-ink font-semibold">AUDIT-20261001-PALU-00918</span>
+<button class="text-muted-slate hover:text-charcoal-ink" title="Salin ID" type="button">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-2 text-caption">
+<div class="p-2 rounded-lg bg-canvas border border-structural-border/60 flex flex-col">
+<span class="text-muted-slate">Aparatur Pelaksana</span>
+<span class="font-medium text-charcoal-ink mt-0.5 truncate">Ainun, S.Tr.Stat.</span>
+<span class="text-[10px] text-muted-slate font-code-sm truncate">Pranata Komputer Ahli</span>
+</div>
+<div class="p-2 rounded-lg bg-canvas border border-structural-border/60 flex flex-col">
+<span class="text-muted-slate">Modul Subsistem</span>
+<span class="font-medium text-charcoal-ink mt-0.5 truncate">Diseminasi Statistik</span>
+<span class="text-[10px] text-authority-teal font-code-sm">WABA Cloud API v20</span>
+</div>
+</div>
+<!-- JSON Payload Diff / Snapshot -->
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between text-caption font-caption">
+<span class="text-muted-slate">Diff Metadata &amp; Payload Transmisi</span>
+<span class="font-code-sm text-operational-teal text-[10px]">JSON-LD • Strict</span>
+</div>
+<pre class="bg-charcoal-ink text-surface-bright p-3 rounded-lg font-code-sm text-[11px] leading-relaxed overflow-x-auto max-h-48 border border-charcoal-ink/80 select-all">{
+  "action": "DISPATCH_CAMPAIGN",
+  "target_topic": "BRS_INFLASI_SULTENG",
+  "recipients": 3450,
+  "rate_limit_profile": "CONSERVATIVE_45_MSG_MIN",
+  "waba_phone_id": "1048291048591",
+  "template_namespace": "bps_sulteng_brs_01",
+  "session_token_sig": "bsre_valid_ecdsa",
+  "source_lan": "10.72.0.14"
+}</pre>
+</div>
+<!-- Cryptographic Proof -->
+<div class="flex flex-col gap-1 pt-1">
+<span class="text-caption font-caption text-muted-slate">Rantai Hash Kriptografi SHA-256</span>
+<div class="p-2 rounded-lg bg-operational-teal/5 border border-operational-teal/30 flex flex-col gap-1">
+<div class="flex items-center justify-between text-caption font-caption">
+<span class="text-charcoal-ink font-medium">Merkle Leaf Digest</span>
+<span class="text-operational-teal font-code-sm text-[10px]">Verified ✓</span>
+</div>
+<div class="font-code-sm text-[10px] text-charcoal-ink break-all select-all">
+                  7a8df9e8c45a72019b8849b291d9e2aa01481c94b3211bb4801e92d8fca03b21
+                </div>
+</div>
+</div>
+<!-- Digital Signature Certificate Info -->
+<div class="p-2 rounded-lg bg-surface-container-low border border-structural-border flex items-center gap-2.5">
+<span class="material-symbols-outlined text-authority-teal text-[22px]">workspace_premium</span>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-[11px] text-charcoal-ink">Tanda Tangan Digital BSrE - BSSN</span>
+<span class="text-caption text-[10px] text-muted-slate truncate">Subjek: Badan Pusat Statistik Sulawesi Tengah (OID: 2.16.360.1...)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card B: Parameter Sistem Operasional BPS Sulteng (Quick Settings Panel) -->
+<div class="bg-surface rounded-xl border border-structural-border shadow-sm p-4 flex flex-col gap-4">
+<div class="flex items-center justify-between pb-3 border-b border-structural-border">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-authority-teal text-[20px]">settings_applications</span>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-charcoal-ink">Parameter Sistem WABA</h3>
+<span class="text-caption font-caption text-muted-slate">Konfigurasi Operasional Palu</span>
+</div>
+</div>
+<span class="w-2 h-2 rounded-full bg-operational-teal" title="Cluster Aktif"></span>
+</div>
+<form class="flex flex-col gap-3.5" onsubmit="event.preventDefault();">
+<!-- Setting 1: Rate Limit -->
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-[12px] text-charcoal-ink flex items-center justify-between">
+<span>Batas Kecepatan Transmisi (Meta Anti-Spam)</span>
+<span class="text-caption text-muted-slate font-code-sm">Safe Mode</span>
+</label>
+<select class="h-9 px-2.5 rounded-lg bg-surface border border-structural-border text-charcoal-ink font-body-sm text-[13px] focus:outline-none focus:border-action-orange">
+<option value="30">30 Pesan / Menit (Strict Tier-1)</option>
+<option selected="" value="45">45 Pesan / Menit (Aman - Standar BPS)</option>
+<option value="60">60 Pesan / Menit (Mode Siaran Darurat)</option>
+<option value="80">80 Pesan / Menit (High Throttle)</option>
+</select>
+<span class="text-caption text-[11px] text-muted-slate">Mencegah penalti pemblokiran nomor akun WABA BPS Sulteng dari pihak Meta.</span>
+</div>
+<!-- Setting 2: Operational Window -->
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-[12px] text-charcoal-ink">
+                Jendela Jam Operasional Siaran Publik (WITA)
+              </label>
+<div class="grid grid-cols-2 gap-2">
+<div class="relative">
+<span class="absolute left-2.5 top-1/2 -translate-y-1/2 text-muted-slate text-[11px] font-code-sm">Mulai</span>
+<input class="w-full h-9 pl-12 pr-2 rounded-lg bg-surface border border-structural-border font-code-sm text-[12px] text-charcoal-ink focus:outline-none focus:border-action-orange" type="text" value="08:00 WITA"/>
+</div>
+<div class="relative">
+<span class="absolute left-2.5 top-1/2 -translate-y-1/2 text-muted-slate text-[11px] font-code-sm">Akhir</span>
+<input class="w-full h-9 pl-12 pr-2 rounded-lg bg-surface border border-structural-border font-code-sm text-[12px] text-charcoal-ink focus:outline-none focus:border-action-orange" type="text" value="17:00 WITA"/>
+</div>
+</div>
+<span class="text-caption text-[11px] text-muted-slate">Siaran non-darurat ditahan di antrean jika di luar jam dinas ASN.</span>
+</div>
+<!-- Setting 3: Auto Logout -->
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-[12px] text-charcoal-ink flex items-center justify-between">
+<span>Waktu Auto-Logout Sesi Operator</span>
+<span class="text-[10px] font-code-sm text-authority-teal">SPBE No. 59/2020</span>
+</label>
+<select class="h-9 px-2.5 rounded-lg bg-surface border border-structural-border text-charcoal-ink font-body-sm text-[13px] focus:outline-none focus:border-action-orange">
+<option selected="" value="15">15 Menit Inaktivitas (Standar SPBE BPS)</option>
+<option value="30">30 Menit Inaktivitas</option>
+<option value="60">60 Menit Inaktivitas</option>
+</select>
+</div>
+<!-- Setting 4: Failure Alert Threshold -->
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<label class="font-label-sm text-[12px] text-charcoal-ink">Ambang Batas Alarm Gagal</label>
+<span class="font-code-sm text-[12px] text-action-orange font-semibold">1.0% Kegagalan</span>
+</div>
+<input class="accent-action-orange h-1.5 bg-canvas rounded-lg cursor-pointer" max="5.0" min="0.5" step="0.5" type="range" value="1.0"/>
+<span class="text-caption text-[11px] text-muted-slate">Kirim SMS &amp; Notifikasi Darurat bila kegagalan melebihi 1.0%.</span>
+</div>
+<!-- Setting 5: WORM Toggle -->
+<div class="pt-2 border-t border-structural-border/60 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-[12px] text-charcoal-ink">Mode Immutability (WORM)</span>
+<span class="text-caption text-[11px] text-muted-slate">Write Once Read Many - Proteksi Penghapusan</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" disabled="" type="checkbox"/>
+<div class="w-9 h-5 bg-authority-teal peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all"></div>
+</label>
+</div>
+<!-- Save CTA -->
+<div class="pt-2">
+<button class="w-full h-9 rounded-lg bg-surface border border-authority-teal/40 hover:bg-authority-teal/10 text-authority-teal font-label-md text-label-md flex items-center justify-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-[17px]">sync</span>
+<span>Terapkan Konfigurasi Cepat</span>
+</button>
+</div>
+</form>
+</div>
+</aside>
+</div>
+<!-- Bottom Compliance Authority Banner -->
+<footer class="bg-surface rounded-xl border border-structural-border p-4 shadow-sm mt-2">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 divide-y md:divide-y-0 md:divide-x divide-structural-border/70">
+<!-- Pillar 1 -->
+<div class="flex items-center gap-3 pt-2 md:pt-0">
+<div class="w-9 h-9 rounded-lg bg-authority-teal/10 flex items-center justify-center text-authority-teal shrink-0">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">security</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-[12px] text-charcoal-ink font-semibold">ISO/IEC 27001:2022</span>
+<span class="text-caption text-[11px] text-muted-slate">Sistem Manajemen Keamanan Informasi Tersertifikasi</span>
+</div>
+</div>
+<!-- Pillar 2 -->
+<div class="flex items-center gap-3 pt-2 md:pt-0 md:pl-4">
+<div class="w-9 h-9 rounded-lg bg-operational-teal/10 flex items-center justify-center text-operational-teal shrink-0">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">privacy_tip</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-[12px] text-charcoal-ink font-semibold">UU No. 27/2022 (PDP)</span>
+<span class="text-caption text-[11px] text-muted-slate">Pencegahan Kebocoran &amp; Masking Data Pribadi</span>
+</div>
+</div>
+<!-- Pillar 3 -->
+<div class="flex items-center gap-3 pt-2 md:pt-0 md:pl-4">
+<div class="w-9 h-9 rounded-lg bg-action-orange/10 flex items-center justify-center text-action-orange shrink-0">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-[12px] text-charcoal-ink font-semibold">SPBE KemenPAN-RB</span>
+<span class="text-caption text-[11px] text-muted-slate">Arsitektur Tata Kelola Data Statistik Terintegrasi</span>
+</div>
+</div>
+<!-- Pillar 4 -->
+<div class="flex items-center gap-3 pt-2 md:pt-0 md:pl-4">
+<div class="w-9 h-9 rounded-lg bg-surface-container-high flex items-center justify-center text-charcoal-ink shrink-0">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">gavel</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-[12px] text-charcoal-ink font-semibold">BSrE - BSSN Validated</span>
+<span class="text-caption text-[11px] text-muted-slate">Integritas Hash &amp; Segel Elektronik Bersertifikat</span>
+</div>
+</div>
+</div>
+</footer>
+</div>
+</div></main></div></body></html>

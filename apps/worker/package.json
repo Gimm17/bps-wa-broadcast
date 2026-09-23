@@ -1,0 +1,18 @@
+{
+  "name": "@bps/worker",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "worker:once": "node src/index.js",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@bps/shared": "*",
+    "dotenv": "^16.4.7",
+    "luxon": "^3.5.0",
+    "pg": "^8.13.1",
+    "pino": "^9.6.0",
+    "zod": "^3.24.1"
+  }
+}
