@@ -111,4 +111,5 @@ export * from './phone.js';
 export * from './schemas/contact.js';
 export * from './schemas/subscription.js';
 export * from './schemas/meta.js';
+export * from './schemas/campaign.js';
 

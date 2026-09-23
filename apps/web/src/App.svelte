@@ -12,6 +12,9 @@
   import Subscriptions from './routes/Subscriptions.svelte';
   import Templates from './routes/Templates.svelte';
   import Integrations from './routes/Integrations.svelte';
+  import Campaigns from './routes/Campaigns.svelte';
+  import CampaignCreate from './routes/CampaignCreate.svelte';
+  import CampaignDetail from './routes/CampaignDetail.svelte';
   import Subscribe from './routes/public/Subscribe.svelte';
   import ManageSubscription from './routes/public/ManageSubscription.svelte';
   import UnsubscribeResult from './routes/public/UnsubscribeResult.svelte';
@@ -61,6 +64,9 @@
     '/subscriptions': wrap({ component: Subscriptions }),
     '/templates': wrap({ component: Templates }),
     '/integrations': wrap({ component: Integrations }),
+    '/campaigns': wrap({ component: Campaigns }),
+    '/campaigns/new': wrap({ component: CampaignCreate }),
+    '/campaigns/:id': wrap({ component: CampaignDetail }),
     '*': wrap({ component: Overview })
   };
 </script>

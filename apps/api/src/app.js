@@ -6,6 +6,7 @@ import { authRouter } from './features/auth/routes.js';
 import { contactsRouter } from './features/contacts/routes.js';
 import { subscriptionsRouter } from './features/subscriptions/routes.js';
 import { metaRouter } from './features/meta/routes.js';
+import { campaignsRouter } from './features/campaigns/routes.js';
 import { authenticate } from './middleware/authenticate.js';
 import { authorize } from './middleware/authorize.js';
 import { validateCsrf } from './middleware/csrf.js';
@@ -32,6 +33,7 @@ export function createApp({ config, db, logger }) {
   app.use('/api', contactsRouter);
   app.use('/api', subscriptionsRouter);
   app.use('/api', metaRouter);
+  app.use('/api', campaignsRouter);
 
   // Common error envelope
   app.use((err, req, res, next) => {
