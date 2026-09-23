@@ -1,7 +1,58 @@
 <script>
-  let title = 'BPS Sulawesi Tengah - WhatsApp Operations Platform';
+  import { onMount } from 'svelte';
+  import Router, { push, location } from 'svelte-spa-router';
+  import { wrap } from 'svelte-spa-router/wrap';
+  import { session, initSession } from './lib/stores/session.js';
+  import AppShell from './lib/components/AppShell.svelte';
+  import Login from './routes/Login.svelte';
+  import Overview from './routes/Overview.svelte';
+  import './styles/global.css';
+
+  let initialized = $state(false);
+
+  onMount(async () => {
+    await initSession();
+    initialized = true;
+
+    // Route guard on initial load
+    if (!$session.isAuthenticated && $location !== '/login') {
+      push('/login');
+    }
+  });
+
+  // Reactive route guard when location changes
+  $effect(() => {
+    if (initialized) {
+      if (!$session.isAuthenticated && $location !== '/login') {
+        push('/login');
+      } else if ($session.isAuthenticated && $location === '/login') {
+        push('/');
+      }
+    }
+  });
+
+  const routes = {
+    '/login': Login,
+    '/': wrap({
+      component: Overview
+    }),
+    '*': wrap({
+      component: Overview
+    })
+  };
 </script>
 
-<main>
-  <h1>{title}</h1>
-</main>
+{#if !initialized}
+  <div class="min-h-screen bg-[#F7F7F3] flex items-center justify-center font-sans text-[#66706F]">
+    <div class="flex items-center gap-3">
+      <div class="w-3 h-3 rounded-full bg-[#007979] animate-ping"></div>
+      <span class="text-[14px] font-mono">Memuat BPS WhatsApp Operations...</span>
+    </div>
+  </div>
+{:else if $location === '/login'}
+  <Router {routes} />
+{:else}
+  <AppShell>
+    <Router {routes} />
+  </AppShell>
+{/if}

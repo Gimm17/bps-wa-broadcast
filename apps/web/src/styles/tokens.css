@@ -1,0 +1,44 @@
+:root {
+  /* Core Brand & Authority Palette */
+  --color-action: #e37434;
+  --color-sand: #ffe2af;
+  --color-teal: #24b1b1;
+  --color-authority: #007979;
+
+  /* Surfaces and Neutral Inks */
+  --color-canvas: #f7f7f3;
+  --color-surface: #ffffff;
+  --color-surface-container: #e6f0ef;
+  --color-surface-low: #ecf6f5;
+  --color-ink: #172020;
+  --color-muted: #66706f;
+  --color-border: #dce2df;
+
+  /* Semantic Alerts */
+  --color-error: #b42318;
+  --color-error-subtle: #fef3f2;
+  --color-success: #027a48;
+  --color-success-subtle: #ecfdf3;
+  --color-warning: #b54708;
+  --color-warning-subtle: #fffaeb;
+  --color-sand-subtle: #fff8ec;
+  --color-teal-subtle: rgba(36, 177, 177, 0.12);
+  --color-authority-subtle: rgba(0, 121, 121, 0.1);
+  --color-action-subtle: rgba(227, 116, 52, 0.1);
+
+  /* Typography */
+  --font-ui: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "Geist Mono", monospace;
+
+  /* Focus & Elevation */
+  --focus-ring: 0 0 0 3px color-mix(in srgb, var(--color-action) 35%, transparent);
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 8px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 10px 18px -3px rgba(0, 0, 0, 0.09), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+}
