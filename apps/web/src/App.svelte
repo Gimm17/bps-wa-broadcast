@@ -17,12 +17,14 @@
   import CampaignDetail from './routes/CampaignDetail.svelte';
   import Automations from './routes/Automations.svelte';
   import AutomationEdit from './routes/AutomationEdit.svelte';
+  import DirectSend from './routes/DirectSend.svelte';
   import Schedules from './routes/Schedules.svelte';
   import MessageLogs from './routes/MessageLogs.svelte';
   import AuditLog from './routes/AuditLog.svelte';
   import Subscribe from './routes/public/Subscribe.svelte';
   import ManageSubscription from './routes/public/ManageSubscription.svelte';
   import UnsubscribeResult from './routes/public/UnsubscribeResult.svelte';
+  import CustomDialog from './lib/components/CustomDialog.svelte';
   import './styles/global.css';
 
   let initialized = $state(false);
@@ -72,6 +74,7 @@
     '/campaigns': wrap({ component: Campaigns }),
     '/campaigns/new': wrap({ component: CampaignCreate }),
     '/campaigns/:id': wrap({ component: CampaignDetail }),
+    '/direct-send': wrap({ component: DirectSend }),
     '/automations': wrap({ component: Automations }),
     '/automations/new': wrap({ component: AutomationEdit }),
     '/automations/:id': wrap({ component: AutomationEdit }),
@@ -96,3 +99,5 @@
     <Router {routes} />
   </AppShell>
 {/if}
+
+<CustomDialog />

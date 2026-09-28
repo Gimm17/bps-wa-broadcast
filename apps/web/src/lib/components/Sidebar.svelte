@@ -9,6 +9,7 @@
       items: [
         { path: '/', label: 'Overview', icon: 'dashboard' },
         { path: '/campaigns', label: 'Campaigns', icon: 'campaign' },
+        { path: '/direct-send', label: 'Kirim Manual / Test', icon: 'send' },
         { path: '/automations', label: 'Automations', icon: 'smart_toy' },
         { path: '/templates', label: 'Templates', icon: 'quickreply' }
       ]
