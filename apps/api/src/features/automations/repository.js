@@ -50,3 +50,13 @@ export async function updateAutomationRule(db = pool, id, data) {
   `, [id, name, type, templateId, isActive, config ? JSON.stringify(config) : null]);
   return rows[0] || null;
 }
+
+export async function deleteAutomationRule(db = pool, id) {
+  const { rows } = await db.query(`
+    DELETE FROM automation_rules
+    WHERE id = $1
+    RETURNING *
+  `, [id]);
+  return rows[0] || null;
+}
+

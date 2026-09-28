@@ -4,9 +4,10 @@ import {
   listAutomationRules,
   getAutomationRuleById,
   createAutomationRule,
-  updateAutomationRule
+  updateAutomationRule,
+  deleteAutomationRule
 } from './repository.js';
-import { runAttendanceRule, processTriggerEvent } from './service.js';
+import { runAttendanceRule, processTriggerEvent, runEventReminderRule } from './service.js';
 import { createAttendanceAdapter } from '../../adapters/attendance.js';
 import { authenticate } from '../../middleware/authenticate.js';
 import { authorize } from '../../middleware/authorize.js';
@@ -16,8 +17,8 @@ import { PERMISSIONS } from '@bps/shared';
 const ruleSchema = z.object({
   code: z.string().min(3).regex(/^[a-z0-9_]+$/, 'Kode harus huruf kecil, angka, atau underscore'),
   name: z.string().min(3, 'Nama wajib diisi'),
-  type: z.enum(['attendance_presensi', 'publication_reminder', 'silastik_transaction', 'custom']),
-  templateId: z.string().uuid().nullable().optional(),
+  type: z.enum(['attendance_presensi', 'publication_reminder', 'silastik_transaction', 'custom', 'event_reminder']),
+  templateId: z.preprocess((val) => (val === '' ? null : val), z.string().uuid().nullable().optional()),
   isActive: z.boolean().default(true),
   config: z.record(z.any()).default({})
 });
@@ -99,6 +100,31 @@ export function createAutomationsRouter({ db }) {
     }
   });
 
+  // Delete rule
+  router.delete('/automations/:id', authorize(PERMISSIONS.AUTOMATION_WRITE), async (req, res, next) => {
+    try {
+      const deleted = await deleteAutomationRule(db, req.params.id);
+      if (!deleted) {
+        return res.status(404).json({ error: { message: 'Rule otomasi tidak ditemukan' } });
+      }
+
+      await recordAudit({
+        client: db,
+        userId: req.user.id,
+        action: 'automation:delete',
+        resourceType: 'automation_rules',
+        resourceId: deleted.id,
+        details: { code: deleted.code, name: deleted.name },
+        ipAddress: req.ip,
+        userAgent: req.headers['user-agent']
+      });
+
+      res.json({ success: true, message: `Aturan otomasi "${deleted.name}" berhasil dihapus` });
+    } catch (err) {
+      next(err);
+    }
+  });
+
   // Manual test trigger of a rule
   router.post('/automations/:id/trigger', authorize(PERMISSIONS.AUTOMATION_WRITE), async (req, res, next) => {
     try {
@@ -127,9 +153,32 @@ export function createAutomationsRouter({ db }) {
             serviceType: 'Konsultasi Data'
           }
         }, { templateId: rule.template_id });
+      } else if (rule.type === 'event_reminder' || rule.type === 'custom') {
+        result = await runEventReminderRule({
+          db,
+          rule,
+          now: new Date()
+        });
       } else {
         result = { status: 'triggered_mock', ruleType: rule.type };
       }
+
+      // Immediately run the worker queue to deliver the messages to WhatsApp right away
+      let dispatchStats = null;
+      try {
+        const { runOnce } = await import('../../../../worker/src/run-once.js');
+        const workerRes = await runOnce({ db });
+        dispatchStats = workerRes?.stats;
+      } catch (workerErr) {
+        req.log?.warn?.({ err: workerErr }, 'Immediate worker dispatch on trigger test encountered an error');
+      }
+
+      const responseData = {
+        ...result,
+        sent: dispatchStats?.sent ?? 0,
+        failed: dispatchStats?.failed ?? 0,
+        deliveryStatus: (dispatchStats?.sent ?? 0) > 0 ? 'Terkirim ke WhatsApp' : (result.queued > 0 ? 'Dalam Antrean' : 'Selesai')
+      };
 
       await recordAudit({
         client: db,
@@ -137,12 +186,17 @@ export function createAutomationsRouter({ db }) {
         action: 'automation:trigger_test',
         resourceType: 'automation_rules',
         resourceId: rule.id,
-        details: result,
+        details: responseData,
         ipAddress: req.ip,
         userAgent: req.headers['user-agent']
       });
 
-      res.json({ data: result, message: 'Trigger simulasi otomasi berhasil dieksekusi' });
+      res.json({
+        data: responseData,
+        message: responseData.sent > 0
+          ? `Trigger simulasi berhasil: ${responseData.sent} pesan langsung terkirim ke WhatsApp`
+          : 'Trigger simulasi otomasi berhasil dieksekusi'
+      });
     } catch (err) {
       next(err);
     }

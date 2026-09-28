@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import { push } from 'svelte-spa-router';
   import { apiFetch } from '../lib/api/client.js';
+  import { confirmDialog, successDialog, errorDialog } from '../lib/stores/dialog.js';
 
   // Svelte 5 State Runes
   let rules = $state([]);
@@ -36,6 +37,7 @@
       if (filterCategory === 'internal' && r.type !== 'attendance_presensi') return false;
       if (filterCategory === 'dissemination' && r.type !== 'publication_reminder') return false;
       if (filterCategory === 'silastik' && r.type !== 'silastik_transaction') return false;
+      if (filterCategory === 'event' && r.type !== 'event_reminder' && r.type !== 'custom') return false;
 
       // Status filter
       if (filterStatus === 'active' && !r.is_active) return false;
@@ -62,6 +64,8 @@
       case 'attendance_presensi': return 'Internal Pegawai';
       case 'publication_reminder': return 'Diseminasi & Publikasi';
       case 'silastik_transaction': return 'Layanan Silastik';
+      case 'event_reminder': return 'Event & Pengingat';
+      case 'custom': return 'Kustom Mandiri';
       default: return 'Kustom / Khusus';
     }
   }
@@ -77,6 +81,13 @@
     }
     if (rule.type === 'silastik_transaction') {
       return 'Real-time Event Ingestion';
+    }
+    if (rule.type === 'event_reminder' || rule.type === 'custom') {
+      const cfg = rule.config || {};
+      const timeStr = cfg.eventTime ? `${cfg.eventTime} WITA` : '09:30 WITA';
+      if (cfg.scheduleType === 'immediate') return `Hari H • Siaran Segera (${timeStr})`;
+      if (cfg.scheduleType === 'recurring') return `Rutin • ${timeStr}`;
+      return `${cfg.eventDate || 'Hari H'} • ${timeStr}`;
     }
     return 'Terjadwal Sesuai Aturan';
   }
@@ -105,14 +116,58 @@
   }
 
   async function toggleRuleActive(rule) {
+    const actionName = rule.is_active ? 'menonaktifkan' : 'mengaktifkan';
+    const confirmed = await confirmDialog({
+      title: `${rule.is_active ? 'Nonaktifkan' : 'Aktifkan'} Aturan?`,
+      message: `Apakah Anda yakin ingin ${actionName} aturan otomasi "${rule.name}" (${rule.code})?`,
+      confirmText: rule.is_active ? 'Ya, Nonaktifkan' : 'Ya, Aktifkan',
+      isDanger: rule.is_active,
+      badge: 'Status Aturan'
+    });
+    if (!confirmed) return;
+
     try {
       await apiFetch(`/api/automations/${rule.id}`, {
         method: 'PUT',
         body: JSON.stringify({ isActive: !rule.is_active })
       });
       await loadRules();
+      await successDialog({
+        title: 'Status Berhasil Diperbarui',
+        message: `Aturan "${rule.name}" berhasil ${rule.is_active ? 'dinonaktifkan' : 'diaktifkan'}.`
+      });
     } catch (err) {
-      alert('Gagal mengubah status aturan: ' + err.message);
+      await errorDialog({
+        title: 'Gagal Mengubah Status',
+        message: 'Terjadi kendala saat mengubah status aturan otomasi.',
+        details: err.message
+      });
+    }
+  }
+
+  async function handleDeleteRule(rule) {
+    const confirmed = await confirmDialog({
+      title: 'Hapus Aturan Otomasi?',
+      message: `Apakah Anda yakin ingin menghapus aturan "${rule.name}" (${rule.code})? Seluruh jadwal pengingat dan pesan otomatisasi terkait aturan ini akan dihapus secara permanen.`,
+      confirmText: 'Ya, Hapus Aturan',
+      cancelText: 'Batal',
+      isDanger: true,
+      badge: 'Hapus Aturan'
+    });
+    if (!confirmed) return;
+
+    try {
+      await apiFetch(`/api/automations/${rule.id}`, { method: 'DELETE' });
+      await loadRules();
+      await successDialog({
+        title: 'Aturan Telah Dihapus',
+        message: `Aturan otomasi "${rule.name}" berhasil dihapus dari sistem.`
+      });
+    } catch (err) {
+      await errorDialog({
+        title: 'Gagal Menghapus Aturan',
+        message: err.message || 'Terjadi kesalahan saat menghapus aturan otomasi.'
+      });
     }
   }
 
@@ -261,6 +316,13 @@
       >
         Layanan Silastik
       </button>
+      <button
+        onclick={() => filterCategory = 'event'}
+        class="px-3 py-1.5 rounded-lg text-[13px] font-medium transition-colors {filterCategory === 'event' ? 'bg-[#007979] text-white shadow-sm' : 'bg-[#ecf6f5] text-[#172020] hover:bg-[#dbe4e4]'}"
+        type="button"
+      >
+        📢 Event &amp; Kustom
+      </button>
     </div>
 
     <!-- Search & Status Select -->
@@ -324,8 +386,14 @@
                     {getCategoryLabel(rule.type)}
                   </span>
                 </td>
-                <td class="py-3.5 px-4 font-mono text-[12px] text-[#66706F]">
-                  {rule.template_name || '—'}
+                <td class="py-3.5 px-4 text-[12px]">
+                  {#if rule.config?.messageMode === 'custom_text' || (!rule.template_name && rule.config?.customMessage)}
+                    <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200 inline-flex items-center gap-1">
+                      <span>💬</span> Pesan Kustom Bebas
+                    </span>
+                  {:else}
+                    <span class="font-mono text-[#66706F]">{rule.template_name || '—'}</span>
+                  {/if}
                 </td>
                 <td class="py-3.5 px-4 text-center">
                   <button
@@ -336,10 +404,10 @@
                     {rule.is_active ? 'Aktif' : 'Dijeda'}
                   </button>
                 </td>
-                <td class="py-3.5 px-4 text-right space-x-1.5">
+                <td class="py-3.5 px-4 text-right space-x-1.5 whitespace-nowrap">
                   <button
                     onclick={() => openTriggerModal(rule)}
-                    class="px-2.5 py-1 rounded bg-[#ecf6f5] hover:bg-[#dbe4e4] text-[#007979] text-[12px] font-medium border border-[#DCE2DF]"
+                    class="px-2.5 py-1 rounded bg-[#ecf6f5] hover:bg-[#dbe4e4] text-[#007979] text-[12px] font-medium border border-[#DCE2DF] transition-colors"
                     title="Uji simulasi pemicu"
                     type="button"
                   >
@@ -347,10 +415,19 @@
                   </button>
                   <button
                     onclick={() => push(`/automations/${rule.id}`)}
-                    class="px-2.5 py-1 rounded bg-white hover:bg-[#ecf6f5] text-[#172020] text-[12px] font-medium border border-[#DCE2DF]"
+                    class="px-2.5 py-1 rounded bg-white hover:bg-[#ecf6f5] text-[#172020] text-[12px] font-medium border border-[#DCE2DF] transition-colors"
+                    title="Edit konfigurasi aturan"
                     type="button"
                   >
                     Edit
+                  </button>
+                  <button
+                    onclick={() => handleDeleteRule(rule)}
+                    class="px-2.5 py-1 rounded bg-white hover:bg-rose-50 text-rose-600 hover:text-rose-700 text-[12px] font-medium border border-rose-200 transition-colors"
+                    title="Hapus aturan otomasi ini"
+                    type="button"
+                  >
+                    Hapus
                   </button>
                 </td>
               </tr>
@@ -384,14 +461,30 @@
       </div>
 
       {#if triggerResult}
-        <div class="p-3 bg-[#ecf6f5] rounded-lg border border-[#DCE2DF] text-[13px] font-mono space-y-1">
-          {#if triggerResult.error}
-            <div class="text-[#B42318] font-bold">{triggerResult.error}</div>
-          {:else}
-            <div class="text-[#007979] font-bold">Hasil Eksekusi Pemicu:</div>
-            <pre class="text-[12px] overflow-x-auto whitespace-pre-wrap">{JSON.stringify(triggerResult.data, null, 2)}</pre>
-          {/if}
-        </div>
+        {#if triggerResult.error}
+          <div class="p-3 bg-[#FEF3F2] rounded-lg border border-[#FECDCA] text-[13px] text-[#B42318] font-medium">
+            ❌ Gagal mengeksekusi: {triggerResult.error}
+          </div>
+        {:else}
+          <div class="space-y-2">
+            {#if (triggerResult.data?.sent ?? 0) > 0}
+              <div class="p-3 bg-emerald-50 border border-emerald-200 rounded-lg flex items-center gap-2 text-emerald-800 text-[13px] font-semibold">
+                <span class="text-base">🚀</span>
+                <span>Pesan Berhasil Terkirim! ({triggerResult.data.sent} pesan langsung dikirim ke WhatsApp via MPWA)</span>
+              </div>
+            {:else if triggerResult.data?.queued > 0}
+              <div class="p-3 bg-amber-50 border border-amber-200 rounded-lg flex items-center gap-2 text-amber-800 text-[13px] font-semibold">
+                <span class="text-base">⏳</span>
+                <span>{triggerResult.data.queued} pesan masuk antrean pengiriman.</span>
+              </div>
+            {/if}
+
+            <div class="p-3 bg-[#ecf6f5] rounded-lg border border-[#DCE2DF] text-[13px] font-mono space-y-1">
+              <div class="text-[#007979] font-bold">Rincian Respon:</div>
+              <pre class="text-[12px] overflow-x-auto whitespace-pre-wrap">{JSON.stringify(triggerResult.data, null, 2)}</pre>
+            </div>
+          </div>
+        {/if}
       {/if}
 
       <div class="flex items-center justify-end gap-3 pt-3 border-t border-[#DCE2DF]">
