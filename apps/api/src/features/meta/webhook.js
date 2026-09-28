@@ -44,6 +44,11 @@ export function verifyMetaSignature(rawBody, signatureHeader, appSecret) {
  * Computes deterministic ID for deduplication of webhook payload.
  */
 export function computeWebhookEventId(payload) {
+  // If MPWA inbound message payload
+  if (payload?.sender && (payload?.messageTimestamp || payload?.message)) {
+    return `mpwa:msg:${payload.sender}:${payload.messageTimestamp || Date.now()}`;
+  }
+
   // If payload contains specific message or status ID, use that
   try {
     const entry = payload?.entry?.[0]?.changes?.[0]?.value;
@@ -123,6 +128,25 @@ export async function ingestWebhook(payload) {
             });
           }
         }
+      }
+    }
+
+    // Handle MPWA direct inbound message format
+    if (payload?.sender && payload?.message) {
+      const from = String(payload.sender);
+      const text = typeof payload.message === 'string'
+        ? payload.message
+        : (payload.message?.text || payload.message?.conversation || '');
+      const receivedAt = payload.messageTimestamp
+        ? new Date(Number(payload.messageTimestamp) * 1000)
+        : new Date();
+
+      if (text) {
+        await handleInboundCommand({
+          from,
+          text,
+          receivedAt
+        });
       }
     }
 

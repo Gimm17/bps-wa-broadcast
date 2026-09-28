@@ -1,6 +1,7 @@
 <script>
   import { onMount } from 'svelte';
   import { api } from '../lib/api/client.js';
+  import { successDialog, errorDialog } from '../lib/stores/dialog.js';
 
   let integrations = $state([]);
   let isLoading = $state(true);
@@ -11,6 +12,10 @@
 
   // Modal configuration state
   let isModalOpen = $state(false);
+  let providerType = $state('mpwa'); // 'mpwa' | 'meta_cloud'
+  let apiKey = $state('m87iDrDIqNxZaodjybbhE6HSnzxd9A');
+  let sender = $state('6287786686392');
+  let baseUrl = $state('https://www.wa-admin.novamedia.my.id');
   let wabaId = $state('');
   let phoneNumberId = $state('');
   let accessToken = $state('');
@@ -31,6 +36,12 @@
       // Prepopulate form if meta_waba exists
       const meta = integrations.find(i => i.type === 'meta_waba');
       if (meta && meta.credentials) {
+        if (meta.credentials.apiKey || meta.credentials.sender) {
+          providerType = 'mpwa';
+          apiKey = meta.credentials.apiKey || '';
+          sender = meta.credentials.sender || '';
+          baseUrl = meta.credentials.baseUrl || 'https://www.wa-admin.novamedia.my.id';
+        }
         wabaId = meta.credentials.wabaId || '';
         phoneNumberId = meta.credentials.phoneNumberId || '';
         webhookVerifyToken = meta.credentials.webhookVerifyToken || '';
@@ -48,10 +59,19 @@
     successMsg = '';
     try {
       const res = await api.post('/api/integrations/meta/test');
-      successMsg = res.message || 'Uji koneksi ke Meta Cloud API berhasil!';
+      successMsg = res.message || 'Uji koneksi ke WhatsApp Gateway berhasil!';
       await loadIntegrations();
+      await successDialog({
+        title: 'Koneksi Berhasil Terhubung! 🟢',
+        message: 'Platform berhasil melakukan handshake ke Gateway MPWA. Nomor pengirim dan API key valid.'
+      });
     } catch (err) {
-      errorMsg = err.message || 'Uji koneksi gagal. Periksa kembali kredensial Meta Anda.';
+      errorMsg = err.message || 'Uji koneksi gagal. Periksa kembali kredensial Gateway Anda.';
+      await errorDialog({
+        title: 'Uji Koneksi Gagal',
+        message: 'Tidak dapat tersambung ke WhatsApp Gateway. Pastikan Base URL, Nomor Pengirim, dan API Key aktif.',
+        details: err.message
+      });
     } finally {
       isTesting = false;
     }
@@ -64,18 +84,38 @@
     successMsg = '';
 
     try {
-      const res = await api.post('/api/integrations/meta', {
-        wabaId,
-        phoneNumberId,
-        accessToken,
-        appSecret,
-        webhookVerifyToken
-      });
-      successMsg = res.message || 'Kredensial Meta WABA berhasil disimpan secara terenkripsi.';
+      const payload = providerType === 'mpwa'
+        ? {
+            provider: 'mpwa',
+            apiKey,
+            sender,
+            baseUrl,
+            webhookVerifyToken
+          }
+        : {
+            provider: 'meta_cloud',
+            wabaId,
+            phoneNumberId,
+            accessToken,
+            appSecret,
+            webhookVerifyToken
+          };
+
+      const res = await api.post('/api/integrations/meta', payload);
+      successMsg = res.message || 'Kredensial WhatsApp Gateway berhasil disimpan secara terenkripsi.';
       isModalOpen = false;
       await loadIntegrations();
+      await successDialog({
+        title: 'Kredensial Berhasil Disimpan',
+        message: 'Konfigurasi integrasi WhatsApp Gateway telah diamankan dengan enkripsi AES-256-GCM.'
+      });
     } catch (err) {
-      errorMsg = err.message || 'Gagal menyimpan kredensial Meta.';
+      errorMsg = err.message || 'Gagal menyimpan kredensial.';
+      await errorDialog({
+        title: 'Gagal Menyimpan Kredensial',
+        message: 'Periksa kembali formulir kredensial integrasi Anda.',
+        details: err.message
+      });
     } finally {
       isSaving = false;
     }
@@ -110,6 +150,14 @@
     </div>
 
     <div class="flex items-center gap-2.5 flex-wrap">
+      <a
+        href="#/direct-send"
+        class="inline-flex items-center gap-1.5 px-3.5 h-10 rounded-lg text-xs font-semibold bg-[#E0EAE9] text-[#007979] hover:bg-[#007979] hover:text-white transition-all shadow-sm"
+      >
+        <span>📤</span>
+        <span>Kirim Pesan Manual / Test</span>
+      </a>
+
       <button
         type="button"
         onclick={handleTestMeta}
@@ -156,8 +204,11 @@
               W
             </div>
             <div>
-              <h2 class="text-base font-bold text-[#172020]">Meta WhatsApp Cloud API</h2>
-              <span class="text-xs text-[#66706F]">Gateway Komunikasi WhatsApp Resmi</span>
+              <div class="flex items-center gap-2">
+                <h2 class="text-base font-bold text-[#172020]">Meta WhatsApp Cloud API</h2>
+                <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-[#E0EAE9] text-[#007979]">Mitra Resmi WABA</span>
+              </div>
+              <span class="text-xs text-[#66706F]">Gateway Nova Media (wa-admin.novamedia.my.id)</span>
             </div>
           </div>
           <span class="px-2.5 py-1 rounded-full text-xs font-semibold {meta?.status === 'connected' ? 'bg-[#E0EAE9] text-[#007979]' : 'bg-[#FFF8EC] text-[#793100]'}">
@@ -167,16 +218,20 @@
 
         <div class="p-4 bg-[#F7F7F3] rounded-xl border border-[#DCE2DF] space-y-2 text-xs mb-4">
           <div class="flex justify-between">
-            <span class="text-[#66706F]">WABA ID:</span>
-            <span class="font-mono font-medium text-[#172020]">{meta?.credentials?.wabaId || 'Belum diisi'}</span>
+            <span class="text-[#66706F]">Penyedia Gateway:</span>
+            <span class="font-medium text-[#172020]">Nova Media MPWA (Mitra WABA)</span>
           </div>
           <div class="flex justify-between">
-            <span class="text-[#66706F]">Phone Number ID:</span>
-            <span class="font-mono font-medium text-[#172020]">{meta?.credentials?.phoneNumberId || 'Belum diisi'}</span>
+            <span class="text-[#66706F]">Nomor Sender (Device):</span>
+            <span class="font-mono font-medium text-[#007979]">{meta?.credentials?.sender || '6287786686392'}</span>
           </div>
           <div class="flex justify-between">
-            <span class="text-[#66706F]">Access Token:</span>
-            <span class="font-mono text-[#66706F]">{meta?.credentials?.accessToken || '••••••••'}</span>
+            <span class="text-[#66706F]">API Key:</span>
+            <span class="font-mono text-[#66706F]">{meta?.credentials?.apiKey ? '••••••••' + meta.credentials.apiKey.slice(-4) : '••••••••'}</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-[#66706F]">Endpoint Server:</span>
+            <span class="font-mono text-[#172020] text-[11px] truncate max-w-[210px]">https://www.wa-admin.novamedia.my.id</span>
           </div>
           <div class="flex justify-between">
             <span class="text-[#66706F]">Keamanan:</span>
@@ -185,7 +240,7 @@
         </div>
 
         <div class="p-3 bg-[#FFF8EC] rounded-xl border border-[#FFE2AF] text-[11px] text-[#793100]">
-          <span class="font-semibold block mb-0.5">URL Callback Webhook Meta:</span>
+          <span class="font-semibold block mb-0.5">URL Callback Webhook Gateway:</span>
           <code class="font-mono text-[10px] break-all">https://wa.sulteng.bps.go.id/api/meta/webhook</code>
         </div>
       </div>
@@ -350,74 +405,134 @@
           </button>
         </div>
 
+        <!-- Provider Type Toggle -->
+        <div class="flex rounded-lg border border-[#DCE2DF] p-1 bg-[#F7F7F3] mb-4">
+          <button
+            type="button"
+            onclick={() => { providerType = 'mpwa'; }}
+            class="flex-1 py-1.5 rounded-md font-semibold text-xs transition-all {providerType === 'mpwa' ? 'bg-white shadow text-[#007979]' : 'text-[#66706F]'}"
+          >
+            Gateway MPWA (Nova Media — Mitra WABA)
+          </button>
+          <button
+            type="button"
+            onclick={() => { providerType = 'meta_cloud'; }}
+            class="flex-1 py-1.5 rounded-md font-semibold text-xs transition-all {providerType === 'meta_cloud' ? 'bg-white shadow text-[#007979]' : 'text-[#66706F]'}"
+          >
+            Direct Meta Cloud API
+          </button>
+        </div>
+
         <form onsubmit={handleSaveCredentials} class="space-y-4 text-xs">
-          <div>
-            <label for="wabaId" class="block font-semibold text-[#172020] mb-1">
-              WhatsApp Business Account ID (WABA ID) <span class="text-[#ba1a1a]">*</span>
-            </label>
-            <input
-              id="wabaId"
-              type="text"
-              bind:value={wabaId}
-              required
-              placeholder="Contoh: 109284729104820"
-              class="w-full px-3 py-2 border border-[#DCE2DF] rounded-lg font-mono focus:outline-none focus:border-[#007979]"
-            />
-          </div>
+          {#if providerType === 'mpwa'}
+            <div>
+              <label for="baseUrl" class="block font-semibold text-[#172020] mb-1">
+                Server Base URL Gateway <span class="text-[#ba1a1a]">*</span>
+              </label>
+              <input
+                id="baseUrl"
+                type="url"
+                bind:value={baseUrl}
+                required
+                placeholder="https://www.wa-admin.novamedia.my.id"
+                class="w-full px-3 py-2 border border-[#DCE2DF] rounded-lg font-mono focus:outline-none focus:border-[#007979]"
+              />
+            </div>
 
-          <div>
-            <label for="phoneNumberId" class="block font-semibold text-[#172020] mb-1">
-              Phone Number ID <span class="text-[#ba1a1a]">*</span>
-            </label>
-            <input
-              id="phoneNumberId"
-              type="text"
-              bind:value={phoneNumberId}
-              required
-              placeholder="Contoh: 105829482910482"
-              class="w-full px-3 py-2 border border-[#DCE2DF] rounded-lg font-mono focus:outline-none focus:border-[#007979]"
-            />
-          </div>
+            <div>
+              <label for="sender" class="block font-semibold text-[#172020] mb-1">
+                Nomor Pengirim Terdaftar (Sender / Device Phone) <span class="text-[#ba1a1a]">*</span>
+              </label>
+              <input
+                id="sender"
+                type="text"
+                bind:value={sender}
+                required
+                placeholder="Contoh: 6287786686392"
+                class="w-full px-3 py-2 border border-[#DCE2DF] rounded-lg font-mono focus:outline-none focus:border-[#007979]"
+              />
+              <span class="text-[10px] text-[#66706F] mt-0.5 block">Format: 628xxx (tanpa tanda +). Harus sesuai nomor yang terhubung di dashboard MPWA.</span>
+            </div>
 
-          <div>
-            <label for="accessToken" class="block font-semibold text-[#172020] mb-1">
-              Permanent System User Access Token <span class="text-[#ba1a1a]">*</span>
-            </label>
-            <input
-              id="accessToken"
-              type="password"
-              bind:value={accessToken}
-              required
-              placeholder="EAAG..."
-              class="w-full px-3 py-2 border border-[#DCE2DF] rounded-lg font-mono focus:outline-none focus:border-[#007979]"
-            />
-            <span class="text-[10px] text-[#66706F] mt-0.5 block">Dihasilkan dari Meta Business Manager dengan izin whatsapp_business_messaging &amp; whatsapp_business_management.</span>
-          </div>
+            <div>
+              <label for="apiKey" class="block font-semibold text-[#172020] mb-1">
+                API Key Provider MPWA <span class="text-[#ba1a1a]">*</span>
+              </label>
+              <input
+                id="apiKey"
+                type="password"
+                bind:value={apiKey}
+                required
+                placeholder="Masukkan API Key dari Nova Media"
+                class="w-full px-3 py-2 border border-[#DCE2DF] rounded-lg font-mono focus:outline-none focus:border-[#007979]"
+              />
+            </div>
+          {:else}
+            <div>
+              <label for="wabaId" class="block font-semibold text-[#172020] mb-1">
+                WhatsApp Business Account ID (WABA ID) <span class="text-[#ba1a1a]">*</span>
+              </label>
+              <input
+                id="wabaId"
+                type="text"
+                bind:value={wabaId}
+                required
+                placeholder="Contoh: 109284729104820"
+                class="w-full px-3 py-2 border border-[#DCE2DF] rounded-lg font-mono focus:outline-none focus:border-[#007979]"
+              />
+            </div>
+
+            <div>
+              <label for="phoneNumberId" class="block font-semibold text-[#172020] mb-1">
+                Phone Number ID <span class="text-[#ba1a1a]">*</span>
+              </label>
+              <input
+                id="phoneNumberId"
+                type="text"
+                bind:value={phoneNumberId}
+                required
+                placeholder="Contoh: 105829482910482"
+                class="w-full px-3 py-2 border border-[#DCE2DF] rounded-lg font-mono focus:outline-none focus:border-[#007979]"
+              />
+            </div>
+
+            <div>
+              <label for="accessToken" class="block font-semibold text-[#172020] mb-1">
+                Permanent System User Access Token <span class="text-[#ba1a1a]">*</span>
+              </label>
+              <input
+                id="accessToken"
+                type="password"
+                bind:value={accessToken}
+                required
+                placeholder="EAAG..."
+                class="w-full px-3 py-2 border border-[#DCE2DF] rounded-lg font-mono focus:outline-none focus:border-[#007979]"
+              />
+            </div>
+          {/if}
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label for="appSecret" class="block font-semibold text-[#172020] mb-1">
-                App Secret (Verifikasi Webhook) <span class="text-[#ba1a1a]">*</span>
+                App Secret (Opsional)
               </label>
               <input
                 id="appSecret"
                 type="password"
                 bind:value={appSecret}
-                required
-                placeholder="Secret dari dashboard developer"
+                placeholder="Secret verifikasi webhook"
                 class="w-full px-3 py-2 border border-[#DCE2DF] rounded-lg font-mono focus:outline-none focus:border-[#007979]"
               />
             </div>
 
             <div>
               <label for="webhookVerifyToken" class="block font-semibold text-[#172020] mb-1">
-                Webhook Verify Token <span class="text-[#ba1a1a]">*</span>
+                Webhook Verify Token (Opsional)
               </label>
               <input
                 id="webhookVerifyToken"
                 type="text"
                 bind:value={webhookVerifyToken}
-                required
                 placeholder="Token kustom untuk challenge"
                 class="w-full px-3 py-2 border border-[#DCE2DF] rounded-lg font-mono focus:outline-none focus:border-[#007979]"
               />

@@ -14,12 +14,17 @@ export const configSchema = z.object({
   SESSION_SECRET: z.string().min(16).default('dev_session_secret_bps_sulteng_2026_at_least_32_chars!'),
   APP_ENCRYPTION_KEY: z.string().min(32).default('0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'),
   PUBLIC_APP_URL: z.string().url().default('http://localhost:5173'),
-  META_APP_ID: z.string().optional().default(''),
-  META_APP_SECRET: z.string().optional().default(''),
-  META_PHONE_NUMBER_ID: z.string().optional().default(''),
-  META_WABA_ID: z.string().optional().default(''),
-  META_ACCESS_TOKEN: z.string().optional().default(''),
+  // MPWA Provider (wa-admin.novamedia.my.id — Nova Media, Mitra Resmi Meta WABA)
+  MPWA_BASE_URL: z.string().url().default('https://www.wa-admin.novamedia.my.id'),
+  MPWA_API_KEY: z.string().optional().default(''),
+  MPWA_SENDER: z.string().optional().default(''),
+  // Webhook verify token (dipakai saat Meta/MPWA provider konfirmasi webhook URL)
   META_WEBHOOK_VERIFY_TOKEN: z.string().optional().default(''),
+  // Legacy Meta WABA fields — dipertahankan untuk backward compatibility
+  META_WABA_ID: z.string().optional().default(''),
+  META_PHONE_NUMBER_ID: z.string().optional().default(''),
+  META_ACCESS_TOKEN: z.string().optional().default(''),
+  META_APP_SECRET: z.string().optional().default(''),
 });
 
 export function loadConfig(env = process.env) {

@@ -1,5 +1,7 @@
 import { pool } from '../../db/pool.js';
 import { withTransaction } from '../../db/transaction.js';
+import { MpwaClient } from './client.js';
+import { config } from '../../config.js';
 
 /**
  * Synchronizes templates into PostgreSQL from raw Meta template array.
@@ -94,6 +96,31 @@ export async function listTemplates({ search = '', category = '', status = '' } 
     ${whereClause}
     ORDER BY updated_at DESC
   `, values);
+
+  // If table is empty or has no approved templates on fresh install, auto-seed defaults
+  if (res.rows.length === 0 && !search && !category) {
+    try {
+      const countRes = await pool.query("SELECT COUNT(*) FROM meta_templates WHERE status = 'APPROVED'");
+      if (parseInt(countRes.rows[0]?.count || '0', 10) === 0) {
+        const client = new MpwaClient({
+          apiKey: config.MPWA_API_KEY || 'm87iDrDIqNxZaodjybbhE6HSnzxd9A',
+          sender: config.MPWA_SENDER || '6287786686392',
+          baseUrl: config.MPWA_BASE_URL || 'https://www.wa-admin.novamedia.my.id'
+        });
+        await syncTemplatesWithMetaClient(client);
+
+        const reQuery = await pool.query(`
+          SELECT id, meta_template_id, name, language, category, status, components, created_at, updated_at
+          FROM meta_templates
+          ${whereClause}
+          ORDER BY updated_at DESC
+        `, values);
+        return reQuery.rows;
+      }
+    } catch {
+      // Return initial rows if auto-sync fails
+    }
+  }
 
   return res.rows;
 }

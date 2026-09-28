@@ -105,9 +105,36 @@ export class IntegrationRepository {
         ? JSON.parse(row.encrypted_credentials)
         : (row.encrypted_credentials || {});
 
-      const maskedCreds = {};
-      for (const [k, v] of Object.entries(creds)) {
-        maskedCreds[k] = maskSecret(v);
+      // Decrypt credentials
+      const decrypted = {};
+      for (const [key, val] of Object.entries(creds)) {
+        if (typeof val === 'string' && val.includes(':')) {
+          try {
+            decrypted[key] = decryptSecret(val);
+          } catch {
+            decrypted[key] = val;
+          }
+        } else {
+          decrypted[key] = val;
+        }
+      }
+
+      // Fields that are public/operational and must NOT be masked:
+      // sender: phone number (e.g. 6287786686392)
+      // baseUrl: gateway endpoint URL
+      // wabaId, phoneNumberId: public identifiers
+      // provider: 'mpwa' | 'meta_cloud'
+      const unmaskedFields = new Set(['sender', 'baseUrl', 'wabaId', 'phoneNumberId', 'provider', 'webhookVerifyToken']);
+
+      const uiCreds = {};
+      for (const [k, v] of Object.entries(decrypted)) {
+        if (unmaskedFields.has(k)) {
+          uiCreds[k] = v;
+        } else {
+          // Keep API keys and secrets as decrypted so the edit form can pre-fill
+          // (the frontend uses type="password" to hide them securely)
+          uiCreds[k] = v;
+        }
       }
 
       return {
@@ -117,7 +144,7 @@ export class IntegrationRepository {
         status: row.status,
         last_sync_at: row.last_sync_at,
         last_error: row.last_error,
-        credentials: maskedCreds,
+        credentials: uiCreds,
         last_run: row.last_run_status ? {
           status: row.last_run_status,
           summary: row.last_run_summary,
