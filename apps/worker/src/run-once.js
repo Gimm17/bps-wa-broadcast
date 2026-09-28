@@ -5,9 +5,23 @@ import { claimMessageBatch } from '../../api/src/db/queue.js';
 import { evaluateDueSchedules } from './scheduler.js';
 import { sendSingleMessage } from './sender.js';
 import { CircuitBreaker } from './circuit-breaker.js';
+import { MpwaClient } from '../../api/src/features/meta/client.js';
+import { config } from '../../api/src/config.js';
 
 const defaultLogger = pino({ name: 'bps-worker' });
 const DEFAULT_LOCK_ID = 987654321;
+
+/**
+ * Create default MPWA client from environment config if credentials are available.
+ */
+function createDefaultMpwaClient() {
+  if (!config.MPWA_API_KEY || !config.MPWA_SENDER) return null;
+  return new MpwaClient({
+    apiKey: config.MPWA_API_KEY,
+    sender: config.MPWA_SENDER,
+    baseUrl: config.MPWA_BASE_URL
+  });
+}
 
 /**
  * Recovers messages that were left in 'sending' status past their lease expiry.
@@ -35,7 +49,7 @@ export async function runOnce({
   leaseSeconds = 60,
   maxRuntimeMs = 55000,
   safetyMarginMs = 5000,
-  metaClient = null,
+  metaClient = createDefaultMpwaClient(),
   customSender = null,
   logger = defaultLogger
 } = {}) {
@@ -85,6 +99,23 @@ export async function runOnce({
 
   const circuitBreaker = new CircuitBreaker({ db, logger });
 
+  let activeSender = metaClient;
+  if (!activeSender && !customSender) {
+    try {
+      const { integrationRepository } = await import('../../api/src/features/integrations/repository.js');
+      const creds = await integrationRepository.getDecryptedCredentials('meta_waba', db);
+      if (creds && (creds.apiKey || creds.accessToken)) {
+        activeSender = new MpwaClient({
+          apiKey: creds.apiKey || creds.accessToken,
+          sender: creds.sender || creds.phoneNumberId,
+          baseUrl: creds.baseUrl || config.MPWA_BASE_URL
+        });
+      }
+    } catch (err) {
+      logger.warn({ err }, 'Tidak dapat memuat kredensial MPWA dari tabel database integrations');
+    }
+  }
+
   try {
     // 2. Recover abandoned/expired leases
     stats.recoveredLeases = await recoverExpiredLeases(db);
@@ -125,7 +156,7 @@ export async function runOnce({
         const res = await sendSingleMessage({
           db,
           message,
-          metaClient,
+          metaClient: activeSender,
           customSender,
           circuitBreaker,
           logger
