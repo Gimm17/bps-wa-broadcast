@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import { api } from '../lib/api/client.js';
   import StatusChip from '../lib/components/StatusChip.svelte';
+  import { confirmDialog, successDialog, errorDialog } from '../lib/stores/dialog.js';
 
   let { params = {} } = $props();
 
@@ -36,14 +37,28 @@
   }
 
   async function handleCancel() {
-    if (!confirm('Apakah Anda yakin ingin membatalkan campaign ini?')) return;
+    const confirmed = await confirmDialog({
+      title: 'Batalkan Kampanye Siaran?',
+      message: 'Apakah Anda yakin ingin membatalkan kampanye ini? Pesan antrean yang belum terkirim akan dinonaktifkan.',
+      confirmText: 'Ya, Batalkan Kampanye',
+      isDanger: true,
+      badge: 'Batal Kampanye'
+    });
+    if (!confirmed) return;
+
     isCancelling = true;
     try {
       const res = await api.post(`/api/campaigns/${params.id}/cancel`);
-      successMsg = res.message || 'Campaign berhasil dibatalkan';
       await loadCampaignDetails();
+      await successDialog({
+        title: 'Kampanye Dibatalkan',
+        message: res.message || 'Kampanye telah berhasil dibatalkan.'
+      });
     } catch (err) {
-      errorMsg = err.message || 'Gagal membatalkan campaign';
+      await errorDialog({
+        title: 'Gagal Membatalkan Kampanye',
+        message: err.message || 'Terjadi kendala saat membatalkan kampanye.'
+      });
     } finally {
       isCancelling = false;
     }

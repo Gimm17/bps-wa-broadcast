@@ -1,6 +1,7 @@
 <script>
   import { loginUser } from '../lib/stores/session.js';
   import { push } from 'svelte-spa-router';
+  import { infoDialog } from '../lib/stores/dialog.js';
 
   let email = $state('');
   let password = $state('');
@@ -143,7 +144,10 @@
               <button
                 type="button"
                 class="text-[12px] text-[#007979] hover:underline font-medium"
-                onclick={() => alert('Permintaan reset kata sandi dialihkan ke Administrator Tim IPDS / Diseminasi BPS Prov. Sulteng.')}
+                onclick={() => infoDialog({
+                  title: 'Bantuan Reset Kata Sandi',
+                  message: 'Demi keamanan data presensi dan operasi siaran WhatsApp, reset kata sandi dikelola secara tersentralisasi oleh Administrator Tim IPDS / Diseminasi BPS Provinsi Sulawesi Tengah.\n\nSilakan hubungi admin internal untuk pembaharuan kredensial akun Anda.'
+                })}
               >
                 Lupa kata sandi?
               </button>

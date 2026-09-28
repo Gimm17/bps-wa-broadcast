@@ -3,6 +3,7 @@
   import { push } from 'svelte-spa-router';
   import { api } from '../lib/api/client.js';
   import MessagePreview from '../lib/components/MessagePreview.svelte';
+  import { successDialog, errorDialog } from '../lib/stores/dialog.js';
 
   let currentStep = $state(1); // 1: Audience, 2: Template, 3: Schedule, 4: Review
 
@@ -27,8 +28,23 @@
   let isLoading = $state(false);
   let isSaving = $state(false);
   let isTesting = $state(false);
+  let isSyncing = $state(false);
   let errorMsg = $state('');
   let successMsg = $state('');
+
+  async function syncTemplates() {
+    isSyncing = true;
+    errorMsg = '';
+    try {
+      await api.post('/api/templates/sync');
+      const tmplRes = await api.get('/api/templates?status=APPROVED');
+      templates = tmplRes?.templates || [];
+    } catch (err) {
+      errorMsg = err.message || 'Gagal menyinkronkan template';
+    } finally {
+      isSyncing = false;
+    }
+  }
 
   onMount(async () => {
     try {
@@ -108,9 +124,20 @@
         await api.post(`/api/campaigns/${campaignId}/schedule`, { scheduledAt });
       }
 
+      await successDialog({
+        title: sendTiming === 'scheduled' ? 'Kampanye Berhasil Dijadwalkan' : 'Kampanye Berhasil Dibuat',
+        message: sendTiming === 'scheduled'
+          ? `Kampanye "${title}" telah berhasil dijadwalkan untuk pengiriman otomatis.`
+          : `Kampanye "${title}" telah dibuat dan antrean pesan siap didistribusikan.`
+      });
+
       push(`/campaigns/${campaignId}`);
     } catch (err) {
       errorMsg = err.message || 'Gagal menyimpan kampanye';
+      await errorDialog({
+        title: 'Gagal Menyimpan Kampanye',
+        message: errorMsg
+      });
       isSaving = false;
     }
   }
@@ -118,6 +145,10 @@
   async function handleTestSend() {
     if (!selectedTestContactId) {
       errorMsg = 'Pilih kontak internal untuk pengujian';
+      await errorDialog({
+        title: 'Kontak Belum Dipilih',
+        message: 'Silakan pilih kontak internal untuk menerima pesan pengujian.'
+      });
       return;
     }
 
@@ -140,8 +171,16 @@
       });
 
       successMsg = res.message || 'Pesan pengujian berhasil dikirim ke antrean!';
+      await successDialog({
+        title: 'Pesan Pengujian Terkirim! 🚀',
+        message: 'Pesan simulasi pengujian berhasil diteruskan ke antrean pengiriman WhatsApp.'
+      });
     } catch (err) {
       errorMsg = err.message || 'Gagal mengirim pesan pengujian';
+      await errorDialog({
+        title: 'Pengujian Gagal',
+        message: errorMsg
+      });
     } finally {
       isTesting = false;
     }
@@ -302,21 +341,52 @@
           <p class="text-xs text-[#66706F]">Gunakan template resmi yang telah disetujui oleh Meta.</p>
         </div>
 
-        <div>
-          <label for="tmplSelect" class="block text-xs font-semibold text-[#172020] mb-1.5">
-            Template Disetujui (Approved) <span class="text-[#ba1a1a]">*</span>
-          </label>
-          <select
-            id="tmplSelect"
-            bind:value={selectedTemplateId}
-            class="w-full px-3.5 py-2.5 border border-[#DCE2DF] rounded-lg text-xs focus:outline-none focus:border-[#007979]"
-          >
-            <option value="">-- Pilih Template --</option>
-            {#each templates as t}
-              <option value={t.id}>{t.name} [{t.category}] ({t.language})</option>
-            {/each}
-          </select>
-        </div>
+        {#if templates.length === 0}
+          <div class="p-4 bg-[#FFF8EC] border border-[#FFE2AF] rounded-xl text-xs space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-[#793100]">⚠️ Belum ada template WhatsApp resmi di sistem</span>
+              <button
+                type="button"
+                onclick={syncTemplates}
+                disabled={isSyncing}
+                class="px-3 py-1.5 rounded-lg bg-[#007979] text-white font-semibold text-xs hover:bg-[#006a6a] disabled:opacity-50 inline-flex items-center gap-1.5 shadow-sm"
+              >
+                <span class="{isSyncing ? 'animate-spin' : ''}">🔄</span>
+                <span>{isSyncing ? 'Menyinkronkan...' : 'Muat Template Sekarang'}</span>
+              </button>
+            </div>
+            <p class="text-[#793100] text-[11px] leading-relaxed">
+              Klik tombol di atas untuk menyinkronkan template standar resmi BPS Sulteng dari gateway WhatsApp.
+            </p>
+          </div>
+        {:else}
+          <div>
+            <div class="flex justify-between items-center mb-1.5">
+              <label for="tmplSelect" class="text-xs font-semibold text-[#172020]">
+                Template Disetujui (Approved) <span class="text-[#ba1a1a]">*</span>
+              </label>
+              <button
+                type="button"
+                onclick={syncTemplates}
+                disabled={isSyncing}
+                class="text-[11px] font-semibold text-[#007979] hover:underline inline-flex items-center gap-1"
+              >
+                <span class="{isSyncing ? 'animate-spin' : ''}">🔄</span>
+                <span>{isSyncing ? 'Menyinkronkan...' : 'Sinkronkan Ulang'}</span>
+              </button>
+            </div>
+            <select
+              id="tmplSelect"
+              bind:value={selectedTemplateId}
+              class="w-full px-3.5 py-2.5 border border-[#DCE2DF] rounded-lg text-xs focus:outline-none focus:border-[#007979]"
+            >
+              <option value="">-- Pilih Template --</option>
+              {#each templates as t}
+                <option value={t.id}>{t.name} [{t.category}] ({t.language})</option>
+              {/each}
+            </select>
+          </div>
+        {/if}
 
         {#if selectedTemplate}
           <div class="p-4 bg-[#F7F7F3] rounded-xl border border-[#DCE2DF] space-y-4">

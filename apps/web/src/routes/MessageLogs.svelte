@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import { apiFetch } from '../lib/api/client.js';
   import MessageTimeline from '../lib/components/MessageTimeline.svelte';
+  import { errorDialog } from '../lib/stores/dialog.js';
 
   // Svelte 5 State Runes
   let messages = $state([]);
@@ -58,7 +59,11 @@
       const res = await apiFetch(`/api/messages/${messageId}`);
       selectedMessage = res.data;
     } catch (err) {
-      alert('Gagal memuat detail pesan: ' + err.message);
+      await errorDialog({
+        title: 'Gagal Memuat Detail Pesan',
+        message: 'Tidak dapat mengambil rekaman riwayat pesan ini.',
+        details: err.message
+      });
     } finally {
       loadingDetail = false;
     }

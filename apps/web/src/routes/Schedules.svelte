@@ -1,6 +1,7 @@
 <script>
   import { onMount } from 'svelte';
   import { apiFetch } from '../lib/api/client.js';
+  import { confirmDialog, successDialog, errorDialog } from '../lib/stores/dialog.js';
 
   // Svelte 5 State Runes
   let currentDate = $state(new Date(2026, 9, 1)); // Default to Oct 2026 for alignment
@@ -129,8 +130,16 @@
     try {
       await apiFetch('/api/calendar/sync-skb', { method: 'POST' });
       await loadData();
+      await successDialog({
+        title: 'Sinkronisasi SKB Berhasil',
+        message: 'Daftar hari libur nasional dan cuti bersama SKB 3 Menteri 2026 telah diperbarui.'
+      });
     } catch (err) {
-      alert('Gagal menyinkronkan SKB: ' + err.message);
+      await errorDialog({
+        title: 'Gagal Menyinkronkan SKB',
+        message: 'Terjadi kendala saat memperbarui jadwal SKB.',
+        details: err.message
+      });
     } finally {
       syncingSkb = false;
     }
@@ -154,6 +163,10 @@
       showModal = false;
       formDesc = '';
       await loadData();
+      await successDialog({
+        title: 'Pengecualian Disimpan',
+        message: `Pengecualian kalender untuk tanggal ${formDate} berhasil disimpan.`
+      });
     } catch (err) {
       formError = err.message || 'Gagal menambahkan pengecualian';
     } finally {
@@ -162,12 +175,28 @@
   }
 
   async function deleteException(dateStr) {
-    if (!confirm(`Hapus pengecualian kalender untuk tanggal ${dateStr}?`)) return;
+    const confirmed = await confirmDialog({
+      title: 'Hapus Pengecualian Kalender?',
+      message: `Apakah Anda yakin ingin menghapus pengecualian kalender untuk tanggal ${dateStr}?`,
+      confirmText: 'Ya, Hapus',
+      isDanger: true,
+      badge: 'Hapus Kalender'
+    });
+    if (!confirmed) return;
+
     try {
       await apiFetch(`/api/calendar/holidays/${dateStr}`, { method: 'DELETE' });
       await loadData();
+      await successDialog({
+        title: 'Pengecualian Dihapus',
+        message: `Pengecualian kalender tanggal ${dateStr} telah berhasil dihapus.`
+      });
     } catch (err) {
-      alert('Gagal menghapus: ' + err.message);
+      await errorDialog({
+        title: 'Gagal Menghapus Pengecualian',
+        message: 'Terjadi kesalahan saat menghapus data kalender.',
+        details: err.message
+      });
     }
   }
 

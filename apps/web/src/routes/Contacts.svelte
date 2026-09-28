@@ -3,6 +3,7 @@
   import { apiFetch } from '../lib/api/client.js';
   import StatusChip from '../lib/components/StatusChip.svelte';
   import DataTable from '../lib/components/DataTable.svelte';
+  import { confirmDialog, successDialog, errorDialog } from '../lib/stores/dialog.js';
 
   let activeTab = $state('all'); // 'all' | 'employee' | 'public'
   let searchQuery = $state('');
@@ -76,7 +77,10 @@
       if (activeTab !== 'all') params.set('type', activeTab);
       window.open(`/api/exports/contacts?${params.toString()}`, '_blank');
     } catch (err) {
-      alert('Gagal mengekspor kontak: ' + (err?.error?.message || err.message));
+      await errorDialog({
+        title: 'Gagal Mengekspor Kontak',
+        message: err?.error?.message || err.message
+      });
     }
   }
 
@@ -103,7 +107,11 @@
 
       importJob = data;
     } catch (err) {
-      alert('Gagal mengunggah file: ' + (err?.error?.message || err.message));
+      await errorDialog({
+        title: 'Gagal Mengunggah Berkas',
+        message: 'Pastikan format berkas sesuai template Excel/CSV yang didukung.',
+        details: err?.error?.message || err.message
+      });
     } finally {
       isUploading = false;
     }
@@ -111,15 +119,30 @@
 
   async function handleApplyImport() {
     if (!importJob || !importJob.job?.id) return;
+    const confirmed = await confirmDialog({
+      title: 'Terapkan Impor Kontak?',
+      message: `Apakah Anda yakin ingin memproses dan menyimpan seluruh kontak dari pratinjau impor ini ke buku kontak?`,
+      confirmText: 'Ya, Terapkan Impor',
+      badge: 'Impor Kontak'
+    });
+    if (!confirmed) return;
+
     try {
       await apiFetch(`/imports/contacts/${importJob.job.id}/apply`, { method: 'POST' });
-      alert('Impor kontak berhasil diterapkan!');
+      await successDialog({
+        title: 'Impor Berhasil Diterapkan',
+        message: 'Seluruh kontak yang valid telah berhasil disimpan ke database.'
+      });
       isImportOpen = false;
       uploadFile = null;
       importJob = null;
       loadContacts();
     } catch (err) {
-      alert('Gagal menerapkan impor: ' + (err?.error?.message || err.message));
+      await errorDialog({
+        title: 'Gagal Menerapkan Impor',
+        message: 'Terjadi kendala saat memproses berkas impor.',
+        details: err?.error?.message || err.message
+      });
     }
   }
 
@@ -129,12 +152,19 @@
         method: 'POST',
         body: JSON.stringify(newContact)
       });
-      alert('Kontak berhasil disimpan!');
+      await successDialog({
+        title: 'Kontak Berhasil Disimpan',
+        message: `Kontak "${newContact.name}" telah berhasil ditambahkan.`
+      });
       isAddOpen = false;
       newContact = { name: '', phone: '', type: 'employee', nip: '', unitKerja: '', instansi: '' };
       loadContacts();
     } catch (err) {
-      alert('Gagal menyimpan kontak: ' + (err?.error?.message || err.message));
+      await errorDialog({
+        title: 'Gagal Menyimpan Kontak',
+        message: 'Silakan periksa kembali kelengkapan nomor telepon dan format data.',
+        details: err?.error?.message || err.message
+      });
     }
   }
 

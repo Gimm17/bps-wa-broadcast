@@ -1,6 +1,7 @@
 <script>
   import { onMount } from 'svelte';
   import { api } from '../../lib/api/client.js';
+  import { confirmDialog, successDialog, errorDialog } from '../../lib/stores/dialog.js';
 
   let token = $state('');
   let contact = $state(null);
@@ -59,9 +60,14 @@
   }
 
   async function handleUnsubscribeAll() {
-    if (!confirm('Apakah Anda yakin ingin berhenti dari seluruh informasi WhatsApp BPS Provinsi Sulawesi Tengah?')) {
-      return;
-    }
+    const confirmed = await confirmDialog({
+      title: 'Berhenti Langganan?',
+      message: 'Apakah Anda yakin ingin berhenti dari seluruh informasi siaran WhatsApp BPS Provinsi Sulawesi Tengah?',
+      confirmText: 'Ya, Berhenti Langganan',
+      isDanger: true,
+      badge: 'Unsubscribe'
+    });
+    if (!confirmed) return;
 
     isSaving = true;
     errorMsg = '';
@@ -70,8 +76,16 @@
       const res = await api.post('/api/subscriptions/unsubscribe', { token });
       isUnsubscribedAll = true;
       successMsg = res.message || 'Anda telah berhasil berhenti dari seluruh siaran.';
+      await successDialog({
+        title: 'Berhasil Berhenti Langganan',
+        message: 'Nomor Anda telah dinonaktifkan dari seluruh daftar siaran informasi BPS Sulteng.'
+      });
     } catch (err) {
       errorMsg = err.message || 'Gagal memproses pembatalan langganan.';
+      await errorDialog({
+        title: 'Gagal Berhenti Langganan',
+        message: err.message || 'Gagal memproses pembatalan langganan.'
+      });
     } finally {
       isSaving = false;
     }

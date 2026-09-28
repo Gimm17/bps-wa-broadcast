@@ -62,6 +62,9 @@ export const api = {
   post(path, data) {
     return apiFetch(path, { method: 'POST', body: JSON.stringify(data) });
   },
+  put(path, data) {
+    return apiFetch(path, { method: 'PUT', body: JSON.stringify(data) });
+  },
   patch(path, data) {
     return apiFetch(path, { method: 'PATCH', body: JSON.stringify(data) });
   },
