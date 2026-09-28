@@ -1,4 +1,6 @@
 import { classifyMetaError, calculateBackoff } from './retry.js';
+import { renderTemplateText } from '../../api/src/features/campaigns/renderer.js';
+
 
 export async function sendSingleMessage({
   db,
@@ -63,14 +65,31 @@ export async function sendSingleMessage({
     return { status: 'suppressed' };
   }
 
-  // 3. Fetch template details
-  const { rows: tplRows } = await db.query('SELECT name, language FROM meta_templates WHERE id = $1', [templateId]);
+  // 3. Fetch template details + stored components for rendering
+  const { rows: tplRows } = await db.query('SELECT name, language, components FROM meta_templates WHERE id = $1', [templateId]);
   const templateName = tplRows[0]?.name || 'unknown';
   const language = tplRows[0]?.language || 'id';
+  const templateComponents = tplRows[0]?.components || [];
 
-  // Parse message payload for components
+  // Parse message payload for param mappings
   const payload = typeof message.payload === 'string' ? JSON.parse(message.payload) : (message.payload || {});
-  const components = payload.components || [];
+  const paramMappings = payload.params || payload.paramMappings || {};
+
+  // Fetch contact details for variable substitution
+  const { rows: contactDetailRows } = await db.query(`
+    SELECT c.name, c.phone_e164, ep.nip, ep.unit_kerja
+    FROM contacts c
+    LEFT JOIN employee_profiles ep ON ep.contact_id = c.id
+    WHERE c.id = $1
+  `, [contactId]);
+  const contactDetail = contactDetailRows[0] || null;
+
+  // Render full text body (for MPWA which sends plain text, not structured HSM)
+  let renderedText = payload.customText || renderTemplateText(templateComponents, paramMappings, contactDetail);
+  if (payload.customText && contactDetail) {
+    renderedText = renderedText.replace(/\{nama\}/gi, contactDetail.name || '')
+                               .replace(/\{\{1\}\}/g, contactDetail.name || '');
+  }
 
   // 4. Send message
   try {
@@ -80,21 +99,22 @@ export async function sendSingleMessage({
         to: phone,
         templateName,
         languageCode: language,
-        components,
+        renderedText,
         message
       });
     } else if (metaClient) {
+      // metaClient may be MpwaClient or MetaClient — both implement sendTemplate()
       result = await metaClient.sendTemplate({
         to: phone,
         templateName,
-        languageCode: language,
-        components
+        renderedText,
+        languageCode: language
       });
     } else {
-      throw new Error('No Meta client or custom sender configured');
+      throw new Error('Tidak ada MPWA/Meta client atau customSender yang dikonfigurasi');
     }
 
-    const metaMessageId = result.metaMessageId || result.messageId || null;
+    const metaMessageId = result.metaMessageId || result.mpwaMessageId || result.messageId || null;
 
     // Success update
     await db.query(`

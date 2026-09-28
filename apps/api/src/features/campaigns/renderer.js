@@ -2,7 +2,11 @@
  * Resolves a template parameter mapping against contact data or literal value.
  */
 export function resolveParamValue(mapping, contact = null) {
-  if (!mapping) return '';
+  if (!mapping && mapping !== 0) return '';
+
+  if (typeof mapping === 'string' || typeof mapping === 'number') {
+    return String(mapping);
+  }
 
   if (mapping.source === 'literal') {
     return mapping.value || '';

@@ -168,3 +168,129 @@ async function _recordAlert(db, code, message) {
     // Non-blocking alert failure
   }
 }
+
+/**
+ * Evaluates and executes an Event / Custom Reminder automation rule.
+ */
+export async function runEventReminderRule({ db, rule, now = new Date() }) {
+  const config = rule.config || {};
+  const messageMode = config.messageMode || (rule.template_id ? 'template' : 'custom_text');
+  const customMessage = config.customMessage || {};
+  const targetAudience = config.targetAudience || { type: 'all_employees' };
+
+  // 1. Resolve recipients based on targetAudience
+  let recipients = [];
+  if (targetAudience.type === 'all_employees') {
+    const { rows } = await db.query("SELECT id, name, phone_e164 FROM contacts WHERE type = 'employee' AND status = 'active'");
+    recipients = rows;
+  } else if (targetAudience.type === 'all_partners' || targetAudience.type === 'all_media') {
+    const { rows } = await db.query("SELECT id, name, phone_e164 FROM contacts WHERE type = 'public' AND status = 'active'");
+    recipients = rows;
+  } else if (targetAudience.type === 'all_contacts') {
+    const { rows } = await db.query("SELECT id, name, phone_e164 FROM contacts WHERE status = 'active'");
+    recipients = rows;
+  } else if (targetAudience.type === 'manual_numbers') {
+    const rawNumbers = Array.isArray(targetAudience.manualNumbers)
+      ? targetAudience.manualNumbers
+      : (typeof targetAudience.manualNumbers === 'string'
+          ? targetAudience.manualNumbers.split(/[\n,;]+/).map(s => s.trim()).filter(Boolean)
+          : []);
+
+    for (const num of rawNumbers) {
+      const digits = num.replace(/\D/g, '');
+      let phone = digits.startsWith('0') ? '62' + digits.slice(1) : digits;
+      if (!phone.startsWith('+')) phone = '+' + phone;
+
+      const { rows } = await db.query(`
+        INSERT INTO contacts (type, name, phone_e164, status)
+        VALUES ('public', $1, $2, 'active')
+        ON CONFLICT (phone_e164) DO UPDATE SET updated_at = now()
+        RETURNING id, name, phone_e164
+      `, [`Penerima Acara (${phone})`, phone]);
+      if (rows[0]) recipients.push(rows[0]);
+    }
+  }
+
+  // Fallback to active contacts if specific query yielded 0
+  if (recipients.length === 0) {
+    const { rows } = await db.query("SELECT id, name, phone_e164 FROM contacts WHERE status = 'active' LIMIT 5");
+    recipients = rows;
+  }
+
+  // 2. Resolve template ID for messages table constraint
+  let effectiveTemplateId = rule.template_id;
+  if (!effectiveTemplateId) {
+    const { rows } = await db.query("SELECT id FROM meta_templates WHERE status = 'APPROVED' LIMIT 1");
+    effectiveTemplateId = rows[0]?.id;
+    if (!effectiveTemplateId) {
+      const { rows: anyTmpl } = await db.query("SELECT id FROM meta_templates LIMIT 1");
+      effectiveTemplateId = anyTmpl[0]?.id;
+    }
+  }
+
+  // 3. Render base custom text if in custom_text mode
+  let baseText = '';
+  if (messageMode === 'custom_text') {
+    const parts = [];
+    if (customMessage.header && customMessage.header.trim()) {
+      parts.push(`*${customMessage.header.trim().replace(/^\*+|\*+$/g, '')}*`);
+    }
+    if (customMessage.body && customMessage.body.trim()) {
+      parts.push(customMessage.body.trim());
+    }
+    if (customMessage.footer && customMessage.footer.trim()) {
+      parts.push(`_${customMessage.footer.trim().replace(/^_+|_+$/g, '')}_`);
+    }
+    baseText = parts.join('\n\n');
+  }
+
+  let queued = 0;
+  const timestamp = Date.now();
+  const dateStr = toWitaDate(now);
+
+  for (const contact of recipients) {
+    const idempotencyKey = `event:${rule.code}:${contact.id}:${dateStr}:${timestamp}`;
+    let contactCustomText = baseText;
+    if (contactCustomText) {
+      contactCustomText = contactCustomText
+        .replace(/\{nama\}/gi, contact.name || 'Bpk/Ibu')
+        .replace(/\{tanggal\}/gi, config.eventDate || dateStr)
+        .replace(/\{jam\}/gi, config.eventTime || '09:00 WITA')
+        .replace(/\{lokasi\}/gi, config.eventLocation || 'BPS Sulteng');
+    }
+
+    try {
+      await enqueueMessage(db, {
+        contactId: contact.id,
+        templateId: effectiveTemplateId,
+        idempotencyKey,
+        payload: {
+          customText: contactCustomText,
+          eventName: rule.name,
+          eventDate: config.eventDate,
+          eventTime: config.eventTime,
+          params: {
+            '1': { source: 'literal', value: contact.name },
+            '2': { source: 'literal', value: config.eventDate || dateStr },
+            '3': { source: 'literal', value: config.eventTime || '09:00 WITA' }
+          }
+        },
+        availableAt: now
+      });
+      queued++;
+    } catch (err) {
+      if (err.code !== '23505') throw err;
+    }
+  }
+
+  await db.query('UPDATE automation_rules SET updated_at = now() WHERE id = $1', [rule.id]);
+
+  return {
+    status: 'triggered_success',
+    ruleName: rule.name,
+    messageMode,
+    recipientsCount: recipients.length,
+    queued,
+    customTextPreview: baseText.slice(0, 150)
+  };
+}

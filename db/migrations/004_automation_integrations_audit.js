@@ -4,7 +4,7 @@ export async function up(client) {
       id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
       code text UNIQUE NOT NULL,
       name text NOT NULL,
-      type text NOT NULL CHECK (type IN ('attendance_presensi', 'publication_reminder', 'silastik_transaction', 'custom')),
+      type text NOT NULL CHECK (type IN ('attendance_presensi', 'publication_reminder', 'silastik_transaction', 'custom', 'event_reminder')),
       template_id uuid REFERENCES meta_templates(id),
       is_active boolean NOT NULL DEFAULT true,
       config jsonb NOT NULL DEFAULT '{}'::jsonb,

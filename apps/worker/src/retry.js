@@ -28,12 +28,28 @@ export function classifyMetaError(err = {}) {
   }
 
   // 4. HTTP 401 / 403 - Auth failure -> permanent, circuit-opening
-  if (status === 401 || status === 403 || metaCode === 190 || message.includes('token') || message.includes('auth')) {
+  if (
+    status === 401 ||
+    status === 403 ||
+    metaCode === 190 ||
+    message.includes('token') ||
+    message.includes('auth') ||
+    message.includes('kunci api') ||
+    message.includes('pengirim tidak valid') ||
+    message.includes('api_key')
+  ) {
     return { isTransient: false, category: 'auth_failure', isAuthError: true };
   }
 
   // 5. HTTP 400 - Recipient errors
-  if (metaCode === 131026 || metaCode === 131047 || message.includes('undeliverable') || message.includes('recipient')) {
+  if (
+    metaCode === 131026 ||
+    metaCode === 131047 ||
+    message.includes('undeliverable') ||
+    message.includes('recipient') ||
+    message.includes('nomor tidak terdaftar') ||
+    message.includes('invalid number')
+  ) {
     return { isTransient: false, category: 'invalid_recipient', isAuthError: false };
   }
 
