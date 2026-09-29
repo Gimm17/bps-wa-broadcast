@@ -1,6 +1,11 @@
+import dns from 'node:dns';
 import { config } from './config.js';
 import { createApp } from './app.js';
 import pino from 'pino';
+
+try {
+  dns.setDefaultResultOrder('ipv4first');
+} catch (_) {}
 
 const logger = pino({ name: 'bps-api' });
 const app = createApp({ config, db: null, logger });
