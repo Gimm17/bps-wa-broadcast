@@ -1,6 +1,6 @@
 import { describe, expect, it, beforeAll, afterAll, vi } from 'vitest';
 import request from 'supertest';
-import argon2 from 'argon2';
+import { hashPassword } from '../../src/features/auth/hasher.js';
 import { createApp } from '../../src/app.js';
 import { pool } from '../../src/db/pool.js';
 import { config } from '../../src/config.js';
@@ -19,7 +19,7 @@ describe('Direct Send & Check Number API Endpoints', () => {
     app = createApp({ config, db: pool, logger: false });
 
     // Setup admin user with campaign.send permission (via ADMIN_DISEMINASI role)
-    const passwordHash = await argon2.hash('DirectSendPass-12345');
+    const passwordHash = await hashPassword('DirectSendPass-12345');
     const adminRes = await pool.query(`
       INSERT INTO users (username, email, password_hash, name, is_active)
       VALUES ('admin_direct_send', 'admin_direct_send@bps.go.id', $1, 'Admin Direct Send', true)

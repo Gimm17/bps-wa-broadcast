@@ -1,7 +1,7 @@
 import crypto from 'node:crypto';
 import { describe, expect, it, beforeAll, afterAll } from 'vitest';
 import request from 'supertest';
-import argon2 from 'argon2';
+import { hashPassword } from '../../src/features/auth/hasher.js';
 import { createApp } from '../../src/app.js';
 import { pool } from '../../src/db/pool.js';
 import { config } from '../../src/config.js';
@@ -17,7 +17,7 @@ describe('Role-Based Access Control (RBAC)', () => {
   beforeAll(async () => {
     app = createApp({ config, db: pool, logger: false });
 
-    const passwordHash = await argon2.hash('TestPass-12345');
+    const passwordHash = await hashPassword('TestPass-12345');
 
     // Create operator user
     const opRes = await pool.query(`

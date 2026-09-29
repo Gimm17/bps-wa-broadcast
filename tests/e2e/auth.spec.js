@@ -1,6 +1,6 @@
 import { describe, expect, it, beforeAll, afterAll } from 'vitest';
 import request from 'supertest';
-import argon2 from 'argon2';
+import { hashPassword } from '../../apps/api/src/features/auth/hasher.js';
 import { createApp } from '../../apps/api/src/app.js';
 import { pool } from '../../apps/api/src/db/pool.js';
 import { config } from '../../apps/api/src/config.js';
@@ -18,7 +18,7 @@ describe('E2E Acceptance: Authentication & Session Lifecycle', () => {
   beforeAll(async () => {
     app = createApp({ config, db: pool, logger: false });
 
-    const passwordHash = await argon2.hash(testUser.password);
+    const passwordHash = await hashPassword(testUser.password);
     const userRes = await pool.query(`
       INSERT INTO users (username, email, password_hash, name, is_active)
       VALUES ($1, $2, $3, $4, true)

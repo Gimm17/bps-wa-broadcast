@@ -1,6 +1,6 @@
 import { describe, expect, it, beforeAll, afterAll } from 'vitest';
 import request from 'supertest';
-import argon2 from 'argon2';
+import { hashPassword } from '../../apps/api/src/features/auth/hasher.js';
 import { createApp } from '../../apps/api/src/app.js';
 import { pool } from '../../apps/api/src/db/pool.js';
 import { config } from '../../apps/api/src/config.js';
@@ -13,7 +13,7 @@ describe('Security: Comprehensive Authorization Matrix (All Roles)', () => {
 
   beforeAll(async () => {
     app = createApp({ config, db: pool, logger: false });
-    const passwordHash = await argon2.hash(testPassword);
+    const passwordHash = await hashPassword(testPassword);
 
     const rolesToCreate = [
       { key: 'viewer', roleCode: ROLES.VIEWER, email: 'matrix_viewer@bps.go.id', username: 'm_viewer' },

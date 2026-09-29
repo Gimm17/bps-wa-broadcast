@@ -1,8 +1,10 @@
 import crypto from 'node:crypto';
-import argon2 from 'argon2';
+import { verifyPassword, hashPassword } from './hasher.js';
 import * as authRepo from './repository.js';
 import { recordAudit } from '../audit/service.js';
 import { config } from '../../config.js';
+
+export { hashPassword, verifyPassword };
 
 export function generateCsrfToken(tokenHash, secret = config.SESSION_SECRET) {
   return crypto.createHmac('sha256', secret).update(tokenHash).digest('hex');
@@ -46,7 +48,7 @@ export async function login({ identifier, password, ipAddress = null, userAgent 
     throw { status: 403, code: 'ACCOUNT_LOCKED', message: 'Akun Anda terkunci sementara karena percobaan login gagal berturut-turut. Silakan coba lagi nanti.' };
   }
 
-  const isValidPassword = await argon2.verify(user.password_hash, password);
+  const isValidPassword = await verifyPassword(user.password_hash, password);
   if (!isValidPassword) {
     await authRepo.recordLoginFailure(user.id);
     await recordAudit({

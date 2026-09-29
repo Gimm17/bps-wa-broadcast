@@ -1,7 +1,7 @@
 import { describe, expect, it, beforeAll, afterAll } from 'vitest';
 import request from 'supertest';
 import crypto from 'node:crypto';
-import argon2 from 'argon2';
+import { hashPassword } from '../../apps/api/src/features/auth/hasher.js';
 import { createApp } from '../../apps/api/src/app.js';
 import { pool } from '../../apps/api/src/db/pool.js';
 import { config } from '../../apps/api/src/config.js';
@@ -19,7 +19,7 @@ describe('Security: Webhook Forgery, CSRF, and Injection Protections', () => {
     app = createApp({ config, db: pool, logger: false });
 
     // Seed security test user
-    const passwordHash = await argon2.hash('Security-Pass-12345');
+    const passwordHash = await hashPassword('Security-Pass-12345');
     const userRes = await pool.query(`
       INSERT INTO users (username, email, password_hash, name, is_active)
       VALUES ('security_admin', 'sec_admin@bps.go.id', $1, 'Sec Admin', true)

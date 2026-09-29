@@ -1,6 +1,6 @@
 import { describe, expect, it, beforeAll, afterAll } from 'vitest';
 import request from 'supertest';
-import argon2 from 'argon2';
+import { hashPassword } from '../../apps/api/src/features/auth/hasher.js';
 import { createApp } from '../../apps/api/src/app.js';
 import { pool } from '../../apps/api/src/db/pool.js';
 import { config } from '../../apps/api/src/config.js';
@@ -21,7 +21,7 @@ describe('Performance & Scale: 5,000-Recipient Broadcast Workload', () => {
     app = createApp({ config, db: pool, logger: false });
 
     // 1. Setup authenticated session for dashboard benchmark
-    const passwordHash = await argon2.hash('LoadTest-Pass-2026');
+    const passwordHash = await hashPassword('LoadTest-Pass-2026');
     const userRes = await pool.query(`
       INSERT INTO users (username, email, password_hash, name, is_active)
       VALUES ('load_admin', 'load_admin@bps.go.id', $1, 'Load Admin', true)

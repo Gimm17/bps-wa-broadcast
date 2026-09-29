@@ -1,4 +1,4 @@
-import argon2 from 'argon2';
+import { hashPassword } from '../../apps/api/src/features/auth/hasher.js';
 import { ROLES } from '@bps/shared';
 
 export async function seed(client) {
@@ -27,7 +27,7 @@ export async function seed(client) {
   ];
 
   for (const u of users) {
-    const passwordHash = await argon2.hash(u.password);
+    const passwordHash = await hashPassword(u.password);
     const userRes = await client.query(`
       INSERT INTO users (username, email, password_hash, name, is_active)
       VALUES ($1, $2, $3, $4, true)

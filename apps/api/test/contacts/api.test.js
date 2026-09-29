@@ -1,6 +1,6 @@
 import { describe, expect, it, beforeAll, afterAll } from 'vitest';
 import request from 'supertest';
-import argon2 from 'argon2';
+import { hashPassword } from '../../src/features/auth/hasher.js';
 import { createApp } from '../../src/app.js';
 import { pool } from '../../src/db/pool.js';
 import { config } from '../../src/config.js';
@@ -16,7 +16,7 @@ describe('Contacts & Import API Endpoints', () => {
   beforeAll(async () => {
     app = createApp({ config, db: pool, logger: false });
 
-    const passwordHash = await argon2.hash('ContactsPass-12345');
+    const passwordHash = await hashPassword('ContactsPass-12345');
 
     // Admin user (has contact.export, contact.write, contact.sensitive.read)
     const adminRes = await pool.query(`

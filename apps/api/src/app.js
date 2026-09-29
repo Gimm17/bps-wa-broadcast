@@ -1,7 +1,16 @@
 import crypto from 'node:crypto';
+import path from 'node:path';
+import fs from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import express from 'express';
 import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const webDistPath = path.resolve(__dirname, '../../web/dist');
+
+export { webDistPath };
 import { authRouter } from './features/auth/routes.js';
 import { contactsRouter } from './features/contacts/routes.js';
 import { subscriptionsRouter } from './features/subscriptions/routes.js';
@@ -23,7 +32,7 @@ import { PERMISSIONS } from '@bps/shared';
 export function createApp({ config, db, logger }) {
   const app = express();
   app.disable('x-powered-by');
-  app.use(helmet());
+  app.use(helmet({ contentSecurityPolicy: false }));
   app.use(cookieParser());
   app.use(express.json());
 
@@ -51,6 +60,15 @@ export function createApp({ config, db, logger }) {
   app.use('/api', createHealthRouter({ db: activeDb }));
   app.use('/api', createReportsRouter({ db: activeDb }));
   app.use('/api', createAuditRouter({ db: activeDb }));
+
+  // Serve built SPA frontend if available
+  if (fs.existsSync(webDistPath)) {
+    app.use(express.static(webDistPath));
+    app.get('*', (req, res, next) => {
+      if (req.path.startsWith('/api')) return next();
+      res.sendFile(path.join(webDistPath, 'index.html'));
+    });
+  }
 
   // Common error envelope
   app.use((err, req, res, next) => {

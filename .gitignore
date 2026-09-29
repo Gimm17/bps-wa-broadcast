@@ -12,3 +12,5 @@ yarn-error.log*
 Thumbs.db
 backups/
 *.dump
+*.zip
+.deploy-staging/
