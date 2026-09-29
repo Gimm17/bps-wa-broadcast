@@ -34,6 +34,7 @@ describe('Message Queue Primitives', () => {
       await pool.query('DELETE FROM contacts WHERE id = $1', [testContactId]);
     }
     if (testTemplateId) {
+      await pool.query('DELETE FROM messages WHERE template_id = $1', [testTemplateId]);
       await pool.query('DELETE FROM meta_templates WHERE id = $1', [testTemplateId]);
     }
   });

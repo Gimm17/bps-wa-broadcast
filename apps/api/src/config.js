@@ -10,7 +10,7 @@ dotenv.config();
 export const configSchema = z.object({
   NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
   PORT: z.coerce.number().default(3000),
-  DATABASE_URL: z.string().default('postgresql://catur_app:CaturDbLocal_2026!@localhost:5432/catur_dev?search_path=bps_whatsapp,public'),
+  DATABASE_URL: z.string().default('postgresql://postgres:postgres@localhost:5432/bps_whatsapp?search_path=bps_whatsapp,public'),
   SESSION_SECRET: z.string().min(16).default('dev_session_secret_bps_sulteng_2026_at_least_32_chars!'),
   APP_ENCRYPTION_KEY: z.string().min(32).default('0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'),
   PUBLIC_APP_URL: z.string().url().default('http://localhost:5173'),

@@ -13,8 +13,8 @@
   // Modal configuration state
   let isModalOpen = $state(false);
   let providerType = $state('mpwa'); // 'mpwa' | 'meta_cloud'
-  let apiKey = $state('m87iDrDIqNxZaodjybbhE6HSnzxd9A');
-  let sender = $state('6287786686392');
+  let apiKey = $state('');
+  let sender = $state('');
   let baseUrl = $state('https://www.wa-admin.novamedia.my.id');
   let wabaId = $state('');
   let phoneNumberId = $state('');
@@ -223,7 +223,7 @@
           </div>
           <div class="flex justify-between">
             <span class="text-[#66706F]">Nomor Sender (Device):</span>
-            <span class="font-mono font-medium text-[#007979]">{meta?.credentials?.sender || '6287786686392'}</span>
+            <span class="font-mono font-medium text-[#007979]">{meta?.credentials?.sender || 'Belum diatur'}</span>
           </div>
           <div class="flex justify-between">
             <span class="text-[#66706F]">API Key:</span>
@@ -448,7 +448,7 @@
                 type="text"
                 bind:value={sender}
                 required
-                placeholder="Contoh: 6287786686392"
+                placeholder="Contoh: 628123456789"
                 class="w-full px-3 py-2 border border-[#DCE2DF] rounded-lg font-mono focus:outline-none focus:border-[#007979]"
               />
               <span class="text-[10px] text-[#66706F] mt-0.5 block">Format: 628xxx (tanpa tanda +). Harus sesuai nomor yang terhubung di dashboard MPWA.</span>
