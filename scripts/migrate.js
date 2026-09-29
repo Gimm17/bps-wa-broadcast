@@ -36,6 +36,38 @@ export async function runMigrations({ connectionString = process.env.DATABASE_UR
       await client.query(`SET search_path TO ${searchPath};`);
     }
 
+    // Ensure gen_random_uuid is available (supports PostgreSQL <= 12 and environments without superuser pgcrypto)
+    await client.query(`
+      DO $$
+      BEGIN
+        BEGIN
+          CREATE EXTENSION IF NOT EXISTS pgcrypto;
+        EXCEPTION WHEN OTHERS THEN
+          NULL;
+        END;
+
+        IF NOT EXISTS (
+          SELECT 1 FROM pg_proc WHERE proname = 'gen_random_uuid'
+        ) THEN
+          EXECUTE '
+            CREATE OR REPLACE FUNCTION gen_random_uuid() RETURNS uuid AS $gen$
+            DECLARE
+              m text := md5(random()::text || clock_timestamp()::text);
+            BEGIN
+              RETURN (
+                substr(m, 1, 8) || ''-'' ||
+                substr(m, 9, 4) || ''-4'' ||
+                substr(m, 14, 3) || ''-'' ||
+                ''a'' || substr(m, 18, 3) || ''-'' ||
+                substr(m, 21, 12)
+              )::uuid;
+            END;
+            $gen$ LANGUAGE plpgsql VOLATILE;
+          ';
+        END IF;
+      END $$;
+    `);
+
     // Create migration tracking table
     await client.query(`
       CREATE TABLE IF NOT EXISTS schema_migrations (
