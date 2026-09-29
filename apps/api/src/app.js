@@ -64,9 +64,11 @@ export function createApp({ config, db, logger }) {
   // Serve built SPA frontend if available
   if (fs.existsSync(webDistPath)) {
     app.use(express.static(webDistPath));
-    app.get('*', (req, res, next) => {
-      if (req.path.startsWith('/api')) return next();
-      res.sendFile(path.join(webDistPath, 'index.html'));
+    app.use((req, res, next) => {
+      if (req.method === 'GET' && !req.path.startsWith('/api')) {
+        return res.sendFile(path.join(webDistPath, 'index.html'));
+      }
+      next();
     });
   }
 
