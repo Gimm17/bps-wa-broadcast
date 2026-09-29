@@ -25,7 +25,7 @@
 
     <div class="flex items-center gap-2">
       <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-[#007979]/10 text-[#007979] border border-[#007979]/20 tracking-wide font-mono">
-        PROD - Palu Cluster
+        SAPA • Palu Cluster
       </span>
     </div>
 

@@ -210,7 +210,8 @@
   <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 bg-white rounded-xl p-5 shadow-sm border border-[#DCE2DF]">
     <div class="flex flex-col gap-1.5 max-w-3xl">
       <div class="flex items-center gap-2 flex-wrap">
-        <span class="px-2 py-0.5 rounded bg-[#007979]/10 text-[#007979] text-[12px] font-semibold">SKB 3 Menteri v2026.4</span>
+        <span class="px-2 py-0.5 rounded bg-[#007979]/10 text-[#007979] text-[12px] font-bold">SAPA Agenda Engine</span>
+        <span class="px-2 py-0.5 rounded bg-[#007979]/5 text-[#007979] text-[12px] font-medium">SKB 3 Menteri v2026.4</span>
         <span class="px-2 py-0.5 rounded bg-[#e0eae9] text-[#172020] text-[12px] font-mono">Asia/Makassar (WITA)</span>
         <span class="inline-flex items-center gap-1 text-[#24B1B1] text-[12px] font-medium">
           <span class="w-2 h-2 rounded-full bg-[#24B1B1] animate-pulse"></span>
@@ -219,7 +220,7 @@
       </div>
       <h1 class="text-[26px] font-bold text-[#172020] tracking-tight">Kalender Diseminasi & Sinkronisasi Libur Nasional</h1>
       <p class="text-[14px] text-[#66706F] leading-relaxed">
-        Sinkronisasi otomatis kalender siaran WhatsApp dengan Surat Keputusan Bersama (SKB 3 Menteri) Hari Libur Nasional, Cuti Bersama, dan Kalender Rilis Resmi BPS Sulawesi Tengah 2026.
+        Modul agenda SAPA untuk sinkronisasi otomatis kalender siaran WhatsApp dengan Surat Keputusan Bersama (SKB 3 Menteri) Hari Libur Nasional, Cuti Bersama, dan Kalender Rilis Resmi BPS Sulawesi Tengah 2026.
       </p>
     </div>
     <div class="flex flex-wrap items-center gap-2.5">

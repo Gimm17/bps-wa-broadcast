@@ -60,16 +60,15 @@
   <div class="flex flex-col">
     <!-- Brand Emblem Header -->
     <div class="h-14 px-4 flex items-center gap-3 border-b border-white/10 bg-[#006a6a]/20">
-      <div class="relative w-8 h-8 flex-shrink-0 flex items-center justify-center">
-        <svg class="w-8 h-8" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-          <rect fill="#FFFFFF" height="31" rx="2" transform="rotate(45 24 2)" width="31" x="24" y="2"></rect>
-          <rect fill="#24B1B1" height="21" rx="1.5" transform="rotate(45 24 9)" width="21" x="24" y="9"></rect>
-          <rect fill="#E37434" height="11" rx="1" transform="rotate(45 24 16)" width="11" x="24" y="16"></rect>
-        </svg>
+      <div class="relative w-8 h-8 flex-shrink-0 rounded-lg overflow-hidden border border-white/20 bg-white p-0.5 shadow-sm flex items-center justify-center">
+        <img src="/logo-sapa.jpg" alt="Logo SAPA BPS Sulteng" class="w-full h-full object-contain rounded" />
       </div>
       <div class="flex flex-col min-w-0">
-        <span class="text-[14px] font-semibold text-[#FFFFFF] truncate tracking-tight">BPS Sulteng</span>
-        <span class="text-[11px] text-[#97f2f1] opacity-90 truncate leading-none">WhatsApp Operations</span>
+        <div class="flex items-center gap-1.5">
+          <span class="text-[15px] font-bold text-[#FFFFFF] tracking-tight">SAPA</span>
+          <span class="text-[9px] font-mono font-bold px-1 py-0.5 rounded bg-[#E37434] text-white leading-none">SULTENG</span>
+        </div>
+        <span class="text-[10px] text-[#97f2f1] opacity-90 truncate leading-tight mt-0.5">Automasi Pesan &amp; Agenda</span>
       </div>
     </div>
 
@@ -100,7 +99,7 @@
   <!-- Footer Version Strip -->
   <div class="p-3 border-t border-white/10 bg-[#006a6a]/30">
     <div class="flex items-center justify-between text-[11px] text-[#97f2f1]/90">
-      <span class="font-mono">BPS WABA v2.4</span>
+      <span class="font-mono text-[10px]">sapa.bpssulteng.id</span>
       <span class="px-1.5 py-0.5 rounded bg-[#007979] border border-[#97f2f1]/30 text-[10px] text-white font-mono font-semibold">PROD</span>
     </div>
   </div>

@@ -181,8 +181,8 @@
   <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 bg-white rounded-xl p-5 shadow-sm border border-[#DCE2DF]">
     <div class="flex flex-col gap-1.5 max-w-3xl">
       <div class="flex items-center gap-2 flex-wrap">
-        <span class="px-2 py-0.5 rounded bg-[#007979]/10 text-[#007979] text-[12px] font-semibold">Engine Otomasi BPS</span>
-        <span class="px-2 py-0.5 rounded bg-[#ecf6f5] text-[#007979] text-[12px] font-mono">SIMPEG • Silastik • BRS</span>
+        <span class="px-2 py-0.5 rounded bg-[#007979]/10 text-[#007979] text-[12px] font-bold">Engine Otomasi SAPA</span>
+        <span class="px-2 py-0.5 rounded bg-[#ecf6f5] text-[#007979] text-[12px] font-mono">SIMPEG • Silastik • Agenda • BRS</span>
         <span class="inline-flex items-center gap-1 text-[#24B1B1] text-[12px] font-medium">
           <span class="w-2 h-2 rounded-full bg-[#24B1B1] animate-pulse"></span>
           Freshness Gate Aktif
@@ -190,7 +190,7 @@
       </div>
       <h1 class="text-[26px] font-bold text-[#172020] tracking-tight">Katalog Aturan Otomasi & Pemicu Siaran</h1>
       <p class="text-[14px] text-[#66706F] leading-relaxed">
-        Pusat kendali logika otomasi siaran WhatsApp berbasis trigger peristiwa SIMPEG Presensi, transaksi Silastik PST, dan peringatan batas waktu rilis publikasi BPS Sulawesi Tengah.
+        Pusat kendali logika SAPA (Sistem Automasi Pesan &amp; Agenda) berbasis pemicu presensi SIMPEG, transaksi Silastik PST, agenda kegiatan darurat, dan pengingat rilis data BPS Sulawesi Tengah.
       </p>
     </div>
     <div class="flex flex-wrap items-center gap-2.5">

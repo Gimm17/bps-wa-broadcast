@@ -63,12 +63,12 @@
     <div class="flex flex-col gap-1">
       <div class="flex items-center gap-2 flex-wrap">
         <h1 class="text-[22px] font-bold text-[#172020] tracking-tight">Pusat Komando Siaran WhatsApp Resmi</h1>
-        <span class="px-2 py-0.5 rounded text-[11px] font-mono font-semibold bg-[#007979]/10 text-[#007979]">
-          BPS Sulawesi Tengah
+        <span class="px-2 py-0.5 rounded text-[11px] font-mono font-bold bg-[#007979]/10 text-[#007979] border border-[#007979]/20">
+          SAPA BPS SULTENG
         </span>
       </div>
       <p class="text-[13px] text-[#66706F]">
-        Monitoring terpadu siaran Meta Cloud API, otomasi presensi ASN, dan diseminasi publikasi statistik.
+        <strong class="text-[#007979] font-medium">SAPA (Sistem Automasi Pesan &amp; Agenda)</strong> — Kanal komunikasi terpadu yang hangat dan ramah untuk otomasi presensi pegawai, jadwal agenda kegiatan &amp; rilis, serta diseminasi statistik Sulawesi Tengah.
       </p>
     </div>
     <div class="flex items-center gap-2.5">

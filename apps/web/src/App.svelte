@@ -86,10 +86,13 @@
 </script>
 
 {#if !initialized}
-  <div class="min-h-screen bg-[#F7F7F3] flex items-center justify-center font-sans text-[#66706F]">
+  <div class="min-h-screen bg-[#F7F7F3] flex flex-col items-center justify-center font-sans text-[#66706F] gap-4">
+    <div class="w-16 h-16 rounded-2xl overflow-hidden border border-[#DCE2DF] bg-white p-2 shadow-sm animate-pulse flex items-center justify-center">
+      <img src="/logo-sapa.jpg" alt="Logo SAPA BPS Sulteng" class="w-full h-full object-contain rounded-xl" />
+    </div>
     <div class="flex items-center gap-3">
-      <div class="w-3 h-3 rounded-full bg-[#007979] animate-ping"></div>
-      <span class="text-[14px] font-mono">Memuat BPS WhatsApp Operations...</span>
+      <div class="w-2.5 h-2.5 rounded-full bg-[#007979] animate-ping"></div>
+      <span class="text-[13px] font-mono font-medium text-[#172020]">Memuat SAPA BPS Sulteng (Sistem Automasi Pesan &amp; Agenda)...</span>
     </div>
   </div>
 {:else if isPublicPath($location)}

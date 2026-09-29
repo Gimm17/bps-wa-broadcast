@@ -31,7 +31,7 @@
   let errorMessage = $state('');
 
   // Gateway info
-  let gatewaySender = $state('6287786686392');
+  let gatewaySender = $state('—');
   let gatewayStatus = $state('connected');
 
   onMount(async () => {
@@ -289,7 +289,7 @@
         Kirim Manual &amp; Uji Pesan WhatsApp
       </h1>
       <p class="text-sm text-[#66706F] leading-relaxed">
-        Kirim pesan WhatsApp langsung ke satu nomor tujuan secara instan (real-time) via gateway resmi BPS Sulteng. Cocok untuk pengujian koneksi, verifikasi tampilan template, atau pesan koordinasi darurat.
+        Kirim pesan WhatsApp langsung ke satu nomor tujuan secara instan (real-time) via SAPA BPS Sulteng. Cocok untuk pengujian koneksi, verifikasi tampilan template, atau pesan koordinasi dan agenda darurat bagi pegawai dan mitra.
       </p>
     </div>
 
@@ -529,7 +529,7 @@
                 <div class="flex flex-wrap gap-1.5">
                   <button
                     type="button"
-                    onclick={() => applyPresetMessage('Halo, ini adalah pesan uji koneksi WhatsApp Gateway resmi BPS Provinsi Sulawesi Tengah. Sistem berjalan dengan normal.')}
+                    onclick={() => applyPresetMessage('Halo, ini adalah pesan uji koneksi SAPA (Sistem Automasi Pesan & Agenda) BPS Provinsi Sulawesi Tengah. Layanan berjalan normal.')}
                     class="px-2.5 py-1 rounded bg-[#F7F7F3] border border-[#DCE2DF] text-[11px] text-[#172020] hover:bg-[#E0EAE9] hover:text-[#007979] transition-colors"
                   >
                     📡 Uji Koneksi Gateway
