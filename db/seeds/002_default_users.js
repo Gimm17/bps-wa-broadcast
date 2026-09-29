@@ -1,5 +1,15 @@
-import { hashPassword } from '../../apps/api/src/features/auth/hasher.js';
+import crypto from 'node:crypto';
 import { ROLES } from '@bps/shared';
+
+function hashPassword(password) {
+  return new Promise((resolve, reject) => {
+    const salt = crypto.randomBytes(16).toString('hex');
+    crypto.scrypt(password, salt, 64, { N: 16384, r: 8, p: 1 }, (err, derivedKey) => {
+      if (err) return reject(err);
+      resolve(`$scrypt$${salt}$${derivedKey.toString('hex')}`);
+    });
+  });
+}
 
 export async function seed(client) {
   const users = [
