@@ -21,6 +21,7 @@
   import Schedules from './routes/Schedules.svelte';
   import MessageLogs from './routes/MessageLogs.svelte';
   import AuditLog from './routes/AuditLog.svelte';
+  import UsersAndRoles from './routes/UsersAndRoles.svelte';
   import Subscribe from './routes/public/Subscribe.svelte';
   import ManageSubscription from './routes/public/ManageSubscription.svelte';
   import UnsubscribeResult from './routes/public/UnsubscribeResult.svelte';
@@ -80,6 +81,7 @@
     '/automations/:id': wrap({ component: AutomationEdit }),
     '/schedules': wrap({ component: Schedules }),
     '/message-logs': wrap({ component: MessageLogs }),
+    '/users-and-roles': wrap({ component: UsersAndRoles }),
     '/audit-and-settings': wrap({ component: AuditLog }),
     '*': wrap({ component: Overview })
   };

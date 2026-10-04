@@ -23,6 +23,7 @@ import { createMessagesRouter } from './features/messages/routes.js';
 import { createHealthRouter } from './features/health/routes.js';
 import { createReportsRouter } from './features/reports/routes.js';
 import { createAuditRouter } from './features/audit/routes.js';
+import { createUsersRouter } from './features/users/routes.js';
 import { pool as defaultPool } from './db/pool.js';
 import { authenticate } from './middleware/authenticate.js';
 import { authorize } from './middleware/authorize.js';
@@ -60,6 +61,7 @@ export function createApp({ config, db, logger }) {
   app.use('/api', createHealthRouter({ db: activeDb }));
   app.use('/api', createReportsRouter({ db: activeDb }));
   app.use('/api', createAuditRouter({ db: activeDb }));
+  app.use('/api', createUsersRouter({ db: activeDb }));
 
   // Serve built SPA frontend if available
   if (fs.existsSync(webDistPath)) {

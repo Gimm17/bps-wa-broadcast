@@ -1,0 +1,14 @@
+# SAPA BPS Sulteng - Apache Reverse Proxy to Node.js Runtime
+DirectoryIndex disabled
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Forward all traffic to internal Node.js port 3000
+  RewriteRule ^(.*)$ http://127.0.0.1:3000/$1 [P,L]
+</IfModule>
+
+<IfModule mod_proxy.c>
+  ProxyPreserveHost On
+  ProxyPassReverse / http://127.0.0.1:3000/
+</IfModule>
