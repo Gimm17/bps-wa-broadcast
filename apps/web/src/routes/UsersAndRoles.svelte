@@ -273,7 +273,7 @@
   <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 bg-white rounded-xl p-5 shadow-sm border border-[#DCE2DF]">
     <div class="flex flex-col gap-1.5 max-w-3xl">
       <div class="flex items-center gap-2 flex-wrap">
-        <span class="px-2 py-0.5 rounded bg-[#007979]/10 text-[#007979] text-[12px] font-semibold">Infrastruktur & Sistem</span>
+        <span class="px-2 py-0.5 rounded bg-[#007979]/10 text-[#007979] text-[12px] font-semibold">Infrastruktur &amp; Sistem</span>
         <span class="px-2 py-0.5 rounded bg-[#ecf6f5] text-[#007979] text-[12px] font-mono">Manajemen Identitas &amp; RBAC</span>
       </div>
       <h1 class="text-[26px] font-bold text-[#172020] tracking-tight">Pengguna &amp; Peran (Users &amp; Roles)</h1>
@@ -287,7 +287,9 @@
         class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#F26522] hover:bg-[#d95516] text-white text-[13px] font-semibold shadow-sm transition-all active:translate-y-[1px]"
         type="button"
       >
-        <span class="material-symbols-outlined text-[18px]">person_add</span>
+        <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+        </svg>
         <span>Tambah Pengguna</span>
       </button>
     </div>
@@ -321,18 +323,22 @@
   <div class="flex items-center gap-2 border-b border-[#DCE2DF] pb-1">
     <button
       onclick={() => (activeTab = 'users')}
-      class="px-4 py-2.5 rounded-t-lg font-medium text-[13px] flex items-center gap-2 transition-all {activeTab === 'users' ? 'bg-white border-t-2 border-[#007979] text-[#007979] shadow-sm' : 'text-[#66706F] hover:text-[#172020]'}"
+      class="px-4 py-2.5 rounded-t-lg font-medium text-[13px] flex items-center gap-2 transition-all {activeTab === 'users' ? 'bg-white border-t-2 border-[#007979] text-[#007979] shadow-sm font-semibold' : 'text-[#66706F] hover:text-[#172020]'}"
       type="button"
     >
-      <span class="material-symbols-outlined text-[18px]">group</span>
+      <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+      </svg>
       <span>Daftar Pengguna ({filteredUsers.length})</span>
     </button>
     <button
       onclick={() => (activeTab = 'matrix')}
-      class="px-4 py-2.5 rounded-t-lg font-medium text-[13px] flex items-center gap-2 transition-all {activeTab === 'matrix' ? 'bg-white border-t-2 border-[#007979] text-[#007979] shadow-sm' : 'text-[#66706F] hover:text-[#172020]'}"
+      class="px-4 py-2.5 rounded-t-lg font-medium text-[13px] flex items-center gap-2 transition-all {activeTab === 'matrix' ? 'bg-white border-t-2 border-[#007979] text-[#007979] shadow-sm font-semibold' : 'text-[#66706F] hover:text-[#172020]'}"
       type="button"
     >
-      <span class="material-symbols-outlined text-[18px]">policy</span>
+      <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+      </svg>
       <span>Matriks Hak Akses (RBAC)</span>
     </button>
   </div>
@@ -342,34 +348,41 @@
     <!-- Search & Filter Controls -->
     <div class="bg-white rounded-xl border border-[#DCE2DF] p-4 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-3">
       <div class="relative w-full sm:w-80">
-        <span class="material-symbols-outlined absolute left-3 top-2.5 text-[#66706F] text-[18px]">search</span>
+        <svg class="w-4 h-4 text-[#66706F] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
         <input
           type="text"
           bind:value={searchQuery}
           placeholder="Cari nama, email, username..."
-          class="w-full pl-9 pr-3 py-2 text-[13px] rounded-lg border border-[#DCE2DF] focus:outline-none focus:border-[#007979] focus:ring-1 focus:ring-[#007979]"
+          class="w-full pl-9 pr-3 py-2 text-[13px] rounded-lg border border-[#DCE2DF] bg-white text-[#172020] placeholder-[#94A3B8] focus:outline-none focus:border-[#007979] focus:ring-1 focus:ring-[#007979]"
         />
       </div>
-      <div class="flex items-center gap-2 w-full sm:w-auto">
-        <label for="filter-role" class="text-[12px] text-[#66706F] whitespace-nowrap">Filter Peran:</label>
-        <select
-          id="filter-role"
-          bind:value={filterRole}
-          class="text-[13px] py-1.5 px-3 rounded-lg border border-[#DCE2DF] bg-white text-[#172020] focus:outline-none focus:border-[#007979]"
-        >
-          <option value="all">Semua Peran</option>
-          <option value="super_admin">Super Admin</option>
-          <option value="admin_diseminasi">Admin Diseminasi</option>
-          <option value="operator">Operator Layanan</option>
-          <option value="viewer">Viewer / Pimpinan</option>
-        </select>
+      <div class="flex items-center gap-2.5 w-full sm:w-auto justify-between sm:justify-end">
+        <div class="flex items-center gap-2">
+          <label for="filter-role" class="text-[12px] text-[#66706F] whitespace-nowrap">Filter Peran:</label>
+          <select
+            id="filter-role"
+            bind:value={filterRole}
+            class="text-[13px] py-1.5 px-3 rounded-lg border border-[#DCE2DF] bg-white text-[#172020] focus:outline-none focus:border-[#007979]"
+          >
+            <option value="all">Semua Peran</option>
+            <option value="super_admin">Super Admin</option>
+            <option value="admin_diseminasi">Admin Diseminasi</option>
+            <option value="operator">Operator Layanan</option>
+            <option value="viewer">Viewer / Pimpinan</option>
+          </select>
+        </div>
         <button
           onclick={loadData}
-          class="p-2 rounded-lg border border-[#DCE2DF] hover:bg-slate-50 text-[#66706F] hover:text-[#172020] transition-colors"
+          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#DCE2DF] bg-white hover:bg-slate-50 text-[12px] font-medium text-[#66706F] hover:text-[#007979] transition-all shadow-2xs shrink-0"
           title="Segarkan data"
           type="button"
         >
-          <span class="material-symbols-outlined text-[18px]">refresh</span>
+          <svg class="w-3.5 h-3.5 {loading ? 'animate-spin' : ''}" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+          </svg>
+          <span>Segarkan</span>
         </button>
       </div>
     </div>
@@ -445,32 +458,46 @@
                     {formatTime(user.last_login_at)}
                   </td>
                   <td class="py-3.5 px-4 text-right">
-                    <div class="inline-flex items-center gap-1">
+                    <div class="inline-flex items-center gap-1.5 justify-end">
                       <button
                         onclick={() => openEdit(user)}
-                        class="p-1.5 rounded-lg hover:bg-slate-100 text-[#66706F] hover:text-[#007979] transition-colors"
+                        class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[12px] font-medium border border-[#DCE2DF] bg-white text-[#172020] hover:bg-[#ecf6f5] hover:text-[#007979] hover:border-[#007979]/40 transition-all shadow-2xs"
                         title="Ubah info / peran"
                         type="button"
                       >
-                        <span class="material-symbols-outlined text-[18px]">edit</span>
+                        <svg class="w-3.5 h-3.5 text-[#007979]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                        </svg>
+                        <span>Edit</span>
                       </button>
                       <button
                         onclick={() => openResetPassword(user)}
-                        class="p-1.5 rounded-lg hover:bg-slate-100 text-[#66706F] hover:text-[#F26522] transition-colors"
+                        class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[12px] font-medium border border-[#DCE2DF] bg-white text-[#172020] hover:bg-[#fff5f0] hover:text-[#F26522] hover:border-[#F26522]/40 transition-all shadow-2xs"
                         title="Reset kata sandi"
                         type="button"
                       >
-                        <span class="material-symbols-outlined text-[18px]">key</span>
+                        <svg class="w-3.5 h-3.5 text-[#F26522]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+                        </svg>
+                        <span>Sandi</span>
                       </button>
                       <button
                         onclick={() => handleToggleStatus(user)}
-                        class="p-1.5 rounded-lg hover:bg-slate-100 {user.is_active ? 'text-[#66706F] hover:text-rose-600' : 'text-[#66706F] hover:text-emerald-600'} transition-colors"
+                        class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[12px] font-medium border border-[#DCE2DF] bg-white {user.is_active ? 'hover:bg-rose-50 hover:text-rose-700 hover:border-rose-300' : 'hover:bg-emerald-50 hover:text-emerald-700 hover:border-emerald-300'} transition-all shadow-2xs"
                         title={user.is_active ? 'Nonaktifkan akun' : 'Aktifkan akun'}
                         type="button"
                       >
-                        <span class="material-symbols-outlined text-[18px]">
-                          {user.is_active ? 'block' : 'check_circle'}
-                        </span>
+                        {#if user.is_active}
+                          <svg class="w-3.5 h-3.5 text-rose-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+                          </svg>
+                          <span class="text-rose-600">Blokir</span>
+                        {:else}
+                          <svg class="w-3.5 h-3.5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                          <span class="text-emerald-600">Aktifkan</span>
+                        {/if}
                       </button>
                     </div>
                   </td>
@@ -521,28 +548,44 @@
                     </td>
                     <td class="py-2.5 px-4 text-center">
                       {#if hasSuper}
-                        <span class="material-symbols-outlined text-[18px] text-emerald-600 align-middle">check_circle</span>
+                        <div class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-100 text-emerald-600">
+                          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                          </svg>
+                        </div>
                       {:else}
                         <span class="text-slate-300 font-bold">—</span>
                       {/if}
                     </td>
                     <td class="py-2.5 px-4 text-center">
                       {#if hasAdmin}
-                        <span class="material-symbols-outlined text-[18px] text-emerald-600 align-middle">check_circle</span>
+                        <div class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-100 text-emerald-600">
+                          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                          </svg>
+                        </div>
                       {:else}
                         <span class="text-slate-300 font-bold">—</span>
                       {/if}
                     </td>
                     <td class="py-2.5 px-4 text-center">
                       {#if hasOp}
-                        <span class="material-symbols-outlined text-[18px] text-emerald-600 align-middle">check_circle</span>
+                        <div class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-100 text-emerald-600">
+                          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                          </svg>
+                        </div>
                       {:else}
                         <span class="text-slate-300 font-bold">—</span>
                       {/if}
                     </td>
                     <td class="py-2.5 px-4 text-center">
                       {#if hasView}
-                        <span class="material-symbols-outlined text-[18px] text-emerald-600 align-middle">check_circle</span>
+                        <div class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-100 text-emerald-600">
+                          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                          </svg>
+                        </div>
                       {:else}
                         <span class="text-slate-300 font-bold">—</span>
                       {/if}
@@ -564,8 +607,10 @@
     <div class="bg-white rounded-2xl shadow-xl border border-[#DCE2DF] w-full max-w-md overflow-hidden">
       <div class="p-5 border-b border-[#DCE2DF] flex items-center justify-between">
         <h3 class="font-bold text-[16px] text-[#172020]">Tambah Pengguna Baru</h3>
-        <button onclick={() => (showCreateModal = false)} class="text-[#66706F] hover:text-[#172020]" type="button">
-          <span class="material-symbols-outlined text-[20px]">close</span>
+        <button onclick={() => (showCreateModal = false)} class="p-1 rounded-lg text-[#66706F] hover:text-[#172020] hover:bg-slate-100 transition-colors" type="button" aria-label="Tutup modal">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
         </button>
       </div>
       <form onsubmit={handleCreateUser} class="p-5 space-y-4">
@@ -655,8 +700,10 @@
     <div class="bg-white rounded-2xl shadow-xl border border-[#DCE2DF] w-full max-w-md overflow-hidden">
       <div class="p-5 border-b border-[#DCE2DF] flex items-center justify-between">
         <h3 class="font-bold text-[16px] text-[#172020]">Edit Pengguna: @{selectedUser.username}</h3>
-        <button onclick={() => (showEditModal = false)} class="text-[#66706F] hover:text-[#172020]" type="button">
-          <span class="material-symbols-outlined text-[20px]">close</span>
+        <button onclick={() => (showEditModal = false)} class="p-1 rounded-lg text-[#66706F] hover:text-[#172020] hover:bg-slate-100 transition-colors" type="button" aria-label="Tutup modal">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
         </button>
       </div>
       <form onsubmit={handleUpdateUser} class="p-5 space-y-4">
@@ -720,8 +767,10 @@
     <div class="bg-white rounded-2xl shadow-xl border border-[#DCE2DF] w-full max-w-md overflow-hidden">
       <div class="p-5 border-b border-[#DCE2DF] flex items-center justify-between">
         <h3 class="font-bold text-[16px] text-[#172020]">Reset Kata Sandi: @{selectedUser.username}</h3>
-        <button onclick={() => (showPasswordModal = false)} class="text-[#66706F] hover:text-[#172020]" type="button">
-          <span class="material-symbols-outlined text-[20px]">close</span>
+        <button onclick={() => (showPasswordModal = false)} class="p-1 rounded-lg text-[#66706F] hover:text-[#172020] hover:bg-slate-100 transition-colors" type="button" aria-label="Tutup modal">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
         </button>
       </div>
       <form onsubmit={handleResetPassword} class="p-5 space-y-4">
