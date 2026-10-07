@@ -7,6 +7,7 @@ export const pool = new Pool({
   connectionString: config.DATABASE_URL,
   options: '-c search_path=bps_whatsapp,public',
   max: 10,
+  connectionTimeoutMillis: 10000,
   idleTimeoutMillis: 30000,
 });
 

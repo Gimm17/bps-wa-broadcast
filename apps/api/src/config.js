@@ -9,7 +9,7 @@ dotenv.config();
 
 export const configSchema = z.object({
   NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
-  PORT: z.coerce.number().default(3000),
+  PORT: z.coerce.number().default(61999),
   DATABASE_URL: z.string().default('postgresql://postgres:postgres@localhost:5432/bps_whatsapp?search_path=bps_whatsapp,public'),
   SESSION_SECRET: z.string().min(16).default('dev_session_secret_bps_sulteng_2026_at_least_32_chars!'),
   APP_ENCRYPTION_KEY: z.string().min(32).default('0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'),

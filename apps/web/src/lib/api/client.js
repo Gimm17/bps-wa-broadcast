@@ -16,7 +16,7 @@ export async function apiFetch(path, options = {}) {
   };
 
   const isBrowser = typeof window !== 'undefined' && window.location && window.location.protocol.startsWith('http');
-  const origin = isBrowser ? window.location.origin : 'http://localhost:3000';
+  const origin = isBrowser ? window.location.origin : 'http://localhost:61999';
   let fullPath = path;
   if (!fullPath.startsWith('http')) {
     if (!fullPath.startsWith('/api')) {
@@ -32,6 +32,12 @@ export async function apiFetch(path, options = {}) {
   });
 
   if (!response.ok) {
+    if (response.status >= 500) {
+      throw { error: {
+        code: 'SERVER_UNAVAILABLE',
+        message: 'Server sedang bermasalah atau tidak dapat terhubung ke database. Silakan coba lagi atau hubungi administrator.'
+      } };
+    }
     let errorData;
     try {
       errorData = await response.json();

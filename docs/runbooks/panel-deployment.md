@@ -20,7 +20,7 @@ Platform dirancang untuk berjalan pada runtime panel standar:
 - **Node.js**: Versi 22.x LTS atau 24.x LTS (wajib $\ge 22.0.0$)
 - **Database**: PostgreSQL 16 atau 17 dengan ekstensi `pgcrypto`
 - **SSL/TLS**: Sertifikat HTTPS aktif (Let's Encrypt via panel) — **wajib** untuk Webhook Meta Cloud API.
-- **Port/Socket**: Port internal aplikasi (misal `3000`) atau reverse proxy bawaan panel.
+- **Port/Socket**: Port internal aplikasi (misal `61999`) atau reverse proxy bawaan panel.
 
 ---
 
@@ -33,13 +33,13 @@ Platform dirancang untuk berjalan pada runtime panel standar:
    - **Application Startup File**: `apps/api/src/server.js`
    - **Node.js Version**: Pilih `22.x`
    - **Application Mode**: `production`
-   - **Port**: `3000` (atau biarkan panel menetapkan port otomatis)
+   - **Port**: `61999` (atau biarkan panel menetapkan port otomatis)
 
 ### B. Konfigurasi Dokumen Statis & Reverse Proxy
 Atur virtual host / reverse proxy pada panel:
 - **Root URL (`/`)**: Arahkan document root ke direktori `apps/web/dist`
 - **SPA Fallback**: Pastikan permintaan rute statis yang tidak ditemukan mengarah kembali ke `index.html` (HTML5 History Mode).
-- **API Proxy (`/api`)**: Teruskan semua request berawalan `/api` ke backend Node.js (`http://127.0.0.1:3000/api`).
+- **API Proxy (`/api`)**: Teruskan semua request berawalan `/api` ke backend Node.js (`http://127.0.0.1:61999/api`).
 
 Contoh direktif Nginx pada panel:
 ```nginx
@@ -47,7 +47,7 @@ root /home/bps-sulteng/htdocs/whatsapp.sulteng.bps.go.id/apps/web/dist;
 index index.html;
 
 location /api {
-    proxy_pass http://127.0.0.1:3000;
+    proxy_pass http://127.0.0.1:61999;
     proxy_http_version 1.1;
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection 'upgrade';
@@ -77,7 +77,7 @@ Isi variabel konfigurasi:
 ```ini
 # Runtime
 NODE_ENV=production
-PORT=3000
+PORT=61999
 HOST=127.0.0.1
 PUBLIC_APP_URL=https://whatsapp.sulteng.bps.go.id
 

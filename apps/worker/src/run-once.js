@@ -66,6 +66,7 @@ export async function runOnce({
 
     if (!lockAcquired) {
       logger.info({ workerId, lockId }, 'Worker instance already executing, skipping this run');
+      lockClient.release();
       return { status: 'locked_by_other_instance' };
     }
   } catch (err) {

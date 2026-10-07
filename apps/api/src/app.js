@@ -48,6 +48,9 @@ export function createApp({ config, db, logger }) {
 
   const activeDb = db || defaultPool;
 
+  // Keep public readiness reachable before routers with authentication middleware.
+  app.use('/api', createHealthRouter({ db: activeDb }));
+
   // Feature routes
   app.use('/api/auth', authRouter);
   app.use('/api', contactsRouter);
@@ -58,7 +61,6 @@ export function createApp({ config, db, logger }) {
   app.use('/api', createAutomationsRouter({ db: activeDb }));
   app.use('/api', createDashboardRouter({ db: activeDb }));
   app.use('/api', createMessagesRouter({ db: activeDb }));
-  app.use('/api', createHealthRouter({ db: activeDb }));
   app.use('/api', createReportsRouter({ db: activeDb }));
   app.use('/api', createAuditRouter({ db: activeDb }));
   app.use('/api', createUsersRouter({ db: activeDb }));
