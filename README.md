@@ -1,60 +1,28 @@
-<div align="center">
+# SAPA BPS Sulteng — WhatsApp Operations Platform
 
-# 💬 SAPA BPS Sulteng — WhatsApp Operations Platform
+> **Sistem Automasi Pesan & Agenda (SAPA)** — Monorepo platform siaran WhatsApp, penjadwalan cron, dan portal langganan publik via **Meta WhatsApp Cloud API** untuk **BPS Provinsi Sulawesi Tengah**.
 
-### Automated WhatsApp Broadcast, Scheduling & Subscription Platform via Meta Cloud API
+![Svelte 5](https://img.shields.io/badge/Frontend-Svelte_5-FF3E00?style=flat-square&logo=svelte&logoColor=white)
+![Node.js](https://img.shields.io/badge/Backend-Node.js-339933?style=flat-square&logo=node.js&logoColor=white)
+![Meta WABA](https://img.shields.io/badge/Meta-WhatsApp_Cloud_API-25D366?style=flat-square&logo=whatsapp&logoColor=white)
+![Vitest](https://img.shields.io/badge/Tests-Vitest_+_Supertest-6E9F18?style=flat-square)
 
-[![Svelte](https://img.shields.io/badge/Frontend-Svelte-FF3E00?style=for-the-badge&logo=svelte&logoColor=white)](https://svelte.dev/)
-[![Node.js](https://img.shields.io/badge/Backend-Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
-[![Meta WABA](https://img.shields.io/badge/Meta-WhatsApp%20Cloud%20API-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://developers.facebook.com/docs/whatsapp/cloud-api)
-[![Vitest](https://img.shields.io/badge/Tests-Vitest%20%2B%20Supertest-6E9F18?style=for-the-badge)](package.json)
+![SAPA BPS Sulteng Overview](docs/screenshots/app-overview.webp)
 
-*Centralized WhatsApp dissemination and internal operations platform for BPS Provinsi Sulawesi Tengah — managing employee attendance/publication reminders and public BRS statistical subscriptions.*
+### Fitur & Struktur Workspace
 
-</div>
-
----
-
-## ✨ Key Features
-
-- **Manual & Scheduled Campaigns** — Create, queue, throttle (`msg/sec`), and monitor WhatsApp broadcast campaigns with real-time delivery & read progress tracking.
-- **Automated Operational Triggers** — Scheduled cron dispatchers for employee attendance reminders, publication deadlines, Silastik service notifications, and BRS/publication releases.
-- **Public Opt-In Subscription Portal** — Allows the public to subscribe/unsubscribe (`DAFTAR`, `BERHENTI`, `BANTUAN`, topic selection) with strict consent enforcement before processing campaigns.
-- **Meta Template Sync & Anti-Spam Throttling** — Synchronizes approved Meta Business Manager templates and enforces rate limits to protect WABA account quality.
-- **Contact Directory, Health & Audit Logs** — Segmented employee & public directories, integration health monitoring (API, Meta, Cron), and full operational audit trails.
-
----
-
-## 📁 Monorepo Structure
+- **Campaign & Anti-Spam Throttling** — Siaran terjadwal dengan rate-limit (`msg/sec`), sinkronisasi template Meta WABA, serta pelacakan status `sent / delivered / read`.
+- **Automated Reminders & Opt-In** — Cron pengingat presensi pegawai, jadwal rilis BRS/publikasi, dan manajemen consent UU PDP (`DAFTAR / BERHENTI / BANTUAN`).
 
 ```text
-Whatsapp_broadcast/
-├── apps/                # Workspace apps (API backend & Svelte web dashboard)
-├── packages/            # Shared workspace packages
-├── db/                  # Database schemas & migrations
-├── scripts/             # Migrate, cron worker, health check, backup & deploy packagers
-├── tests/               # Acceptance & API integration tests (Vitest + Supertest)
-├── docs/                # Design specs, runbooks (cron, webhook, cPanel) & QA evidence
-└── package.json
+apps/       # API server (Node.js) & Dashboard Web SPA (Svelte)
+db/         # Migrations & seeders PostgreSQL
+scripts/    # Worker cron, health check & backup packagers
+tests/      # Vitest + Supertest integration & security tests
 ```
 
----
-
-## 🚀 Development & Testing
-
 ```bash
-# Install monorepo dependencies
-npm install
-
-# Run database migrations
-npm run migrate
-
-# Start API & web dashboard concurrently
-npm run dev
-
-# Run workspace & acceptance tests
-npm run test:all
-
-# Build production web bundle
-npm run build
+npm install && npm run migrate
+npm run dev         # jalankan API + Svelte web bersamaan
+npm run test:all    # unit, contract, security & E2E suites
 ```
